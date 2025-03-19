@@ -1,32 +1,42 @@
-from dash import Dash, html, dcc
+import dash
+from dash import dcc, html
 import plotly.express as px
+import plotly.graph_objects as go
+import plotly.io as pio
 import pandas as pd
+from plots import *
 
-app = Dash(__name__)
+
+####### Initialize the Dash app #######
+
+app = dash.Dash(__name__)
 server=app.server
 
-# assume you have a "long-form" data frame
-# see https://plotly.com/python/px-arguments/ for more options
-df = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
+############## Load Data ##############
 
-fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
+DATA_PATH = 'data/'
+
+df_CraWeath = pd.read_csv(DATA_PATH + 'crashes_and_weather.csv')
+
+
+# ############ Define Graphs ############
+
+init_figs()
+fig_CraWeath = create_fig_CraWeath(df_CraWeath)
+
+
+########## Set up the layout ##########
 
 app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
-
+    html.H1("Testing Server"),
     html.Div(children='''
-        Dash: A web application framework for your data.
+    Hello from from testing server.
     '''),
-
-    dcc.Graph(
-        id='example-graph',
-        figure=fig
-    )
+    dcc.Graph(figure=fig_CraWeath)
 ])
+
+
+############# Run the app #############
 
 if __name__ == '__main__':
     app.run(debug=True)
