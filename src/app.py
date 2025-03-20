@@ -10,7 +10,7 @@ import dash_bootstrap_components as dbc
 
 ####### Initialize the Dash app #######
 
-style_sheet = [dbc.themes.SLATE]
+style_sheet = [dbc.themes.LUX]
 app = dash.Dash(__name__, external_stylesheets=style_sheet, use_pages=True)
 app.title = "DSP 2025 - Team 897"
 server=app.server
@@ -30,13 +30,58 @@ fig_CraWeath = create_fig_CraWeath(df_CraWeath)
 
 ########## Create Bootstrap Components ##########
 
+ASSET_PATH = 'assets/'
+
 navbar = dbc.NavbarSimple(
+    children=[
+        #html.Img(src=ASSET_PATH + 'formula-1-vector-826415.jpg', height="50px"),
+        dbc.DropdownMenu(
+            children=[
+                dbc.DropdownMenuItem("Research Questions", href="/"),
+                dbc.DropdownMenuItem("Grid Position Analysis", href="/gridPosition"),
+                dbc.DropdownMenuItem("Retirement Analysis", href="/retirements"),
+                dbc.DropdownMenuItem("Pitstop Analysis", href="/pitstops"),
+            ],
+            nav=True,
+            in_navbar=True,
+            label="Navigation",
+        ),
+        dbc.NavItem(dbc.NavLink("Home", href="/")),
+    ],
     brand="DSP 2025 - Team 897",
     brand_href="/",
-    color="dark",
     dark=True,
     fluid=True
 )
+
+imprint_section = html.Footer([
+    dbc.Container([
+        html.Hr(),
+        dbc.Row([
+            dbc.Col([
+                html.P([
+                    '',
+                    html.A(
+                        'Christian-Albrechts-Universität zu Kiel',
+                        href='https://www.uni-kiel.de/de/impressum',
+                        target='_blank',
+                        className='text-center text-light'
+                    )
+                ], className='text-center text-light'),
+                html.P('Christian-Albrechts-Platz 4', className='text-center text-light'),
+                html.P('24118 Kiel, Germany', className='text-center text-light'),
+                html.P([
+                    "Telephone: ",
+                    html.A("+49 (0431) 880-00", href="tel:+4943188000", className="text-light")
+                ], className="text-center text-light"),
+                html.P([
+                    "E-Mail: ",
+                    html.A("mail@uni-kiel.de", href="mailto:mail@uni-kiel.de", className="text-light")
+                ], className="text-center text-light")
+            ], width=12)
+        ], justify='center')
+    ], fluid=True, className='text-light')
+])
 
 
 ########## Set up the layout ##########
@@ -44,23 +89,9 @@ navbar = dbc.NavbarSimple(
 app.layout = dbc.Container([
     navbar,
     html.Br(),
-    html.H2(
-        "Welcome to DSP 2025! These are our research questions:",
-        className="text-center text-light"
-    ),
+    dash.page_container,
     html.Br(),
-    dbc.Row([
-        dbc.Col([
-            dcc.Graph(figure=fig_CraWeath)
-        ])
-    ]),
-    dbc.Row([
-        dbc.Col(dbc.Button("Page 1", href="/page-1", color="primary", size="lg", className="w-100"), width=4),
-        dbc.Col(dbc.Button("Page 2", href="/page-2", color="success", size="lg", className="w-100"), width=4),
-        dbc.Col(dbc.Button("Page 3", href="/page-3", color="danger", size="lg", className="w-100"), width=4),
-    ], className="text-center"),
-    html.Br(),
-    dash.page_container
+    imprint_section
 ], fluid=True, className="bg-dark text-light")
 
 

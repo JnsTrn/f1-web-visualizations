@@ -1,7 +1,7 @@
 import dash
 from dash import html
 
-dash.register_page(__name__, path="/page-1")
+dash.register_page(__name__, path="/gridPosition")
 
 layout = html.Div([
     html.H1("Page 1", className="text-center text-light"),
