@@ -1,27 +1,38 @@
 import dash
-from dash import html
+from dash import html, dcc
+import dash_bootstrap_components as dbc
+import pandas as pd
+from plots import *
+
+####### Initialize the Dash app #######
 
 dash.register_page(__name__, path="/")
 
-layout = html.Div([
-    html.H1("Page 3", className="text-center text-light"),
-    html.P("This is the content of Page 3.", className="text-light"),
-    html.A("Back to Home", href="/", className="btn btn-danger")
-], className="container bg-dark text-light")
 
-    # html.H2(
-    #     "Welcome to DSP 2025! These are our research questions:",
-    #     className="text-center text-light"
-    # ),
-    # html.Br(),
-    # dbc.Row([
-    #     dbc.Col([
-    #         dcc.Graph(figure=fig_CraWeath)
-    #     ])
-    # ]),
-    # dbc.Row([
-    #     dbc.Col(dbc.Button("Page 1", href="/page-1", color="primary", size="lg", className="w-100"), width=4),
-    #     dbc.Col(dbc.Button("Page 2", href="/page-2", color="success", size="lg", className="w-100"), width=4),
-    #     dbc.Col(dbc.Button("Page 3", href="/page-3", color="danger", size="lg", className="w-100"), width=4),
-    # ], className="text-center"),
-    # html.Br(),
+############## Load Data ##############
+############ Create Graphs ############
+
+########## Set up the layout ##########
+
+layout = dbc.Container([
+    html.H4(
+        "Welcome to our Project! We want to answer these questions:",
+        className="text-center text-light"
+    ),
+    html.Br(),
+    html.A(
+        html.H1("How does the starting grid position influence the finishing position of drivers in the seasons from 1994 - 2024?", className='text-center page-header'),
+    href='/gridPosition'),
+    html.P("The starting grid position is an important factor in determining the finishing position of drivers in Formula and could be a key factor in determening the outcome of the race. We will analyze the data from the seasons 1994 - 2024 to determine the relationship between the starting grid position and the finishing position of drivers."),
+    html.Br(),
+    html.A(
+    html.H1("How has the total number of crashes and retirements evolved in the seasons from 1994 - 2024?", className='text-center page-header'),
+    href='/retirements'),
+    html.P("Crashes and retirements are a common occurence in Formula 1. We will analyze the data from the seasons 1994 - 2024 to determine how the total number of crashes and retirements has evolved over the years."),
+    html.Br(),
+    html.A(
+    html.H1("How does the number and the average duration of pitstops for a driver in a race relate to his finishing position?", className='text-center page-header'),
+    href='/pitstops'),
+    html.P("Pitstops are an important part of Formula 1. We will analyze the data from the seasons 2005 - 2024 to determine how the number and the average duration of pitstops for a driver has evolved over the years and how it relates to his finishing position."),
+    html.Br(),
+])

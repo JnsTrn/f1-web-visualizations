@@ -22,7 +22,7 @@ DATA_PATH = 'data/'
 df_CraWeath = pd.read_csv(DATA_PATH + 'crashes_and_weather.csv')
 
 
-# ########### Create Graphs ###########
+############ Create Graphs ############
 
 init_figs()
 fig_CraWeath = create_fig_CraWeath(df_CraWeath)
@@ -30,11 +30,12 @@ fig_CraWeath = create_fig_CraWeath(df_CraWeath)
 
 ########## Create Bootstrap Components ##########
 
-ASSET_PATH = 'assets/'
-
 navbar = dbc.NavbarSimple(
     children=[
-        #html.Img(src=ASSET_PATH + 'formula-1-vector-826415.jpg', height="50px"),
+        dbc.NavItem(dbc.NavLink("Research Questions", href="/")),
+        dbc.NavItem(dbc.NavLink("Grid Position Analysis", href="/gridPosition")),
+        dbc.NavItem(dbc.NavLink("Retirement Analysis", href="/retirements")),
+        dbc.NavItem(dbc.NavLink("Pitstop Analysis", href="/pitstops")),
         dbc.DropdownMenu(
             children=[
                 dbc.DropdownMenuItem("Research Questions", href="/"),
@@ -46,7 +47,7 @@ navbar = dbc.NavbarSimple(
             in_navbar=True,
             label="Navigation",
         ),
-        dbc.NavItem(dbc.NavLink("Home", href="/")),
+        html.Img(src=dash.get_asset_url('red_f1_car_clipped_small.png'), style={"height": "40px"}),
     ],
     brand="DSP 2025 - Team 897",
     brand_href="/",

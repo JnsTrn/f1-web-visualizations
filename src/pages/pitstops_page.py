@@ -1,10 +1,35 @@
 import dash
-from dash import html
+from dash import html, dcc
+import dash_bootstrap_components as dbc
+
+####### Initialize the Dash app #######
 
 dash.register_page(__name__, path="/pitstops")
 
-layout = html.Div([
-    html.H1("Page 3", className="text-center text-light"),
-    html.P("This is the content of Page 3.", className="text-light"),
-    html.A("Back to Home", href="/", className="btn btn-danger")
-], className="container bg-dark text-light")
+
+############## Load Data ##############
+############ Create Graphs ############
+
+########## Set up the layout ##########
+
+layout = dbc.Container([
+    html.H1(
+        "How does the number and the average duration of pitstops for a driver in a race relate to his finishing position?",
+        className="text-center page-header"
+    ),
+    html.Br(),
+    # Subquestion 1
+    html.H2(
+        "How does the number and the average duration of pitstops for a driver in a race relate to his finishing position? ",
+        className='text-light'
+    ),
+    dbc.Row([
+        dbc.Col([
+            #dcc.Graph(figure=)
+        ])
+    ]),
+    html.Br(),
+    html.P("Description and Analysis"),
+    html.Br(),
+])
+
