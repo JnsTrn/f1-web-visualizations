@@ -1,15 +1,8 @@
-import dash
-from dash import html, dcc
+import crash_vis_mod as cvm
 import dash_bootstrap_components as dbc
 import pandas as pd
-import crash_vis_mod as cvm
 import plots as plt
 from dash import dcc, html
-
-####### Initialize the Dash app #######
-
-#dash.register_page(__name__, path="/retirements")
-
 
 ############## Load Data ##############
 
@@ -108,6 +101,31 @@ layout = html.Div(
             dbc.Col(
                 html.Div(
                     [
+                        html.H4(
+                            'Weather Impact Analysis',
+                            className='text-center',
+                            style={'fontSize': '20px'},
+                        ),
+                        html.P(
+                            total_incidents_explanation,
+                            style={
+                                'fontSize': '16px',
+                                'lineHeight': '1.6',
+                                'width': '86%',
+                                'margin': '0 auto',
+                            },
+                        ),
+                    ],
+                    className='p-3 bg-dark text-light',
+                ),
+                width=12,
+            ),
+            className='mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
                         html.H3(
                             'Total Incidents by Year',
                             className='text-center',
@@ -120,7 +138,7 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '77%',
+                                'width': '85%',
                             },
                         ),
                     ]
@@ -128,31 +146,6 @@ layout = html.Div(
                 width=22,
             ),
             className='mb-4',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.H4(
-                            'Weather Impact Analysis',
-                            className='text-center',
-                            style={'fontSize': '20px'},
-                        ),
-                        html.P(
-                            total_incidents_explanation,
-                            style={
-                                'fontSize': '16px',
-                                'lineHeight': '1.6',
-                                'width': '78%',
-                                'margin': '0 auto',
-                            },
-                        ),
-                    ],
-                    className='p-3 bg-dark text-light',
-                ),
-                width=12,
-            ),
-            className='mb-5',
         ),
         dbc.Row(
             dbc.Col(
@@ -170,7 +163,7 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '77%',
+                                'width': '85%',
                             },
                         ),
                     ]
@@ -193,7 +186,32 @@ layout = html.Div(
                             style={
                                 'fontSize': '16px',
                                 'lineHeight': '1.6',
-                                'width': '78%',
+                                'width': '86%',
+                                'margin': '0 auto',
+                            },
+                        ),
+                    ],
+                    className='p-3 bg-dark text-light',
+                ),
+                width=12,
+            ),
+            className='mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.H4(
+                            'Weather Impact Analysis',
+                            className='text-center',
+                            style={'fontSize': '20px'},
+                        ),
+                        html.P(
+                            retirements_race_explanation,
+                            style={
+                                'fontSize': '16px',
+                                'lineHeight': '1.6',
+                                'width': '86%',
                                 'margin': '0 auto',
                             },
                         ),
@@ -220,7 +238,7 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '77%',
+                                'width': '85%',
                             },
                         ),
                     ]
@@ -228,31 +246,6 @@ layout = html.Div(
                 width=22,
             ),
             className='mb-4',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.H4(
-                            'Weather Impact Analysis',
-                            className='text-center',
-                            style={'fontSize': '20px'},
-                        ),
-                        html.P(
-                            retirements_race_explanation,
-                            style={
-                                'fontSize': '16px',
-                                'lineHeight': '1.6',
-                                'width': '78%',
-                                'margin': '0 auto',
-                            },
-                        ),
-                    ],
-                    className='p-3 bg-dark text-light',
-                ),
-                width=12,
-            ),
-            className='mb-5',
         ),
         dbc.Row(
             dbc.Col(
@@ -270,7 +263,7 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '77%',
+                                'width': '85%',
                             },
                         ),
                     ]
@@ -293,7 +286,7 @@ layout = html.Div(
                             style={
                                 'fontSize': '16px',
                                 'lineHeight': '1.6',
-                                'width': '78%',
+                                'width': '86%',
                                 'margin': '0 auto',
                             },
                         ),
@@ -309,11 +302,48 @@ layout = html.Div(
                 html.Div(
                     incidents_layout,
                     style={
-                        'width': '100%',
+                        'width': '85%',
                         'margin': '0 auto',
                     },
                 ),
                 width=22,
+            ),
+            className='mb-4',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.H4(
+                            'Weather Impact Analysis',
+                            className='text-center',
+                            style={'fontSize': '20px'},
+                        ),
+                        html.P(
+                            interactive_dashboard_explanation,
+                            style={
+                                'fontSize': '16px',
+                                'lineHeight': '1.6',
+                                'width': '86%',
+                                'margin': '0 auto',
+                            },
+                        ),
+                    ],
+                    className='p-3 bg-dark text-light',
+                ),
+                width=12,
+            ),
+            className='mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    html.A(
+                        'Back to Top', href='#top', className='btn btn-success'
+                    ),
+                    className='text-center',
+                ),
+                width=12,
             ),
             className='mb-4',
         ),

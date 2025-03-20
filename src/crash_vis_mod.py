@@ -394,7 +394,7 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
 
     fig.update_layout(
         height=1000,
-        width=1910,
+        autosize=True,
         # Put the x-axis scale on top
         xaxis=dict(side='top'),
         xaxis2=dict(side='top'),
@@ -454,8 +454,8 @@ def create_interactive_incidents_dashboard(df):
                 id='incidents-graph',
                 style={
                     'width': '100%',
-                    'margin-left': '285px',
                 },
+                config={'responsive': True},
             ),
             html.Div(
                 [
@@ -482,7 +482,7 @@ def create_interactive_incidents_dashboard(df):
                         step=1,
                     ),
                 ],
-                style={'width': '78.5%', 'margin': 'auto'},
+                style={'width': '85%', 'margin': 'auto'},
             ),
             html.Div(
                 [
@@ -506,7 +506,7 @@ def create_interactive_incidents_dashboard(df):
                         step=1,
                     ),
                 ],
-                style={'width': '78.5%', 'margin': 'auto'},
+                style={'width': '85%', 'margin': 'auto'},
             ),
             html.Div(
                 [
@@ -544,7 +544,7 @@ def create_interactive_incidents_dashboard(df):
                         step=1,
                     ),
                 ],
-                style={'width': '78.5%', 'margin': 'auto'},
+                style={'width': '85%', 'margin': 'auto'},
             ),
         ]
     )
