@@ -1,6 +1,6 @@
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Input, Output, callback, dcc, html
+from dash import Input, Output, dcc, html
 from plotly.subplots import make_subplots
 
 
@@ -41,14 +41,14 @@ def total_incidents_by_year(df):
     )
 
     fig.add_annotation(
-        text='Click on legend items to toggle visibility',
+        text='Click on legend items<br>to toggle visibility',
         xref='paper',
         yref='paper',
         x=1.12,
         y=1.2,
         showarrow=False,
         font=dict(size=17, color='white'),
-        align='right',
+        align='left',
         borderpad=5,
     )
 
@@ -394,7 +394,7 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
 
     fig.update_layout(
         height=1000,
-        width=1900,
+        width=1910,
         # Put the x-axis scale on top
         xaxis=dict(side='top'),
         xaxis2=dict(side='top'),
@@ -446,10 +446,16 @@ def create_interactive_incidents_dashboard(df):
     # Layout definition (No Dash instance created)
     layout = html.Div(
         [
-            html.H3('Interactive Incidents by Circuit Dashboard'),
+            html.H3(
+                'Interactive Incidents by Circuit Dashboard',
+                className='text-center',
+            ),
             dcc.Graph(
                 id='incidents-graph',
-                style={'width': '100%', 'margin-left': '320px'},
+                style={
+                    'width': '100%',
+                    'margin-left': '285px',
+                },
             ),
             html.Div(
                 [
@@ -476,7 +482,7 @@ def create_interactive_incidents_dashboard(df):
                         step=1,
                     ),
                 ],
-                style={'width': '80%', 'margin': 'auto'},
+                style={'width': '78.5%', 'margin': 'auto'},
             ),
             html.Div(
                 [
@@ -500,7 +506,7 @@ def create_interactive_incidents_dashboard(df):
                         step=1,
                     ),
                 ],
-                style={'width': '80%', 'margin': 'auto'},
+                style={'width': '78.5%', 'margin': 'auto'},
             ),
             html.Div(
                 [
@@ -538,28 +544,28 @@ def create_interactive_incidents_dashboard(df):
                         step=1,
                     ),
                 ],
-                style={'width': '80%', 'margin': 'auto'},
+                style={'width': '78.5%', 'margin': 'auto'},
             ),
         ]
     )
 
-    # Callback function
-    def register_callbacks(app):
-        @app.callback(
-            Output('incidents-graph', 'figure'),
-            [
-                Input('year-slider', 'value'),
-                Input('race-slider', 'value'),
-                Input('type-slider', 'value'),
-            ],
+    return layout
+
+
+def register_callbacks(app, df):
+    @app.callback(
+        Output('incidents-graph', 'figure'),
+        [
+            Input('year-slider', 'value'),
+            Input('race-slider', 'value'),
+            Input('type-slider', 'value'),
+        ],
+    )
+    def update_figure(selected_years, min_race_count, type_value):
+        start_year, end_year = selected_years
+        type_mapping = {0: 'per_race', 1: 'per_race_driver'}
+        type_str = type_mapping[type_value]
+
+        return create_incidents_figure(
+            df, start_year, end_year, min_race_count, type_str
         )
-        def update_figure(selected_years, min_race_count, type_value):
-            start_year, end_year = selected_years
-            type_mapping = {0: 'per_race', 1: 'per_race_driver'}
-            type_str = type_mapping[type_value]
-
-            return create_incidents_figure(
-                df, start_year, end_year, min_race_count, type_str
-            )
-
-    return layout, register_callbacks
