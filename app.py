@@ -9,9 +9,6 @@ app = dash.Dash(__name__, external_stylesheets=style_sheet, use_pages=True)
 app.title = 'DSP 2025 - Team 897'
 server = app.server
 
-############## Load Data ##############
-
-############ Create Graphs ############
 
 ########## Create Bootstrap Components ##########
 
