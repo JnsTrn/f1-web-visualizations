@@ -137,7 +137,8 @@ layout = html.Div(
                 html.Label('List of Drivers with chosen amount of races:', style={'color': 'white'}),
                 dcc.Dropdown(
                     id='driver-dropdown',
-                    style={'width': '50%', 'margin': '20px auto'}
+                    value ='Michael Schumacher',
+                    style={'width': '50%', 'margin': 'auto', 'color': 'black'}
                 ),
             ],
             style={'width': '80%', 'margin': '20px auto', 'textAlign': 'center'}
@@ -152,7 +153,7 @@ layout = html.Div(
             
             # Slider, um den Wert von "number" festzulegen
             html.Div([
-                html.Label('Wählen Sie die Nummer:'),
+                html.Label('Choose the number of mininum races on this circuit'),
                 dcc.Slider(
                     id='number-slider',
                     min=0,
@@ -164,13 +165,15 @@ layout = html.Div(
             ], style={'textAlign': 'center', 'margin': '20px'}),
 
             # Dropdown für die Streckenwahl, initial mit einer Beispiel-Strecke
-            dcc.Dropdown(
-                id='circuit-dropdown',
-                options=[],  # Optionen werden später dynamisch gesetzt
-                value='silverstone',  # Standardwert, der später dynamisch gesetzt wird
-                style={'width': '50%', 'margin': 'auto'}
-            ),
-            
+            html.Div([
+                html.Label('List of circuits that have been driven on', style={'textAlign': 'center'}),
+                dcc.Dropdown(
+                    id='circuit-dropdown',
+                    options=[],  # Optionen werden später dynamisch gesetzt
+                    value='silverstone',  # Standardwert, der später dynamisch gesetzt wird
+                    style={'width': '50%', 'margin' : 'auto', 'color' : 'black'}
+                ),
+            ], style={'textAlign': 'center', 'margin': '20px'}),
             # Graph zur Anzeige der Heatmap
             dcc.Graph(id='heatmap'),
 
