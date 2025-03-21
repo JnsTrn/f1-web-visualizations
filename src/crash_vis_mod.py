@@ -14,15 +14,35 @@ def total_incidents_by_year(df):
         .reset_index()
     )
 
+    # Rename columns for clarity in the legend
+    column_mapping = {
+        'Total_Retirements': 'Total Retirements',
+        'Race Incident/Crash': 'Incidents/Crashes',
+        'Technical Failure': 'Technical Failures',
+    }
+    yearly_totals = yearly_totals.rename(columns=column_mapping)
+
     fig = px.line(
         yearly_totals,
         x='year',
-        y=['Total_Retirements', 'Race Incident/Crash', 'Technical Failure'],
+        y=list(column_mapping.values()),  # Use renamed columns
         title='Total Incidents by Year (1994 - 2024)',
         markers=True,
         labels={'value': 'Total Count', 'year': 'Year'},
         template='plotly_dark',
     )
+
+    # Update traces for hover customization
+    hover_templates = {
+        'Total Retirements': '<b>Total Retirements:</b> %{y}<extra></extra>',
+        'Incidents/Crashes': '<b>Incidents/Crashes:</b> %{y}<extra></extra>',
+        'Technical Failures': '<b>Technical Failures:</b> %{y}<extra></extra>',
+    }
+
+    for trace in fig.data:
+        trace_name = trace.name  # Get the trace name
+        if trace_name in hover_templates:
+            trace.hovertemplate = hover_templates[trace_name]
 
     # Update traces for better visibility
     fig.update_traces(line=dict(width=3), marker=dict(size=8))
@@ -38,18 +58,6 @@ def total_incidents_by_year(df):
             x=1,
             y=1,
         ),
-    )
-
-    fig.add_annotation(
-        text='Click on legend items<br>to toggle visibility',
-        xref='paper',
-        yref='paper',
-        x=1.096,
-        y=1.2,
-        showarrow=False,
-        font=dict(size=17, color='white'),
-        align='left',
-        borderpad=5,
     )
 
     return fig
