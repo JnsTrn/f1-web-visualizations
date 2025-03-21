@@ -44,6 +44,7 @@ for fig in [
 ########## Set up the layout ##########
 
 total_incidents_explanation = """
+This is an explanation about what the plot depicts and what it means.
 This graph shows the total number of incidents per year in Formula 1 from 1994
 to 2024. Incidents include accidents, mechanical failures, and other reasons
 for non-finishes. We can observe that the total number of incidents has
@@ -89,27 +90,57 @@ patterns and trends. This tool is particularly useful for investigating
 specific periods or comparing performance across different teams and drivers.
 """
 
+sample_text = """
+This is a short explanation about what the graph is suppposed to show and what
+we did to create it.
+"""
 
 layout = html.Div(
     [
         dbc.Row(
             dbc.Col(
                 html.H1(
-                    'Retirement Analysis', className='text-center text-light'
+                    [
+                        'How has the total number of crashes and retirements '
+                        'evolved in the seasons from 1994 - 2024?',
+                    ],
+                    className='text-center page-header',
                 ),
                 width={'size': 12, 'order': 1},
             ),
-            className='mb-4',
+            # className='mb-4 border border-dark rounded bg-danger bg-gradient p-3',
+            style={
+                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
+                'padding': '20px',
+                'borderRadius': '10px',
+                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
+            },
         ),
         dbc.Row(
             dbc.Col(
                 html.Div(
                     [
-                        html.H3(
-                            'Total Incidents by Year',
-                            className='text-center',
-                            style={'fontSize': '22px'},
+                        html.P(
+                            sample_text,
+                            style={
+                                'fontSize': '18px',
+                                'lineHeight': '1.6',
+                                'width': '93%',
+                                'margin': '0 auto',
+                                'textAlign': 'justify',
+                            },
                         ),
+                    ],
+                    className='p-3 bg-dark text-light',
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            className='mb-2 mt-4',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
                         html.Div(
                             dcc.Graph(
                                 figure=fig_total_incidents,
@@ -124,17 +155,12 @@ layout = html.Div(
                 ),
                 width={'size': 12, 'order': 1},
             ),
-            className='mb-4',
+            className='mb-2',
         ),
         dbc.Row(
             dbc.Col(
                 html.Div(
                     [
-                        html.H4(
-                            'Weather Impact Analysis',
-                            className='text-center',
-                            style={'fontSize': '20px'},
-                        ),
                         html.P(
                             total_incidents_explanation,
                             style={
@@ -156,11 +182,6 @@ layout = html.Div(
             dbc.Col(
                 html.Div(
                     [
-                        html.H3(
-                            'Retirement Rate by Year',
-                            className='text-center',
-                            style={'fontSize': '22px'},
-                        ),
                         html.Div(
                             dcc.Graph(
                                 figure=fig_retirements_rate,
@@ -207,11 +228,6 @@ layout = html.Div(
             dbc.Col(
                 html.Div(
                     [
-                        html.H3(
-                            'Average Retirements per Race by Year',
-                            className='text-center',
-                            style={'fontSize': '22px'},
-                        ),
                         html.Div(
                             dcc.Graph(
                                 figure=fig_retirements_race,
@@ -256,54 +272,16 @@ layout = html.Div(
         ),
         dbc.Row(
             dbc.Col(
-                html.Div(
+                html.H1(
                     [
-                        html.H3(
-                            'Crash Rate by Weather',
-                            className='text-center',
-                            style={'fontSize': '22px'},
-                        ),
-                        html.Div(
-                            dcc.Graph(
-                                figure=fig_CraWeath,
-                                config={'responsive': True},
-                            ),
-                            style={
-                                'margin': '0 auto',
-                                'width': '92%',
-                            },
-                        ),
-                    ]
-                ),
-                width={'size': 12, 'order': 1},
-            ),
-            className='mb-4',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.H4(
-                            'Weather Impact Analysis',
-                            className='text-center',
-                            style={'fontSize': '20px'},
-                        ),
-                        html.P(
-                            crash_weather_explanation,
-                            style={
-                                'fontSize': '18px',
-                                'lineHeight': '1.6',
-                                'width': '93%',
-                                'margin': '0 auto',
-                                'textAlign': 'justify',
-                            },
-                        ),
+                        'Which tracks have the highest frequency of crashes '
+                        'or retirements compared to others?',
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='text-center page-header',
                 ),
                 width={'size': 12, 'order': 1},
             ),
-            className='mb-5',
+            className='mb-4 border border-dark rounded bg-danger bg-gradient p-3',
         ),
         dbc.Row(
             dbc.Col(
@@ -346,9 +324,73 @@ layout = html.Div(
         ),
         dbc.Row(
             dbc.Col(
+                html.H1(
+                    [
+                        'How does weather affect race completion rates and ',
+                        html.Br(),
+                        'the likelihood of crashes or retirements in the '
+                        'seasons from 2005 - 2024?',
+                    ],
+                    className='text-center page-header',
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            # className='mb-4 border border-dark rounded bg-danger bg-gradient p-3',
+            style={
+                'backgroundColor': '#eb0e20',
+                'color': 'white',
+                'padding': '5px',
+                #'border': '0.5px solid black',
+                'borderRadius': '7px',
+                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
+            },
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.Div(
+                            dcc.Graph(
+                                figure=fig_CraWeath,
+                                config={'responsive': True},
+                            ),
+                            style={
+                                'margin': '0 auto',
+                                'width': '92%',
+                            },
+                        ),
+                    ]
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            className='mb-4 mt-4',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            crash_weather_explanation,
+                            style={
+                                'fontSize': '18px',
+                                'lineHeight': '1.6',
+                                'width': '93%',
+                                'margin': '0 auto',
+                                'textAlign': 'justify',
+                            },
+                        ),
+                    ],
+                    className='p-3 bg-dark text-light',
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            className='mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
                 html.Div(
                     html.A(
-                        'Back to Top', href='#top', className='btn btn-success'
+                        'Back to Top', href='#top', className='btn btn-danger'
                     ),
                     className='text-center',
                 ),

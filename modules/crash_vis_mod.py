@@ -242,7 +242,11 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 orientation='h',
                 marker=dict(
                     color=track_incidents_sorted['crashes_per_race'],
-                    colorscale='Reds',
+                    colorscale=[
+                        [0, 'orangered'],
+                        [0.5, 'firebrick'],
+                        [1, 'darkred'],
+                    ],
                 ),
                 name='Crashes',
                 hovertext=track_incidents_sorted.apply(
@@ -270,7 +274,11 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 orientation='h',
                 marker=dict(
                     color=track_incidents_sorted['failures_per_race'],
-                    colorscale='Blues',
+                    colorscale=[
+                        [0, 'deepskyblue'],
+                        [0.5, 'mediumblue'],
+                        [1, 'darkblue'],
+                    ],
                 ),
                 name='Failures',
                 hovertext=track_incidents_sorted.apply(
@@ -299,7 +307,11 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 orientation='h',
                 marker=dict(
                     color=track_incidents_sorted['retirements_per_race'],
-                    colorscale='Greens',
+                    colorscale=[
+                        [0, 'limegreen'],
+                        [0.5, 'forestgreen'],
+                        [1, 'darkgreen'],
+                    ],
                 ),
                 name='Retirements',
                 hovertext=track_incidents_sorted.apply(
