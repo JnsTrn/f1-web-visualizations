@@ -45,7 +45,7 @@ for fig in [
 
 total_incidents_explanation = """
 This graph shows the total number of incidents per year in Formula 1 from 1994
-to 2024.Incidents include accidents, mechanical failures, and other reasons
+to 2024. Incidents include accidents, mechanical failures, and other reasons
 for non-finishes. We can observe that the total number of incidents has
 decreased over time, likely due to improved safety standards and car
 reliability. The peaks in certain years may correspond to regulation changes
@@ -54,7 +54,7 @@ or particularly challenging seasons.
 
 retirement_rate_explanation = """
 The retirement rate represents the percentage of cars that did not finish the
-race compared to the total number of starters.This metric helps us understand
+race compared to the total number of starters. This metric helps us understand
 the reliability and safety evolution in F1 over three decades. The downward
 trend suggests that modern F1 cars are significantly more reliable than their
 predecessors. Notably, the introduction of hybrid power units in 2014 initially
@@ -105,31 +105,6 @@ layout = html.Div(
             dbc.Col(
                 html.Div(
                     [
-                        html.H4(
-                            'Weather Impact Analysis',
-                            className='text-center',
-                            style={'fontSize': '20px'},
-                        ),
-                        html.P(
-                            total_incidents_explanation,
-                            style={
-                                'fontSize': '16px',
-                                'lineHeight': '1.6',
-                                'width': '86%',
-                                'margin': '0 auto',
-                            },
-                        ),
-                    ],
-                    className='p-3 bg-dark text-light',
-                ),
-                width=12,
-            ),
-            className='mb-5',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
                         html.H3(
                             'Total Incidents by Year',
                             className='text-center',
@@ -142,7 +117,7 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '85%',
+                                'width': '92%',
                             },
                         ),
                     ]
@@ -150,6 +125,31 @@ layout = html.Div(
                 width=22,
             ),
             className='mb-4',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.H4(
+                            'Weather Impact Analysis',
+                            className='text-center',
+                            style={'fontSize': '20px'},
+                        ),
+                        html.P(
+                            total_incidents_explanation,
+                            style={
+                                'fontSize': '18px',
+                                'lineHeight': '1.6',
+                                'width': '93%',
+                                'margin': '0 auto',
+                            },
+                        ),
+                    ],
+                    className='p-3 bg-dark text-light',
+                ),
+                width=12,
+            ),
+            className='mb-5',
         ),
         dbc.Row(
             dbc.Col(
@@ -167,7 +167,7 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '85%',
+                                'width': '92%',
                             },
                         ),
                     ]
@@ -188,34 +188,9 @@ layout = html.Div(
                         html.P(
                             retirement_rate_explanation,
                             style={
-                                'fontSize': '16px',
+                                'fontSize': '18px',
                                 'lineHeight': '1.6',
-                                'width': '86%',
-                                'margin': '0 auto',
-                            },
-                        ),
-                    ],
-                    className='p-3 bg-dark text-light',
-                ),
-                width=12,
-            ),
-            className='mb-5',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.H4(
-                            'Weather Impact Analysis',
-                            className='text-center',
-                            style={'fontSize': '20px'},
-                        ),
-                        html.P(
-                            retirements_race_explanation,
-                            style={
-                                'fontSize': '16px',
-                                'lineHeight': '1.6',
-                                'width': '86%',
+                                'width': '93%',
                                 'margin': '0 auto',
                             },
                         ),
@@ -242,7 +217,7 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '85%',
+                                'width': '92%',
                             },
                         ),
                     ]
@@ -250,6 +225,31 @@ layout = html.Div(
                 width=22,
             ),
             className='mb-4',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.H4(
+                            'Weather Impact Analysis',
+                            className='text-center',
+                            style={'fontSize': '20px'},
+                        ),
+                        html.P(
+                            retirements_race_explanation,
+                            style={
+                                'fontSize': '18px',
+                                'lineHeight': '1.6',
+                                'width': '93%',
+                                'margin': '0 auto',
+                            },
+                        ),
+                    ],
+                    className='p-3 bg-dark text-light',
+                ),
+                width=12,
+            ),
+            className='mb-5',
         ),
         dbc.Row(
             dbc.Col(
@@ -267,7 +267,7 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '85%',
+                                'width': '92%',
                             },
                         ),
                     ]
@@ -288,9 +288,9 @@ layout = html.Div(
                         html.P(
                             crash_weather_explanation,
                             style={
-                                'fontSize': '16px',
+                                'fontSize': '18px',
                                 'lineHeight': '1.6',
-                                'width': '86%',
+                                'width': '93%',
                                 'margin': '0 auto',
                             },
                         ),
@@ -306,7 +306,7 @@ layout = html.Div(
                 html.Div(
                     incidents_layout,
                     style={
-                        'width': '85%',
+                        'width': '92%',
                         'margin': '0 auto',
                     },
                 ),
@@ -326,9 +326,9 @@ layout = html.Div(
                         html.P(
                             interactive_dashboard_explanation,
                             style={
-                                'fontSize': '16px',
+                                'fontSize': '18px',
                                 'lineHeight': '1.6',
-                                'width': '86%',
+                                'width': '93%',
                                 'margin': '0 auto',
                             },
                         ),

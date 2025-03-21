@@ -44,7 +44,7 @@ def total_incidents_by_year(df):
         text='Click on legend items<br>to toggle visibility',
         xref='paper',
         yref='paper',
-        x=1.12,
+        x=1.096,
         y=1.2,
         showarrow=False,
         font=dict(size=17, color='white'),
