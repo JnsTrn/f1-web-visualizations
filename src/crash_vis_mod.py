@@ -197,13 +197,19 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
     # Return an empty figure if no data matches criteria
     if track_incidents.empty:
         fig = go.Figure()
-        fig.add_annotation(
-            text='No circuits with enough races in selected period',
-            xref='paper',
-            yref='paper',
-            x=0.5,
-            y=0.5,
-            showarrow=False,
+        fig.update_layout(
+            height=1000,
+            annotations=[
+                dict(
+                    text='No circuits with enough races in selected period',
+                    xref='paper',
+                    yref='paper',
+                    x=0.5,
+                    y=0.5,
+                    showarrow=False,
+                    font=dict(size=20),
+                )
+            ],
         )
         return fig
 
