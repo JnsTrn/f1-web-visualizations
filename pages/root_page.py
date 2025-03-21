@@ -1,8 +1,6 @@
 import dash
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-import pandas as pd
-from plots import *
 
 ####### Initialize the Dash app #######
 

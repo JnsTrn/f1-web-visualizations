@@ -1,8 +1,8 @@
-import crash_vis_mod as cvm
+import modules.crash_vis_mod as cvm
 import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
-import plots as plt
+import modules.weather_crash_vis_mod as wcvm
 from dash import Input, Output, dcc, html
 
 ####### Initialize the Dash app #######
@@ -22,8 +22,8 @@ df_CraWeath = pd.read_csv(DATA_PATH + 'crashes_and_weather.csv')
 
 # ############ Define Graphs ############
 
-plt.init_figs()
-fig_CraWeath = plt.create_fig_CraWeath(df_CraWeath)
+wcvm.init_figs()
+fig_CraWeath = wcvm.create_fig_CraWeath(df_CraWeath)
 fig_total_incidents = cvm.total_incidents_by_year(df)
 fig_retirements_rate = cvm.yearly_retirements_rate(df)
 fig_retirements_race = cvm.average_yearly_retirements(df)
@@ -142,7 +142,6 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
-                                'textAlign': 'justify',
                             },
                         ),
                     ],
@@ -193,7 +192,6 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
-                                'textAlign': 'justify',
                             },
                         ),
                     ],
@@ -244,7 +242,6 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
-                                'textAlign': 'justify',
                             },
                         ),
                     ],
@@ -295,7 +292,6 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
-                                'textAlign': 'justify',
                             },
                         ),
                     ],
@@ -334,7 +330,6 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
-                                'textAlign': 'justify',
                             },
                         ),
                     ],
