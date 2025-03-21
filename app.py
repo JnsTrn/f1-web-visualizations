@@ -23,25 +23,25 @@ navbar = dbc.NavbarSimple(
         ),
         dbc.NavItem(dbc.NavLink('Retirement Analysis', href='/retirements')),
         dbc.NavItem(dbc.NavLink('Pitstop Analysis', href='/pitstops')),
-        dbc.DropdownMenu(
-            children=[
-                dbc.DropdownMenuItem('Research Questions', href='/'),
-                dbc.DropdownMenuItem(
-                    'Grid Position Analysis', href='/gridPosition'
-                ),
-                dbc.DropdownMenuItem(
-                    'Retirement Analysis', href='/retirements'
-                ),
-                dbc.DropdownMenuItem('Pitstop Analysis', href='/pitstops'),
-            ],
-            nav=True,
-            in_navbar=True,
-            label='Navigation',
-        ),
-        html.Img(
+        # dbc.DropdownMenu(
+        #     children=[
+        #         dbc.DropdownMenuItem('Research Questions', href='/'),
+        #         dbc.DropdownMenuItem(
+        #             'Grid Position Analysis', href='/gridPosition'
+        #         ),
+        #         dbc.DropdownMenuItem(
+        #             'Retirement Analysis', href='/retirements'
+        #         ),
+        #         dbc.DropdownMenuItem('Pitstop Analysis', href='/pitstops'),
+        #     ],
+        #     nav=True,
+        #     in_navbar=True,
+        #     label='Navigation',
+        # ),
+        dbc.NavItem(html.Img(
             src=dash.get_asset_url('red_f1_car_clipped_small.png'),
             style={'height': '40px'},
-        ),
+        )),
     ],
     brand='DSP 2025 - Team 897',
     brand_href='/',
