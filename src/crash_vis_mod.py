@@ -1,6 +1,6 @@
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import Input, Output, dcc, html
+from dash import dcc, html
 from plotly.subplots import make_subplots
 
 
@@ -550,22 +550,3 @@ def create_interactive_incidents_dashboard(df):
     )
 
     return layout
-
-
-def register_callbacks(app, df):
-    @app.callback(
-        Output('incidents-graph', 'figure'),
-        [
-            Input('year-slider', 'value'),
-            Input('race-slider', 'value'),
-            Input('type-slider', 'value'),
-        ],
-    )
-    def update_figure(selected_years, min_race_count, type_value):
-        start_year, end_year = selected_years
-        type_mapping = {0: 'per_race', 1: 'per_race_driver'}
-        type_str = type_mapping[type_value]
-
-        return create_incidents_figure(
-            df, start_year, end_year, min_race_count, type_str
-        )

@@ -1,9 +1,6 @@
 import dash
 import dash_bootstrap_components as dbc
-import pages.retirements_page as retirements_page
-import pandas as pd
 from dash import html
-from plots import *
 
 ####### Initialize the Dash app #######
 
@@ -14,33 +11,18 @@ server = app.server
 
 ############## Load Data ##############
 
-DATA_PATH = 'data/'
-
-df_CraWeath = pd.read_csv(DATA_PATH + 'crashes_and_weather.csv')
-
-
 ############ Create Graphs ############
-
-init_figs()
-fig_CraWeath = create_fig_CraWeath(df_CraWeath)
-
-########### Register Pages ############
-
-dash.register_page(
-    'retirements', path='/retirements', layout=retirements_page.layout
-)
-
-# Register callbacks for the retirements page
-retirements_page.retirement_callbacks(app)
 
 ########## Create Bootstrap Components ##########
 
 navbar = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink("Research Questions", href="/")),
-        dbc.NavItem(dbc.NavLink("Grid Position Analysis", href="/gridPosition")),
-        dbc.NavItem(dbc.NavLink("Retirement Analysis", href="/retirements")),
-        dbc.NavItem(dbc.NavLink("Pitstop Analysis", href="/pitstops")),
+        dbc.NavItem(dbc.NavLink('Research Questions', href='/')),
+        dbc.NavItem(
+            dbc.NavLink('Grid Position Analysis', href='/gridPosition')
+        ),
+        dbc.NavItem(dbc.NavLink('Retirement Analysis', href='/retirements')),
+        dbc.NavItem(dbc.NavLink('Pitstop Analysis', href='/pitstops')),
         dbc.DropdownMenu(
             children=[
                 dbc.DropdownMenuItem('Research Questions', href='/'),
@@ -56,7 +38,10 @@ navbar = dbc.NavbarSimple(
             in_navbar=True,
             label='Navigation',
         ),
-        html.Img(src=dash.get_asset_url('red_f1_car_clipped_small.png'), style={"height": "40px"}),
+        html.Img(
+            src=dash.get_asset_url('red_f1_car_clipped_small.png'),
+            style={'height': '40px'},
+        ),
     ],
     brand='DSP 2025 - Team 897',
     brand_href='/',
@@ -136,7 +121,6 @@ app.layout = dbc.Container(
     fluid=True,
     className='bg-dark text-light',
 )
-
 
 ############# Run the app #############
 

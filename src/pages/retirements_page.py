@@ -1,8 +1,13 @@
 import crash_vis_mod as cvm
+import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plots as plt
-from dash import dcc, html
+from dash import Input, Output, dcc, html
+
+####### Initialize the Dash app #######
+
+dash.register_page(__name__, path='/retirements')
 
 ############## Load Data ##############
 
@@ -14,7 +19,6 @@ df = pd.read_csv(
 )
 
 df_CraWeath = pd.read_csv(DATA_PATH + 'crashes_and_weather.csv')
-
 
 # ############ Define Graphs ############
 
@@ -352,6 +356,19 @@ layout = html.Div(
 )
 
 
-###### Register Callbacks ################
-def retirement_callbacks(app):
-    cvm.register_callbacks(app, df)
+@dash.callback(
+    Output('incidents-graph', 'figure'),
+    [
+        Input('year-slider', 'value'),
+        Input('race-slider', 'value'),
+        Input('type-slider', 'value'),
+    ],
+)
+def update_figure(selected_years, min_race_count, type_value):
+    start_year, end_year = selected_years
+    type_mapping = {0: 'per_race', 1: 'per_race_driver'}
+    type_str = type_mapping[type_value]
+
+    return cvm.create_incidents_figure(
+        df, start_year, end_year, min_race_count, type_str
+    )
