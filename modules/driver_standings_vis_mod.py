@@ -13,14 +13,15 @@ def create_grid_finish_figure(name, df):
     finish_counts.columns = ['grid_position', 'count_finish']
 
     fig = go.Figure()
-    fig.add_trace(go.Bar(x=grid_counts['grid_position'], y=grid_counts['count_grid'], name='grid', hovertemplate='Number of grid positions %{y}<extra></extra>'))
-    fig.add_trace(go.Bar(x=finish_counts['grid_position'], y=finish_counts['count_finish'], name='finish', hovertemplate='Number of finish positions %{y}<extra></extra>'))
+    fig.add_trace(go.Bar(x=grid_counts['grid_position'], y=grid_counts['count_grid'], name='grid', hovertemplate='Number from start position %{x}: %{y}<extra></extra>'))
+    fig.add_trace(go.Bar(x=finish_counts['grid_position'], y=finish_counts['count_finish'], name='finish', hovertemplate='Number of finish positions %{x} %{y}<extra></extra>'))
 
     fig.update_layout(
         template='plotly_dark',
+        #hoverlabel=dict(font=dict(color='white')),
         xaxis_title='Position', 
         yaxis_title='Count',  
-        title=f'All time Grid/Finish Position of {name}',
+        title=f'All time Start/Finish Position of {name}',
         title_font=dict(
         color='white'  
         ),
@@ -52,7 +53,7 @@ def update_dropdown_and_heatmap(slider_value, selected_circuit, df):
     circuit = df[df['circuit_id'] == selected_circuit]
     
     # Berechnung der Heatmap-Daten
-    a = ds.get_all_standings(circuit)  # Verwende ds.get_all_standings, wenn verfügbar
+    a = ds.get_all_standings(circuit,29)  # Verwende ds.get_all_standings, wenn verfügbar
     heatmap_data = a.pivot(index='finish_position', columns='grid_position', values='count')
 
     # Erstellen der Heatmap
@@ -67,13 +68,13 @@ def update_dropdown_and_heatmap(slider_value, selected_circuit, df):
     # Layout der Heatmap
     fig.update_layout(
         template='plotly_dark',
-        title=f'Grid/finish position of circuit {selected_circuit.capitalize()}',
+        title=f'Start/finish position of circuit {selected_circuit.capitalize()}',
         height=600,
         xaxis=dict(
             tickmode='array',
             tickvals=a['grid_position'].unique(),
             showgrid=False,
-            title='Grid position',
+            title='Start position',
             linecolor='white'
         ),
         yaxis=dict(
@@ -148,3 +149,108 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
     return fig
 
 
+### Heatmap für alle driver 
+
+def create_figure_all_time_standings(df):
+    number = 22 # Number of positions
+
+    df_heatmap = ds.get_all_standings(df, (number+1))
+    df_heatmap = df_heatmap[df_heatmap['finish_position'] <= number]
+    heatmap_data = df_heatmap.pivot(index='finish_position', columns='grid_position', values='count')
+
+
+    fig = go.Figure(data=go.Heatmap(
+        z=heatmap_data.values,
+        x=heatmap_data.columns,  
+        y=heatmap_data.index,  
+        colorscale='Reds_r',
+        #text=heatmap_data.values,  # Werte in den Zellen anzeigen
+        texttemplate='%{text}',  # Text direkt anzeigen
+        #showscale=True  # Farbskala anzeigen (optional)
+    ))
+    fig.update_layout(
+        template='plotly_dark',
+        title= 'All time Start/finish Position',
+        height=600,  
+        xaxis=dict(
+            tickmode='array',
+            tickvals=df_heatmap['grid_position'].unique(),
+            showgrid=False,
+            title= 'Start position',
+            linecolor= 'white'
+        ),
+        yaxis=dict(
+            tickmode='array',
+            tickvals=df_heatmap['finish_position'].unique(),
+            showgrid=False,
+            title= 'Finish position',
+            linecolor='white'
+        )
+    )
+    return fig
+
+
+### AVG Placement depending on Start Position
+
+def create_fig_start_avg_placements(df, df_race_completed):
+    # Calculation of mean for races that were completed
+    standings = ds.get_all_standings(df_race_completed,23)
+    standings['Produkt'] = standings.prod(axis=1)
+    df_final = pd.DataFrame({'grid_position' : [], 'avg_placement' : []})
+    for pos in range(1,28):
+        temp = standings[standings['grid_position']== pos]
+        sum_pro = temp['Produkt'].sum()/pos
+        sum_count = temp['count'].sum() 
+        if sum_count != 0 :
+            mittelwert = sum_pro / sum_count
+            df_final.loc[len(df_final)] = [pos, mittelwert]
+
+    # Calculation of mean for all races
+    df_all_races = ds.get_all_standings(df,23)
+    df_all_races['Produkt'] = df_all_races.prod(axis=1)
+    df_final_all = pd.DataFrame({'grid_position' : [], 'avg_placement' : []})
+    for pos in range(1,28):
+        temp = df_all_races[df_all_races['grid_position']== pos]
+        sum_pro = temp['Produkt'].sum()/pos
+        sum_count = temp['count'].sum() 
+        if sum_count != 0 :
+            mittelwert = sum_pro / sum_count
+            df_final_all.loc[len(df_final_all)] = [pos, mittelwert]
+
+
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(x=df_final['grid_position'], y=df_final['avg_placement'],  mode='lines+markers',name='race completed', marker=dict(color='blue'),
+                            hovertemplate='Average placement: %{y:.2f}<extra></extra>'))
+
+    fig.add_trace(go.Scatter(x=df_final_all['grid_position'], y=df_final_all['avg_placement'], mode='lines+markers', name='all races ',  marker=dict(color='red'),
+                            hovertemplate='Average placement: %{y:.2f}<extra></extra>'))
+
+    fig.update_layout(
+        template='plotly_dark',
+        title= 'Average placement depending on starting position',
+        xaxis=dict(
+            tick0=0,        
+            dtick=2,        
+            range=[0, 22],
+            showgrid=False,
+            linecolor= 'white', 
+            zeroline= False,
+            title= 'Start position'
+        ),
+        yaxis=dict(
+            tick0=0,        
+            dtick=2,        
+            range=[0, 22],
+            showgrid=False,
+            linecolor='black',
+            title= 'Average placement',
+            zeroline=False,
+            
+        ),
+        #plot_bgcolor='white',  
+        margin=dict(t=50, b=50, l=50, r=50),  
+        
+    )
+
+    return fig

@@ -30,9 +30,9 @@ def driver_finish_pos(name,df):
     return finish_position_count
 
 #Get all time grid and finish driver standings
-def get_all_standings(df):
+def get_all_standings(df,number):
     df_all_standings_count = pd.DataFrame()
-    for grid_pos in range(1,29) : 
+    for grid_pos in range(1,number) : 
         df_filtered = df[df["grid_position"] == grid_pos]
         df_temp = df_filtered["finish_position"].value_counts().reset_index()
         df_temp["grid_position"] = grid_pos

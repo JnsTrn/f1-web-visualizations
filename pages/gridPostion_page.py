@@ -43,6 +43,8 @@ df_race_completed = df_race_completed[df_race_completed['race_completed']].drop(
 
 ############ Create Graphs ############
 # somehow they are not created here
+figure_all_time_standings = dsv.create_figure_all_time_standings(df)
+figure_start_avg_placements = dsv.create_fig_start_avg_placements(df, df_race_completed)
 
 ########## Set up the layout ##########
 
@@ -195,7 +197,11 @@ layout = html.Div(
             # Graph-Komponente zur Anzeige der Grafik
             dcc.Graph(
                 id='driver-placements'
-            )
+            ),
+############################## Heatmap für standings aller driver
+           dcc.Graph(figure=figure_all_time_standings),
+########################## Avg Placements depending on start position
+           dcc.Graph(figure=figure_start_avg_placements)        
     ]
 )
 
