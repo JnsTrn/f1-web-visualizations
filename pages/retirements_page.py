@@ -1,8 +1,8 @@
-import modules.crash_vis_mod as cvm
 import dash
 import dash_bootstrap_components as dbc
-import pandas as pd
+import modules.crash_vis_mod as cvm
 import modules.weather_crash_vis_mod as wcvm
+import pandas as pd
 from dash import Input, Output, dcc, html
 
 ####### Initialize the Dash app #######
@@ -97,7 +97,7 @@ layout = html.Div(
                 html.H1(
                     'Retirement Analysis', className='text-center text-light'
                 ),
-                width=22,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-4',
         ),
@@ -122,7 +122,7 @@ layout = html.Div(
                         ),
                     ]
                 ),
-                width=22,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-4',
         ),
@@ -142,12 +142,13 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
+                                'textAlign': 'justify',
                             },
                         ),
                     ],
                     className='p-3 bg-dark text-light',
                 ),
-                width=12,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-5',
         ),
@@ -172,7 +173,7 @@ layout = html.Div(
                         ),
                     ]
                 ),
-                width=22,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-4',
         ),
@@ -192,12 +193,13 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
+                                'textAlign': 'justify',
                             },
                         ),
                     ],
                     className='p-3 bg-dark text-light',
                 ),
-                width=12,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-5',
         ),
@@ -222,7 +224,7 @@ layout = html.Div(
                         ),
                     ]
                 ),
-                width=22,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-4',
         ),
@@ -242,12 +244,13 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
+                                'textAlign': 'justify',
                             },
                         ),
                     ],
                     className='p-3 bg-dark text-light',
                 ),
-                width=12,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-5',
         ),
@@ -272,7 +275,7 @@ layout = html.Div(
                         ),
                     ]
                 ),
-                width=22,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-4',
         ),
@@ -292,12 +295,13 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
+                                'textAlign': 'justify',
                             },
                         ),
                     ],
                     className='p-3 bg-dark text-light',
                 ),
-                width=12,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-5',
         ),
@@ -310,7 +314,7 @@ layout = html.Div(
                         'margin': '0 auto',
                     },
                 ),
-                width=22,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-4',
         ),
@@ -330,12 +334,13 @@ layout = html.Div(
                                 'lineHeight': '1.6',
                                 'width': '93%',
                                 'margin': '0 auto',
+                                'textAlign': 'justify',
                             },
                         ),
                     ],
                     className='p-3 bg-dark text-light',
                 ),
-                width=12,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-5',
         ),
@@ -347,7 +352,7 @@ layout = html.Div(
                     ),
                     className='text-center',
                 ),
-                width=12,
+                width={'size': 12, 'order': 1},
             ),
             className='mb-4',
         ),
