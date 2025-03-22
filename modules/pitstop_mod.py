@@ -1,3 +1,5 @@
+import numpy as np
+import pandas as pd
 from dash import dcc, html
 
 
@@ -9,22 +11,22 @@ def create_pitstop_layout(unique_circuits):
             'padding': '20px',
         },
         children=[
-            html.H1('F1 Pitstop Analyse', style={'textAlign': 'center'}),
+            # html.H1('F1 Pitstop Analyse', style={'textAlign': 'center'}),
             # Dropdown für Rennstrecke
-            html.Label('Wähle eine Rennstrecke:', style={'fontSize': '20px'}),
+            html.Label('Choose a circuit:', style={'fontSize': '20px'}),
             dcc.Dropdown(
                 id='circuit-pitstops-dropdown',
                 options=[
                     {'label': circuit, 'value': circuit}
-                    for circuit in unique_circuits
+                    for circuit in sorted(unique_circuits)
                 ],
-                value=unique_circuits[0],  # Standardwert
+                value='German Grand Prix',  # sorted(unique_circuits)[0],  # Standardwert
                 clearable=False,
                 style={'backgroundColor': 'white', 'color': 'black'},
             ),
             # Dropdown für Jahr (abhängig von Rennstrecke)
             html.Label(
-                'Wähle ein Jahr:',
+                'Choose a year:',
                 style={'fontSize': '20px', 'marginTop': '10px'},
             ),
             dcc.Dropdown(
@@ -54,8 +56,8 @@ def create_pitstop_layout_boxplot(eligible_drivers):
             'padding': '20px',
         },
         children=[
-            html.H1('F1 Pitstop Analyse', style={'textAlign': 'center'}),
-            html.Label('Fahrer auswählen:', style={'fontSize': '20px'}),
+            # html.H1('F1 Pitstop Analyse', style={'textAlign': 'center'}),
+            html.Label('Choose a driver:', style={'fontSize': '20px'}),
             dcc.Dropdown(
                 id='driver-pitstop-dropdown',
                 options=[
@@ -73,3 +75,27 @@ def create_pitstop_layout_boxplot(eligible_drivers):
         ],
     )
     return layout
+
+
+def convert_duration_to_seconds(duration):
+    if pd.isna(duration):
+        return np.nan
+
+    # Convert to string to handle all input types
+    duration_str = str(duration)
+
+    # If it's a simple number (no colon), return as float
+    if ':' not in duration_str:
+        try:
+            return float(duration_str)
+        except ValueError:
+            return np.nan
+
+    # If it's in MM:SS.sss format
+    try:
+        parts = duration_str.split(':')
+        minutes = float(parts[0])
+        seconds = float(parts[1])
+        return minutes * 60 + seconds
+    except (ValueError, IndexError):
+        return np.nan
