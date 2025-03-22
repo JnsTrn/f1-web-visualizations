@@ -3,6 +3,7 @@ import modules.driver_standings_mod as ds
 import modules.driver_standings_vis_mod as dsv
 import pandas as pd
 from dash import Input, Output, dcc, html
+import dash_bootstrap_components as dbc
 
 ####### Initialize the Dash app #######
 
@@ -40,7 +41,7 @@ df_race_completed['race_completed'] = df['status'].isin(race_status)
 df_race_completed = df_race_completed[
     df_race_completed['race_completed']
 ].drop(columns=['race_completed'])
-
+name =''
 
 ############ Create Graphs ############
 # somehow they are not created here
@@ -48,117 +49,346 @@ figure_all_time_standings = dsv.create_figure_all_time_standings(df)
 figure_start_avg_placements = dsv.create_fig_start_avg_placements(
     df, df_race_completed
 )
+spcific_driver_layout = dsv.create_grid_finish_figure(name,df)
 
 ########## Set up the layout ##########
 
-# Layout für das Dashboard
+all_time_standings_explanation = ''' Test
+'''
+
+circuit_explanation =''' Test
+'''
+
+specific_driver_standings_explanation =''' Test
+'''
+
+weather_explanation = ''' Test
+'''
+
+sample_text = """
+This is a short explanation about what the graph is suppposed to show and what
+we did to create it.
+"""
+
+
 layout = html.Div(
-    style={'fontFamily': 'Arial', 'margin': '20px'},
-    children=[
-        html.H1(
-            'All time Grid and Finish Positions',
-            style={'textAlign': 'center', 'color': 'white'},
-        ),
-        # Slider zur Eingabe der Anzahl der Fahrer
-        html.Div(
-            children=[
-                html.Label(
-                    'Choose the number of mininum races driven',
-                    style={'color': 'white'},
+    [
+        dbc.Row(
+            dbc.Col(
+                html.H1(
+                    [
+                        'How does the starting grid position influence the finishing '
+                        'position of drivers in the seasons from 1994 - 2024?',
+                    ],
+                    className='text-center page-header',
                 ),
-                dcc.Slider(
-                    id='driver-count-slider',
-                    min=0,  # Minimumwert für die Anzahl der Fahrer
-                    max=400,  # Maximumwert für die Anzahl der Fahrer
-                    step=10,  # Schrittgröße
-                    value=200,  # Startwert
-                    marks={
-                        i: str(i) for i in range(0, 401, 10)
-                    },  # Markierungen bei jedem 10. Wert
-                    tooltip={'placement': 'bottom', 'always_visible': True},
-                ),
-            ],
-            style={'width': '80%', 'margin': '0 auto', 'textAlign': 'center'},
-        ),
-        # Dropdown-Menü zur Auswahl des Fahrers
-        html.Div(
-            children=[
-                html.Label(
-                    'List of Drivers with chosen amount of races:',
-                    style={'color': 'white'},
-                ),
-                dcc.Dropdown(
-                    id='driver-dropdown',
-                    value='Michael Schumacher',
-                    style={'width': '50%', 'margin': 'auto', 'color': 'black'},
-                ),
-            ],
+                width={'size': 12, 'order': 1},
+            ),
             style={
-                'width': '80%',
-                'margin': '20px auto',
-                'textAlign': 'center',
+                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
+                'padding': '20px',
+                'borderRadius': '10px',
+                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
             },
         ),
-        # Diagramm zur Anzeige der Positionen
-        dcc.Graph(id='grid-finish-positions'),
-        ############# Zweite Grafik
-        html.H1('Grid and Finish position', style={'textAlign': 'center'}),
-        # Slider, um den Wert von "number" festzulegen
-        html.Div(
-            [
-                html.Label(
-                    'Choose the number of mininum races on this circuit'
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            sample_text,
+                            style={
+                                'fontSize': '18px',
+                                'lineHeight': '1.6',
+                                'width': '93%',
+                                'margin': '0 auto',
+                                'textAlign': 'justify',
+                            }
+
+                        ),
+                    ],
+                    className='p-3 bg-dark text-light',
                 ),
-                dcc.Slider(
-                    id='number-slider',
-                    min=0,
-                    max=30,  # Passen Sie den Max-Wert entsprechend an
-                    step=1,
-                    value=15,  # Standardwert
-                    marks={i: str(i) for i in range(1, 31)},
-                ),
-            ],
-            style={'textAlign': 'center', 'margin': '20px'},
+                width={'size': 12, 'order': 1},
+            ),
+            className='mb-2 mt-4',
         ),
-        # Dropdown für die Streckenwahl, initial mit einer Beispiel-Strecke
-        html.Div(
-            [
-                html.Label(
-                    'List of circuits that have been driven on',
-                    style={'textAlign': 'center'},
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    children=[
+                        dcc.Graph(
+                        figure= figure_all_time_standings,
+                        config={'responsive': True}
+                        ),
+                    ],                  
+                    style={
+                        'margin': '0 auto',
+                        'width': '92%',
+                        #'display': 'flex',
+                        'justifyContent': 'center'
+                    },                   
                 ),
-                dcc.Dropdown(
-                    id='circuit-dropdown',
-                    options=[],  # Optionen werden später dynamisch gesetzt
-                    value='silverstone',  # Standardwert, der später dynamisch gesetzt wird
-                    style={'width': '50%', 'margin': 'auto', 'color': 'black'},
+            ),
+            className='mb-4',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    children=[
+                        dcc.Graph(
+                        figure= figure_start_avg_placements,
+                        config={'responsive': True}
+                        ),
+                    ],                  
+                    style={
+                        'margin': '0 auto',
+                        'width': '92%',
+                        #'display': 'flex',
+                        'justifyContent': 'center'
+                    },                   
                 ),
-            ],
-            style={'textAlign': 'center', 'margin': '20px'},
+            ),
         ),
-        # Graph zur Anzeige der Heatmap
-        dcc.Graph(id='heatmap'),
-        ############## Dritte Grafik
-        html.H1('Driver Placement Analysis'),
-        # Interaktiver Schieberegler für die Anzahl der Rennen
-        html.Label('Select the minimum number of races:'),
-        dcc.Slider(
-            id='races-slider',
-            min=0,
-            max=400,  # Maximale Anzahl der Rennen, die der Benutzer auswählen kann
-            step=10,
-            value=200,  # Standardwert
-            marks={
-                i: str(i) for i in range(0, 401, 10)
-            },  # Markierungen auf dem Schieberegler
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            all_time_standings_explanation,
+                            style={
+                                'fontSize': '18px',
+                                'lineHeight': '1.6',
+                                'width': '93%',
+                                'margin': '0 auto',
+                                'textAlign': 'justify',
+                            },
+                        ),
+                    ],
+                    className='p-3 bg-dark text-light',
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            className='mb-5',
         ),
-        # Graph-Komponente zur Anzeige der Grafik
-        dcc.Graph(id='driver-placements'),
-        ############################## Heatmap für standings aller driver
-        dcc.Graph(figure=figure_all_time_standings),
-        ########################## Avg Placements depending on start position
-        dcc.Graph(figure=figure_start_avg_placements),
+
+        dbc.Row(
+            dbc.Col(
+                html.H1(
+                    [
+                        'How does this differ between circuits that have '
+                        'been driven on at least X times?',
+                    ],
+                    className='text-center page-header',
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            style={
+                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
+                'padding': '20px',
+                'borderRadius': '10px',
+                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
+            },
+        ),
+
+        dbc.Row(
+            dbc.Col(
+                html.Div([
+                    html.Div(
+                        [
+                        html.Label(
+                                'Choose mininum races driven on this circuit'
+                        ),
+                        dcc.Slider(
+                            id='number-slider',
+                            min=0,
+                            max=30,  
+                            step=1,
+                            value=15,  
+                            marks={i: str(i) for i in range(1, 31)},
+                            ),
+                        ],
+                        style={'textAlign': 'center', 'margin': '20px'},
+                    ),
+                    html.Div(
+                        [
+                            html.Label(
+                            'List of circuits',
+                            style={'textAlign': 'center'},
+                             ),
+                            dcc.Dropdown(
+                            id='circuit-dropdown',
+                               options=[],  
+                            value='silverstone',  
+                            style={'width': '50%', 'margin': 'auto', 'color': 'black'},
+                            ),
+                        ],
+                        style={'textAlign': 'center', 'margin': '20px'},
+                    ),
+                    dcc.Graph(id='heatmap'),
+                ],                  
+                ),
+            ),
+        className='mb-4',
+        ),
+
+        dbc.Row(
+            dbc.Col(
+                html.H1(
+                    [
+                        'Are there specific drivers who excel or struggle '
+                        'more in wet conditions compared to dry conditions?',
+                    ],
+                    className='text-center page-header',
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            style={
+                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
+                'padding': '20px',
+                'borderRadius': '10px',
+                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
+            },
+        ),
+
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            weather_explanation,
+                            style={
+                                'fontSize': '18px',
+                                'lineHeight': '1.6',
+                                'width': '93%',
+                                'margin': '0 auto',
+                                'textAlign': 'justify',
+                            }
+
+                        ),
+                    ],
+                    className='p-3 bg-dark text-light',
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            className='mb-2 mt-4',
+        ),
+        
+
+        dbc.Row(
+            dbc.Col(
+                html.H1(
+                    [
+                        'How does this differ between drivers of different experience'
+                        'levels (as determined by the amount of races they participated in)',
+                    ],
+                    className='text-center page-header',
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            style={
+                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
+                'padding': '20px',
+                'borderRadius': '10px',
+                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
+            },
+        ),
+
+        dbc.Row(
+            dbc.Col(
+                html.Div([
+                    html.Div(
+                        children=[
+                            html.Label(
+                                'Choose mininum races driven',
+                                style={'color': 'white'},
+                            ),
+                            dcc.Slider(
+                                id='driver-count-slider',
+                                min=0,  
+                                max=400,  
+                                step=10,  
+                                value=200,  
+                                marks={
+                                    i: str(i) for i in range(0, 401, 10)
+                                },  
+                                tooltip={'placement': 'bottom', 'always_visible': True},
+                            ),
+                        ],
+                        style={'width': '80%', 'margin': '0 auto', 'textAlign': 'center'},
+                    ),
+                    html.Div(
+                        children=[
+                            html.Label(
+                                'List of Drivers with chosen amount of races:',
+                                style={'color': 'white'},
+                            ),
+                            dcc.Dropdown(
+                                id='driver-dropdown',
+                                value='Michael Schumacher',
+                                style={'width': '50%', 'margin': 'auto', 'color': 'black'},
+                            ),
+                        ],
+                        style={
+                            'width': '80%',
+                            'margin': '20px auto',
+                            'textAlign': 'center',
+                        },
+                    ), 
+                    dcc.Graph(id='grid-finish-positions'),
+                ],                  
+                ),
+            ),
+            className='mb-4',
+        ),
+
+        dbc.Row(
+            dbc.Col(
+                html.Div([
+                    dcc.Slider(
+                        id='races-slider',
+                        min=0,
+                        max=400,  
+                        step=10,
+                        value=200, 
+                        marks={
+                        i: str(i) for i in range(0, 401, 10)
+                        },  
+                    ),
+                    dcc.Graph(id='driver-placements'),                      
+                ],
+                ),
+            ),
+            className='mb-4'
+        ),
+
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+
+                        ),
+                    ],
+
+                ),
+            ),
+        ),
+
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    html.A(
+                        'Back to Top', href='#top', className='btn btn-danger'
+                    ),
+                    className='text-center',
+                ),
+                width={'size': 12, 'order': 1},
+            ),
+            className='mb-4',
+        ),
     ],
+    className='container-fluid px-4 bg-dark text-light',
 )
 
 

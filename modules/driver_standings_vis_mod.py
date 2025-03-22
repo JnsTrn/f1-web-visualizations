@@ -1,10 +1,13 @@
 import modules.driver_standings_mod as ds
 import plotly.graph_objects as go
 import pandas as pd
+import numpy as np
+from dash import dcc, html
 
 
 # Funktion, um das Diagramm basierend auf dem ausgewählten Fahrer zu erstellen
 def create_grid_finish_figure(name, df):
+    # Creates a bar chart for a specfic driver with his all time start/finish position
     grid_counts = ds.driver_grid_pos(name, df)
     grid_counts = grid_counts[grid_counts['grid_position'] != 0]  # Entfernen von Zeilen mit grid_pos == 0
     grid_counts.columns = ['grid_position', 'count_grid']
@@ -31,6 +34,7 @@ def create_grid_finish_figure(name, df):
 
     return fig
 
+
 # Callback zum Abrufen der Liste von Strecken aus ds.circuit_list(number, df)
 def get_circuit_options(number, df):
     circuit_list = ds.circuit_list(number=number, df=df)  # Beispielaufruf der Funktion mit number
@@ -53,8 +57,10 @@ def update_dropdown_and_heatmap(slider_value, selected_circuit, df):
     circuit = df[df['circuit_id'] == selected_circuit]
     
     # Berechnung der Heatmap-Daten
-    a = ds.get_all_standings(circuit,29)  # Verwende ds.get_all_standings, wenn verfügbar
+    a = ds.get_all_standings(circuit,23)  # Verwende ds.get_all_standings, wenn verfügbar
     heatmap_data = a.pivot(index='finish_position', columns='grid_position', values='count')
+    heatmap_data = heatmap_data.fillna(0)
+
 
     # Erstellen der Heatmap
     fig = go.Figure(data=go.Heatmap(
@@ -63,6 +69,7 @@ def update_dropdown_and_heatmap(slider_value, selected_circuit, df):
         y=heatmap_data.index,
         colorscale='Reds_r',
         texttemplate='%{text}',
+        hovertemplate='Start: %{x}<br>Finish: %{y}<br> count: %{z}<extra></extra>',
     ))
 
     # Layout der Heatmap
@@ -89,8 +96,9 @@ def update_dropdown_and_heatmap(slider_value, selected_circuit, df):
     return circuit_options, selected_circuit, fig
 
 
-# Erstelle eine Funktion, die die Daten und die Visualisierung erstellt
+
 def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
+    # Creates a figure for the average placements of drivers
     liste = ds.driver_list(amount_of_races, df)
     df_driver = pd.DataFrame({'driver_name': [], 'avg_placement': []})
 
@@ -132,7 +140,7 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
         title=f'Average placement of drivers with at Least {amount_of_races} races',
         xaxis=dict(
             showgrid=False,
-            linecolor='black',
+            linecolor='white',
             title='Driver'
         ),
         yaxis=dict(
@@ -140,7 +148,7 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
             dtick=2,
             range=[0, 20],
             showgrid=False,
-            linecolor='black',
+            linecolor='white',
             title='Avg Placement'
         ),
         margin=dict(t=50, b=50, l=50, r=50),
@@ -152,12 +160,13 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
 ### Heatmap für alle driver 
 
 def create_figure_all_time_standings(df):
-    number = 22 # Number of positions
+    # Creates a heatmap of all time Start and finish position
+    number = 22 
 
     df_heatmap = ds.get_all_standings(df, (number+1))
     df_heatmap = df_heatmap[df_heatmap['finish_position'] <= number]
     heatmap_data = df_heatmap.pivot(index='finish_position', columns='grid_position', values='count')
-
+    heatmap_data = heatmap_data.fillna(0)
 
     fig = go.Figure(data=go.Heatmap(
         z=heatmap_data.values,
@@ -167,6 +176,7 @@ def create_figure_all_time_standings(df):
         #text=heatmap_data.values,  # Werte in den Zellen anzeigen
         texttemplate='%{text}',  # Text direkt anzeigen
         #showscale=True  # Farbskala anzeigen (optional)
+        hovertemplate='Start: %{x}<br>Finish: %{y}<br> count: %{z}<extra></extra>',
     ))
     fig.update_layout(
         template='plotly_dark',
@@ -222,17 +232,16 @@ def create_fig_start_avg_placements(df, df_race_completed):
 
     fig.add_trace(go.Scatter(x=df_final['grid_position'], y=df_final['avg_placement'],  mode='lines+markers',name='race completed', marker=dict(color='blue'),
                             hovertemplate='Average placement: %{y:.2f}<extra></extra>'))
-
     fig.add_trace(go.Scatter(x=df_final_all['grid_position'], y=df_final_all['avg_placement'], mode='lines+markers', name='all races ',  marker=dict(color='red'),
                             hovertemplate='Average placement: %{y:.2f}<extra></extra>'))
-
+    
     fig.update_layout(
         template='plotly_dark',
         title= 'Average placement depending on starting position',
         xaxis=dict(
             tick0=0,        
             dtick=2,        
-            range=[0, 22],
+            range=[0, 23],
             showgrid=False,
             linecolor= 'white', 
             zeroline= False,
@@ -241,16 +250,13 @@ def create_fig_start_avg_placements(df, df_race_completed):
         yaxis=dict(
             tick0=0,        
             dtick=2,        
-            range=[0, 22],
+            range=[0, 23],
             showgrid=False,
-            linecolor='black',
+            linecolor='white',
             title= 'Average placement',
             zeroline=False,
             
-        ),
-        #plot_bgcolor='white',  
-        margin=dict(t=50, b=50, l=50, r=50),  
-        
+        ),     
     )
 
     return fig
