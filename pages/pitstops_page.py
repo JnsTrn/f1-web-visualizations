@@ -1,9 +1,13 @@
 import dash
-import dash_bootstrap_components as dbc
-import modules.pitstop_mod as ptm
 import pandas as pd
 import plotly.express as px
+
 from dash import Input, Output, html
+
+import dash_bootstrap_components as dbc
+
+import modules.pitstop_mod as ptm
+
 
 ####### Initialize the Dash app #######
 
@@ -18,7 +22,6 @@ df = pd.read_csv(
     DATA_PATH + 'merged_pitstops.csv',
 )
 
-
 # Konvertiere 'duration' in numerische Werte und entferne NaN-Werte
 df_unique = df
 df_unique['duration'] = df_unique['duration'].apply(
@@ -28,7 +31,6 @@ df_unique = df_unique.dropna(subset=['duration'])
 
 # Einzigartige Rennstrecken abrufen
 unique_circuits = df_unique['race_name'].unique()
-
 
 df_filtered = df[['year', 'driver_name', 'duration', 'finish_position']].copy()
 df_filtered['duration'] = df_filtered['duration'].apply(
@@ -40,21 +42,23 @@ df_filtered = df_filtered.dropna(subset=['duration'])
 driver_years = df_filtered.groupby('driver_name')['year'].nunique()
 eligible_drivers = driver_years[driver_years >= 2].index
 
+
 ############## Create Graphs ##############
 
 pitstops_layout = ptm.create_pitstop_layout(unique_circuits)
 pitstops_boxplot = ptm.create_pitstop_layout_boxplot(eligible_drivers)
 
+
 ############ Set up the layout ############
 
-sample_text = """
+sample_text = '''
 This is a short explanation about what the graph is suppposed to show and what
 we did to create it.
-"""
+'''
 
-explanation_text = """
+explanation_text = '''
 This is an analysis.
-"""
+'''
 
 layout = html.Div(
     [
@@ -209,7 +213,6 @@ layout = html.Div(
 
 ########### Initialize Callbacks ############
 
-
 # Callback zur Aktualisierung der Jahr-Dropdown-Liste basierend auf
 # der Rennstrecke
 @dash.callback(
@@ -353,13 +356,13 @@ def update_pitstop_plot(selected_circuit, selected_year):
         [
             html.P(f'Number of Drivers: {len(driver_pitstops_sorted)}'),
             html.P(
-                f'Fast ({category_counts.get("Fast", 0)} Drivers): {fast_range[0]:.2f}s - {fast_range[1]:.2f}s'
+                f'Fast ({category_counts.get('Fast', 0)} Drivers): {fast_range[0]:.2f}s - {fast_range[1]:.2f}s'
             ),
             html.P(
-                f'Average ({category_counts.get("Average", 0)} Drivers): {medium_range[0]:.2f}s - {medium_range[1]:.2f}s'
+                f'Average ({category_counts.get('Average', 0)} Drivers): {medium_range[0]:.2f}s - {medium_range[1]:.2f}s'
             ),
             html.P(
-                f'Slow ({category_counts.get("Slow", 0)} Drivers): {slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
+                f'Slow ({category_counts.get('Slow', 0)} Drivers): {slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
             ),
         ]
     )
@@ -437,13 +440,13 @@ def update_plot(driver_name):
         [
             html.P(f'Number of Races: {total_races}'),
             html.P(
-                f'Fast ({category_counts.get("Fast", 0)} Races): {fast_range[0]:.2f}s - {fast_range[1]:.2f}s'
+                f'Fast ({category_counts.get('Fast', 0)} Races): {fast_range[0]:.2f}s - {fast_range[1]:.2f}s'
             ),
             html.P(
-                f'Average ({category_counts.get("Average", 0)} Races): {medium_range[0]:.2f}s - {medium_range[1]:.2f}s'
+                f'Average ({category_counts.get('Average', 0)} Races): {medium_range[0]:.2f}s - {medium_range[1]:.2f}s'
             ),
             html.P(
-                f'Slow ({category_counts.get("Slow", 0)} Races): {slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
+                f'Slow ({category_counts.get('Slow', 0)} Races): {slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
             ),
         ]
     )

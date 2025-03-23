@@ -1,13 +1,18 @@
+import pandas as pd
 import dash
+
+from dash import Input, Output, dcc, html
+
 import dash_bootstrap_components as dbc
+
 import modules.crash_vis_mod as cvm
 import modules.weather_crash_vis_mod as wcvm
-import pandas as pd
-from dash import Input, Output, dcc, html
+
 
 ####### Initialize the Dash app #######
 
 dash.register_page(__name__, path='/retirements')
+
 
 ############## Load Data ##############
 
@@ -17,8 +22,8 @@ df = pd.read_csv(
     DATA_PATH + 'f1_1994_2024_categorized_by_race_status.csv',
     parse_dates=['date'],
 )
-
 df_CraWeath = pd.read_csv(DATA_PATH + 'crashes_and_weather.csv')
+
 
 # ############ Define Graphs ############
 
@@ -41,9 +46,10 @@ for fig in [
         margin=dict(l=70, r=40, t=80, b=40),
     )
 
+
 ########## Set up the layout ##########
 
-total_incidents_explanation = """
+total_incidents_explanation = '''
 This is an explanation about what the plot depicts and what it means.
 This graph shows the total number of incidents per year in Formula 1 from 1994
 to 2024. Incidents include accidents, mechanical failures, and other reasons
@@ -51,9 +57,9 @@ for non-finishes. We can observe that the total number of incidents has
 decreased over time, likely due to improved safety standards and car
 reliability. The peaks in certain years may correspond to regulation changes
 or particularly challenging seasons.
-"""
+'''
 
-retirement_rate_explanation = """
+retirement_rate_explanation = '''
 The retirement rate represents the percentage of cars that did not finish the
 race compared to the total number of starters. This metric helps us understand
 the reliability and safety evolution in F1 over three decades. The downward
@@ -61,9 +67,9 @@ trend suggests that modern F1 cars are significantly more reliable than their
 predecessors. Notably, the introduction of hybrid power units in 2014 initially
 caused a spike in retirements as teams adapted to the new technology, but
 reliability quickly improved in subsequent seasons.
-"""
+'''
 
-retirements_race_explanation = """
+retirements_race_explanation = '''
 This visualization shows the average number of retirements per race for each
 season. It provides insight into how race attrition has changed over time.
 Early seasons in our dataset show significantly higher average retirements per
@@ -71,9 +77,9 @@ race, sometimes exceeding 13 cars per race, while recent seasons typically see
 fewer than 4 retirements per race. This improvement reflects advancements in
 engineering, manufacturing processes, and overall design philosophy in modern
 Formula 1.
-"""
+'''
 
-crash_weather_explanation = """
+crash_weather_explanation = '''
 This analysis examines the relationship between weather conditions and crash
 frequency. Wet or changing conditions have historically been associated with
 higher crash rates in motorsport. The data reveals that races with rain or
@@ -81,19 +87,19 @@ changing weather conditions do indeed show a higher proportion of crash-related
 retirements compared to races held in consistently dry conditions. This
 information is valuable for understanding risk factors in race strategy and
 safety planning.
-"""
+'''
 
-interactive_dashboard_explanation = """
+interactive_dashboard_explanation = '''
 The interactive dashboard above allows you to explore incident data in more
 detail. You can filter by year, team, driver, and incident type to identify
 patterns and trends. This tool is particularly useful for investigating
 specific periods or comparing performance across different teams and drivers.
-"""
+'''
 
-sample_text = """
+sample_text = '''
 This is a short explanation about what the graph is suppposed to show and what
 we did to create it.
-"""
+'''
 
 layout = html.Div(
     [

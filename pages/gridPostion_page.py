@@ -1,9 +1,13 @@
+import pandas as pd
 import dash
+
+from dash import Input, Output, dcc, html
+
+import dash_bootstrap_components as dbc
+
 import modules.driver_standings_mod as ds
 import modules.driver_standings_vis_mod as dsv
-import pandas as pd
-from dash import Input, Output, dcc, html
-import dash_bootstrap_components as dbc
+
 
 ####### Initialize the Dash app #######
 
@@ -43,13 +47,15 @@ df_race_completed = df_race_completed[
 ].drop(columns=['race_completed'])
 name =''
 
+
 ############ Create Graphs ############
-# somehow they are not created here
+
 figure_all_time_standings = dsv.create_figure_all_time_standings(df)
 figure_start_avg_placements = dsv.create_fig_start_avg_placements(
     df, df_race_completed
 )
 spcific_driver_layout = dsv.create_grid_finish_figure(name,df)
+
 
 ########## Set up the layout ##########
 
@@ -65,10 +71,10 @@ specific_driver_standings_explanation =''' Test
 weather_explanation = ''' Test
 '''
 
-sample_text = """
+sample_text = '''
 This is a short explanation about what the graph is suppposed to show and what
 we did to create it.
-"""
+'''
 
 
 layout = html.Div(
@@ -393,7 +399,6 @@ layout = html.Div(
 
 
 ############ Callbacks #############
-
 
 # Callback zum Aktualisieren der Dropdown-Optionen basierend auf dem Slider-Wert
 @dash.callback(

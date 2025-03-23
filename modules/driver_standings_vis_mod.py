@@ -1,8 +1,7 @@
-import modules.driver_standings_mod as ds
 import plotly.graph_objects as go
 import pandas as pd
-import numpy as np
-from dash import dcc, html
+
+import modules.driver_standings_mod as ds
 
 
 # Funktion, um das Diagramm basierend auf dem ausgewählten Fahrer zu erstellen
@@ -46,7 +45,7 @@ def update_dropdown_and_heatmap(slider_value, selected_circuit, df):
     # Multipliziere den Wert des Sliders mit 20
     number = slider_value * 20
     
-    # Erhalte die Strecken-Liste basierend auf dem aktuellen Wert von "number"
+    # Erhalte die Strecken-Liste basierend auf dem aktuellen Wert von 'number'
     circuit_options = get_circuit_options(number, df)
     
     # Setze den Standardwert (erste Strecke aus der Liste) oder den ausgewählten Wert
@@ -94,7 +93,6 @@ def update_dropdown_and_heatmap(slider_value, selected_circuit, df):
     )
     
     return circuit_options, selected_circuit, fig
-
 
 
 def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
@@ -157,8 +155,6 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
     return fig
 
 
-### Heatmap für alle driver 
-
 def create_figure_all_time_standings(df):
     # Creates a heatmap of all time Start and finish position
     number = 22 
@@ -199,8 +195,6 @@ def create_figure_all_time_standings(df):
     )
     return fig
 
-
-### AVG Placement depending on Start Position
 
 def create_fig_start_avg_placements(df, df_race_completed):
     # Calculation of mean for races that were completed

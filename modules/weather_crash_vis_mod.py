@@ -1,9 +1,10 @@
-import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
 
+
 def init_figs ():
-    pio.templates.default = "plotly_dark"
+    pio.templates.default = 'plotly_dark'
+
 
 def create_fig_CraWeath(df_CraWeath):
     fig_CraWeath = go.Figure()

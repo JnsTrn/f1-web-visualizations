@@ -1,6 +1,7 @@
+from dash import dcc, html
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import dcc, html
+
 from plotly.subplots import make_subplots
 
 
@@ -251,8 +252,8 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 name='Crashes',
                 hovertext=track_incidents_sorted.apply(
                     lambda row: (
-                        f'Races: {row["race_count"]}<br>'
-                        f'Crashes per Race: {row["crashes_per_race"]:.2f}'
+                        f'Races: {row['race_count']}<br>'
+                        f'Crashes per Race: {row['crashes_per_race']:.2f}'
                     ),
                     axis=1,
                 ),
@@ -283,9 +284,9 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 name='Failures',
                 hovertext=track_incidents_sorted.apply(
                     lambda row: (
-                        f'Races: {row["race_count"]}<br>'
+                        f'Races: {row['race_count']}<br>'
                         f'Technical Failures per Race: '
-                        f'{row["failures_per_race"]:.2f}'
+                        f'{row['failures_per_race']:.2f}'
                     ),
                     axis=1,
                 ),
@@ -316,9 +317,9 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 name='Retirements',
                 hovertext=track_incidents_sorted.apply(
                     lambda row: (
-                        f'Races: {row["race_count"]}<br>'
+                        f'Races: {row['race_count']}<br>'
                         f'Total Retirements per Race: '
-                        f'{row["retirements_per_race"]:.2f}'
+                        f'{row['retirements_per_race']:.2f}'
                     ),
                     axis=1,
                 ),
@@ -347,8 +348,8 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 name='Crashes',
                 hovertext=track_incidents_sorted.apply(
                     lambda row: (
-                        f'Races: {row["race_count"]}<br>'
-                        f'Crash Rate: {row["crashes_per_race_driver"]:.2f}%'
+                        f'Races: {row['race_count']}<br>'
+                        f'Crash Rate: {row['crashes_per_race_driver']:.2f}%'
                     ),
                     axis=1,
                 ),
@@ -375,9 +376,9 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 name='Failures',
                 hovertext=track_incidents_sorted.apply(
                     lambda row: (
-                        f'Races: {row["race_count"]}<br>'
+                        f'Races: {row['race_count']}<br>'
                         f'Technical Failure Rate: '
-                        f'{row["failures_per_race_driver"]:.2f}%'
+                        f'{row['failures_per_race_driver']:.2f}%'
                     ),
                     axis=1,
                 ),
@@ -406,9 +407,9 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 name='Retirements',
                 hovertext=track_incidents_sorted.apply(
                     lambda row: (
-                        f'Races: {row["race_count"]}<br>'
+                        f'Races: {row['race_count']}<br>'
                         f'Total Retirements Rate: '
-                        f'{row["retirements_per_race_driver"]:.2f}%'
+                        f'{row['retirements_per_race_driver']:.2f}%'
                     ),
                     axis=1,
                 ),

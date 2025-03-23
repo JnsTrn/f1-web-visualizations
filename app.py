@@ -1,6 +1,9 @@
 import dash
-import dash_bootstrap_components as dbc
+
 from dash import html
+
+import dash_bootstrap_components as dbc
+
 
 ####### Initialize the Dash app #######
 
@@ -20,21 +23,7 @@ navbar = dbc.NavbarSimple(
         ),
         dbc.NavItem(dbc.NavLink('Retirement Analysis', href='/retirements')),
         dbc.NavItem(dbc.NavLink('Pitstop Analysis', href='/pitstops')),
-        # dbc.DropdownMenu(
-        #     children=[
-        #         dbc.DropdownMenuItem('Research Questions', href='/'),
-        #         dbc.DropdownMenuItem(
-        #             'Grid Position Analysis', href='/gridPosition'
-        #         ),
-        #         dbc.DropdownMenuItem(
-        #             'Retirement Analysis', href='/retirements'
-        #         ),
-        #         dbc.DropdownMenuItem('Pitstop Analysis', href='/pitstops'),
-        #     ],
-        #     nav=True,
-        #     in_navbar=True,
-        #     label='Navigation',
-        # ),
+
         dbc.NavItem(html.Img(
             src=dash.get_asset_url('red_f1_car_clipped_small.png'),
             style={'height': '40px'},
@@ -116,8 +105,9 @@ imprint_section = html.Footer(
 app.layout = dbc.Container(
     [navbar, html.Br(), dash.page_container, html.Br(), imprint_section],
     fluid=True,
-    className='bg-dark text-light', style={"backgroundColor": "black"}
+    className='bg-dark text-light', style={'backgroundColor': 'black'}
 )
+
 
 ############# Run the app #############
 
