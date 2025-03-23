@@ -60,7 +60,7 @@ imprint_section = html.Footer(
                                         '',
                                         html.A(
                                             'Christian-Albrechts-Universität zu Kiel',
-                                            href='https://www.uni-kiel.de/de/impressum',
+                                            href='https://www.uni-kiel.de/en/imprint',
                                             target='_blank',
                                             className='text-center text-light',
                                         ),
@@ -116,7 +116,7 @@ imprint_section = html.Footer(
 app.layout = dbc.Container(
     [navbar, html.Br(), dash.page_container, html.Br(), imprint_section],
     fluid=True,
-    className='bg-dark text-light',
+    className='bg-dark text-light', style={"backgroundColor": "black"}
 )
 
 ############# Run the app #############
