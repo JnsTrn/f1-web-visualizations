@@ -260,54 +260,6 @@ layout = html.Div(
             dbc.Col(
                 html.H1(
                     [
-                        'Are there specific drivers who excel or struggle '
-                        'more in wet conditions compared to dry conditions?',
-                    ],
-                    className='text-center page-header text-light',
-                ),
-            ),
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div([
-                    html.Div([
-                        html.Button('Dry', id='dry-button', n_clicks=0),
-                        html.Button('Wet', id='wet-button', n_clicks=0),
-                    ], style={'marginBottom': '20px'}),
-                    dcc.Store(id='last-clicked', data='dry-button'),
-                    dcc.Graph(id='graph', figure=figure_driver_dry)
-                ]),
-            ),
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.P(
-                            weather_explanation,
-                        ),
-                    ],
-                    className='p-3 text-light',
-                    style={
-                        'width': '89%',
-                        'margin': '0 auto',
-                        'backgroundColor': '#212529',
-                        'border-radius': '10px',
-                    }
-                ),
-            ),
-            className='mt-2 mb-5',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(className="chequered-flag"),
-            ),
-            className='mb-4'
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.H1(
-                    [
                         'How does this differ between drivers of different '
                         'experience levels ',
                         html.Br(),
@@ -339,6 +291,54 @@ layout = html.Div(
                         'margin': '0 auto',
                     },
                 ),
+            ),
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            weather_explanation,
+                        ),
+                    ],
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
+                ),
+            ),
+            className='mt-2 mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.H1(
+                    [
+                        'Are there specific drivers who excel or struggle '
+                        'more in wet conditions compared to dry conditions?',
+                    ],
+                    className='text-center page-header text-light',
+                ),
+            ),
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div([
+                    html.Div([
+                        html.Button('Dry', id='dry-button', n_clicks=0),
+                        html.Button('Wet', id='wet-button', n_clicks=0),
+                    ], style={'marginBottom': '20px'}),
+                    dcc.Store(id='last-clicked', data='dry-button'),
+                    dcc.Graph(id='graph', figure=figure_driver_dry)
+                ]),
             ),
         ),
         dbc.Row(
