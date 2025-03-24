@@ -74,16 +74,28 @@ graph_wet = dcc.Graph(
 
 ########## Set up the layout ##########
 
-all_time_standings_explanation = ''' Test
+all_time_standings_explanation = '''
+This is a great analysis of what the plot depicts and totally not just some
+filler text for the sole purpose of seeing how more text looks inside the
+boxes.
 '''
 
-circuit_explanation =''' Test
+circuit_explanation ='''
+This is a great analysis of what the plot depicts and totally not just some
+filler text for the sole purpose of seeing how more text looks inside the
+boxes.
 '''
 
-specific_driver_standings_explanation =''' Test
+specific_driver_standings_explanation ='''
+This is a great analysis of what the plot depicts and totally not just some
+filler text for the sole purpose of seeing how more text looks inside the
+boxes.
 '''
 
-weather_explanation = ''' Test
+weather_explanation = '''
+This is a great analysis of what the plot depicts and totally not just some
+filler text for the sole purpose of seeing how more text looks inside the
+boxes.
 '''
 
 sample_text = '''
@@ -96,21 +108,23 @@ layout = html.Div(
     [
         dbc.Row(
             dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
+        ),
+        dbc.Row(
+            dbc.Col(
                 html.H1(
                     [
-                        'How does the starting grid position influence the finishing '
-                        'position of drivers in the seasons from 1994 - 2024?',
+                        'How does the starting grid position influence the '
+                        'finishing position',
+                        html.Br(),
+                        ' of drivers in the seasons from 1994 - 2024?',
                     ],
-                    className='text-center page-header',
+                    className='text-center page-header text-light',
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            style={
-                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
-                'padding': '20px',
-                'borderRadius': '10px',
-                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
-            },
+            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -118,37 +132,34 @@ layout = html.Div(
                     [
                         html.P(
                             sample_text,
-                            style={
-                                'fontSize': '18px',
-                                'lineHeight': '1.6',
-                                'width': '93%',
-                                'margin': '0 auto',
-                                'textAlign': 'justify',
-                            }
-
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
             className='mb-2 mt-4',
         ),
         dbc.Row(
             dbc.Col(
                 html.Div(
-                    children=[
+                    children=
+                    [
                         dcc.Graph(
                         figure= figure_all_time_standings,
                         config={'responsive': True}
                         ),
-                    ],                  
+                    ],
                     style={
                         'margin': '0 auto',
-                        'width': '92%',
-                        #'display': 'flex',
+                        'width': '89%',
                         'justifyContent': 'center'
-                    },                   
+                    },
                 ),
             ),
             className='mb-4',
@@ -161,13 +172,12 @@ layout = html.Div(
                         figure= figure_start_avg_placements,
                         config={'responsive': True}
                         ),
-                    ],                  
+                    ],
                     style={
                         'margin': '0 auto',
-                        'width': '92%',
-                        #'display': 'flex',
+                        'width': '89%',
                         'justifyContent': 'center'
-                    },                   
+                    },
                 ),
             ),
         ),
@@ -177,22 +187,25 @@ layout = html.Div(
                     [
                         html.P(
                             all_time_standings_explanation,
-                            style={
-                                'fontSize': '18px',
-                                'lineHeight': '1.6',
-                                'width': '93%',
-                                'margin': '0 auto',
-                                'textAlign': 'justify',
-                            },
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-5',
+            className='mt-2 mb-5',
         ),
-
+        dbc.Row(
+            dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
+        ),
         dbc.Row(
             dbc.Col(
                 html.H1(
@@ -200,59 +213,54 @@ layout = html.Div(
                         'How does this differ between circuits that have '
                         'been driven on at least X times?',
                     ],
-                    className='text-center page-header',
+                    className='text-center page-header text-light',
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            style={
-                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
-                'padding': '20px',
-                'borderRadius': '10px',
-                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
-            },
         ),
-
         dbc.Row(
             dbc.Col(
-                html.Div([
-                    html.Div(
-                        [
-                        html.Label(
-                                'Choose mininum races driven on this circuit'
-                        ),
-                        dcc.Slider(
-                            id='number-slider',
-                            min=0,
-                            max=30,  
-                            step=1,
-                            value=15,  
-                            marks={i: str(i) for i in range(1, 31)},
-                            ),
-                        ],
-                        style={'textAlign': 'center', 'margin': '20px'},
-                    ),
-                    html.Div(
-                        [
+                html.Div(
+                    [
+                        html.Div(
+                            [
                             html.Label(
-                            'List of circuits',
-                            style={'textAlign': 'center'},
-                             ),
-                            dcc.Dropdown(
-                            id='circuit-dropdown',
-                               options=[],  
-                            value='silverstone',  
-                            style={'width': '50%', 'margin': 'auto', 'color': 'black'},
+                                'Choose mininum races driven on this circuit'
                             ),
-                        ],
-                        style={'textAlign': 'center', 'margin': '20px'},
-                    ),
-                    dcc.Graph(id='heatmap'),
-                ],                  
+                            dcc.Slider(
+                                id='number-slider',
+                                min=0,
+                                max=30,
+                                step=1,
+                                value=15,
+                                marks={i: str(i) for i in range(1, 31)},
+                                ),
+                            ],
+                            style={'textAlign': 'center', 'margin': '20px'},
+                        ),
+                        html.Div(
+                            [
+                                html.Label(
+                                    'List of circuits',
+                                    style={'textAlign': 'center'},
+                                ),
+                                dcc.Dropdown(
+                                    id='circuit-dropdown',
+                                    options=[],
+                                    value='silverstone',
+                                    style={'width': '50%',
+                                        'margin': 'auto',
+                                        'color': 'black'
+                                    },
+                                ),
+                            ],
+                            style={'textAlign': 'center', 'margin': '20px'},
+                        ),
+                        dcc.Graph(id='heatmap'),
+                    ],
                 ),
             ),
         className='mb-4',
         ),
-
         dbc.Row(
             dbc.Col(
                 html.H1(
@@ -260,18 +268,10 @@ layout = html.Div(
                         'Are there specific drivers who excel or struggle '
                         'more in wet conditions compared to dry conditions?',
                     ],
-                    className='text-center page-header',
+                    className='text-center page-header text-light',
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            style={
-                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
-                'padding': '20px',
-                'borderRadius': '10px',
-                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
-            },
         ),
-
         dbc.Row(
             dbc.Col(
                 html.Div([
@@ -284,31 +284,25 @@ layout = html.Div(
                 ]),
             ),
         ),
-
         dbc.Row(
             dbc.Col(
                 html.Div(
                     [
                         html.P(
                             weather_explanation,
-                            style={
-                                'fontSize': '18px',
-                                'lineHeight': '1.6',
-                                'width': '93%',
-                                'margin': '0 auto',
-                                'textAlign': 'justify',
-                            }
-
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
             className='mb-2 mt-4',
         ),
-        
-
         dbc.Row(
             dbc.Col(
                 html.H1(
@@ -316,18 +310,10 @@ layout = html.Div(
                         'How does this differ between drivers of different experience'
                         'levels (as determined by the amount of races they participated in)',
                     ],
-                    className='text-center page-header',
+                    className='text-center page-header text-light',
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            style={
-                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
-                'padding': '20px',
-                'borderRadius': '10px',
-                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
-            },
         ),
-
         dbc.Row(
             dbc.Col(
                 html.Div([
@@ -339,13 +325,13 @@ layout = html.Div(
                             ),
                             dcc.Slider(
                                 id='driver-count-slider',
-                                min=0,  
-                                max=400,  
-                                step=10,  
-                                value=200,  
+                                min=0,
+                                max=400,
+                                step=10,
+                                value=200,
                                 marks={
                                     i: str(i) for i in range(0, 401, 10)
-                                },  
+                                },
                                 tooltip={'placement': 'bottom', 'always_visible': True},
                             ),
                         ],
@@ -368,9 +354,9 @@ layout = html.Div(
                             'margin': '20px auto',
                             'textAlign': 'center',
                         },
-                    ), 
+                    ),
                     dcc.Graph(id='grid-finish-positions'),
-                ],                  
+                ],
                 ),
             ),
             className='mb-4',
@@ -382,41 +368,19 @@ layout = html.Div(
                     dcc.Slider(
                         id='races-slider',
                         min=0,
-                        max=400,  
+                        max=400,
                         step=10,
-                        value=200, 
+                        value=200,
                         marks={
                         i: str(i) for i in range(0, 401, 10)
-                        },  
+                        },
                     ),
-                    dcc.Graph(id='driver-placements'),                      
+                    dcc.Graph(id='driver-placements'),
                 ],
                 ),
             ),
             className='mb-4'
         ),
-
-        dbc.Row(
-            dbc.Col(
-                html.Div(                   
-
-                ),
-            ),
-        ),
-
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.P(
-
-                        ),
-                    ],
-
-                ),
-            ),
-        ),
-
         dbc.Row(
             dbc.Col(
                 html.Div(
@@ -430,13 +394,13 @@ layout = html.Div(
             className='mb-4',
         ),
     ],
-    className='container-fluid px-4 bg-dark text-light',
 )
 
 
 ############ Callbacks #############
 
-# Callback zum Aktualisieren der Dropdown-Optionen basierend auf dem Slider-Wert
+# Callback zum Aktualisieren der Dropdown-Optionen basierend
+# auf dem Slider-Wert
 @dash.callback(
     Output('driver-dropdown', 'options'),
     Input('driver-count-slider', 'value'),

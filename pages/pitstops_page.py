@@ -61,11 +61,19 @@ we did to create it.
 '''
 
 explanation_text = '''
-This is an analysis.
+This is a great analysis of what the plot depicts and totally not just some
+filler text for the sole purpose of seeing how more text looks inside the
+boxes.
 '''
 
 layout = html.Div(
     [
+        dbc.Row(
+            dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
+        ),
         dbc.Row(
             dbc.Col(
                 html.H1(
@@ -76,16 +84,10 @@ layout = html.Div(
                         'for a driver in a race relate to his '
                         'finishing position? ',
                     ],
-                    className='text-center page-header',
+                    className='text-center page-header text-light',
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            style={
-                'backgroundImage': 'linear-gradient(to bottom, #b30412, #eb0e20)',
-                'padding': '20px',
-                'borderRadius': '10px',
-                'boxShadow': '5px 5px 15px rgba(0,0,0,0.2)',
-            },
+            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -93,18 +95,16 @@ layout = html.Div(
                     [
                         html.P(
                             sample_text,
-                            style={
-                                'fontSize': '18px',
-                                'lineHeight': '1.6',
-                                'width': '93%',
-                                'margin': '0 auto',
-                                'textAlign': 'justify',
-                            },
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
             className='mb-2 mt-4',
         ),
@@ -113,13 +113,11 @@ layout = html.Div(
                 html.Div(
                     pitstops_boxplot,
                     style={
-                        'width': '92%',
+                        'width': '89%',
                         'margin': '0 auto',
                     },
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -127,20 +125,18 @@ layout = html.Div(
                     [
                         html.P(
                             explanation_text,
-                            style={
-                                'fontSize': '18px',
-                                'lineHeight': '1.6',
-                                'width': '93%',
-                                'margin': '0 auto',
-                                'textAlign': 'justify',
-                            },
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-8 mt-4',
+            className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
@@ -148,18 +144,16 @@ layout = html.Div(
                     [
                         html.P(
                             sample_text,
-                            style={
-                                'fontSize': '18px',
-                                'lineHeight': '1.6',
-                                'width': '93%',
-                                'margin': '0 auto',
-                                'textAlign': 'justify',
-                            },
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
             className='mb-2 mt-4',
         ),
@@ -168,13 +162,11 @@ layout = html.Div(
                 html.Div(
                     pitstops_layout,
                     style={
-                        'width': '92%',
+                        'width': '89%',
                         'margin': '0 auto',
                     },
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -182,35 +174,36 @@ layout = html.Div(
                     [
                         html.P(
                             explanation_text,
-                            style={
-                                'fontSize': '18px',
-                                'lineHeight': '1.6',
-                                'width': '93%',
-                                'margin': '0 auto',
-                                'textAlign': 'justify',
-                            },
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-8 mt-4',
+            className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
                 html.Div(
-                    html.A(
-                        'Back to Top', href='#top', className='btn btn-danger'
+                     html.A(
+                        'Back to Top',
+                        href='#top',
+                        className='btn',
+                        style={
+                        'backgroundColor': '#a36664',
+                        'color': 'white',
+                        }
                     ),
                     className='text-center',
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-4',
         ),
     ],
-    className='container-fluid px-4 bg-dark text-light',
 )
 
 
@@ -269,7 +262,8 @@ def update_pitstop_plot(selected_circuit, selected_year):
         'duration', ascending=True
     )
 
-    return ptm.create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
+    return ptm.create_circuit_plot(
+        selected_circuit, selected_year, driver_pitstops_sorted)
 
 
 # Callback for the driver pitstop plot

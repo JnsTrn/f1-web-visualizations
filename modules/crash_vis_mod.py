@@ -56,8 +56,8 @@ def total_incidents_by_year(df):
             itemclick='toggle',
             itemdoubleclick='toggleothers',
             font=dict(size=16),
-            x=1,
-            y=1,
+            x=0.9,
+            y=1.4,
         ),
     )
 
@@ -343,7 +343,11 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 orientation='h',
                 marker=dict(
                     color=track_incidents_sorted['crashes_per_race_driver'],
-                    colorscale='Reds',
+                    colorscale=[
+                        [0, 'orangered'],
+                        [0.5, 'firebrick'],
+                        [1, 'darkred'],
+                    ],
                 ),
                 name='Crashes',
                 hovertext=track_incidents_sorted.apply(
@@ -371,7 +375,11 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 orientation='h',
                 marker=dict(
                     color=track_incidents_sorted['failures_per_race_driver'],
-                    colorscale='Blues',
+                   colorscale=[
+                        [0, 'deepskyblue'],
+                        [0.5, 'mediumblue'],
+                        [1, 'darkblue'],
+                    ],
                 ),
                 name='Failures',
                 hovertext=track_incidents_sorted.apply(
@@ -402,7 +410,11 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                     color=track_incidents_sorted[
                         'retirements_per_race_driver'
                     ],
-                    colorscale='Greens',
+                    colorscale=[
+                        [0, 'limegreen'],
+                        [0.5, 'forestgreen'],
+                        [1, 'darkgreen'],
+                    ],
                 ),
                 name='Retirements',
                 hovertext=track_incidents_sorted.apply(
@@ -470,7 +482,18 @@ def create_interactive_incidents_dashboard(df):
     all_years = sorted(df['year'].unique())
     min_year, max_year = all_years[0], all_years[-1]
 
-    # Layout definition (No Dash instance created)
+    step_years = 1
+    marks_years = {
+        str(year): {'label': str(year), 'style': {'color': '#d1d1d1'}}
+        for year in range(min_year, max_year + 1, step_years)
+    }
+
+    # Only show labels every nth mark
+    nth_label = 3
+    for year in range(min_year, max_year + 1):
+        if (year - min_year) % nth_label != 0:
+            marks_years[str(year)]['label'] = ''
+
     layout = html.Div(
         [
             dcc.Graph(
@@ -486,7 +509,6 @@ def create_interactive_incidents_dashboard(df):
                         'Years:',
                         style={
                             'font-size': '14px',
-                            'color': '#ff5733',
                             'font-weight': 'bold',
                         },
                     ),
@@ -495,17 +517,11 @@ def create_interactive_incidents_dashboard(df):
                         min=min_year,
                         max=max_year,
                         value=[min_year, max_year],
-                        marks={
-                            str(year): {
-                                'label': str(year),
-                                'style': {'color': '#d1d1d1'},
-                            }
-                            for year in all_years
-                        },
-                        step=1,
+                        marks=marks_years,
+                        step=step_years,
                     ),
                 ],
-                style={'width': '85%', 'margin': 'auto'},
+                style={'width': '100%', 'margin': 'auto'},
             ),
             html.Div(
                 [
@@ -513,7 +529,6 @@ def create_interactive_incidents_dashboard(df):
                         'Minimum Number of Races:',
                         style={
                             'font-size': '14px',
-                            'color': '#ff5733',
                             'font-weight': 'bold',
                         },
                     ),
@@ -524,20 +539,19 @@ def create_interactive_incidents_dashboard(df):
                         value=10,
                         marks={
                             i: {'label': str(i), 'style': {'color': '#d1d1d1'}}
-                            for i in range(1, 31)
+                            for i in range(1, 31, 1)
                         },
                         step=1,
                     ),
                 ],
-                style={'width': '85%', 'margin': 'auto'},
+                style={'width': '100%', 'margin': 'auto'},
             ),
             html.Div(
                 [
                     html.Label(
-                        'Analysis Type:',
+                        'Type:',
                         style={
                             'font-size': '14px',
-                            'color': '#ff5733',
                             'font-weight': 'bold',
                         },
                     ),
@@ -548,18 +562,18 @@ def create_interactive_incidents_dashboard(df):
                         value=0,
                         marks={
                             0: {
-                                'label': 'Per Race Basis',
+                                'label': 'Per Race',
                                 'style': {
-                                    'color': '#ff9e80',
-                                    'font-size': '14px',
+                                    'color': '#ff5733',
+                                    'font-size': '13px',
                                     'font-weight': 'bold',
                                 },
                             },
                             1: {
-                                'label': 'Percentage Basis',
+                                'label': 'Rate',
                                 'style': {
-                                    'color': '#ff9e80',
-                                    'font-size': '14px',
+                                    'color': '#ff5733',
+                                    'font-size': '13px',
                                     'font-weight': 'bold',
                                 },
                             },
@@ -567,7 +581,7 @@ def create_interactive_incidents_dashboard(df):
                         step=1,
                     ),
                 ],
-                style={'width': '85%', 'margin': 'auto'},
+                style={'width': '100%', 'margin': 'auto'},
             ),
         ]
     )

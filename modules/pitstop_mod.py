@@ -202,7 +202,8 @@ def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
                 f'Slow ({category_counts.get('Slow', 0)} Drivers): '
                 f'{slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
             ),
-        ]
+        ],
+        className="info-text",
     )
 
     return fig_box, fig_bar, info_text
@@ -276,7 +277,8 @@ def create_driver_plot(driver_name, df_driver_sorted, total_races):
                 f'Slow ({category_counts.get('Slow', 0)} Races): '
                 f'{slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
             ),
-        ]
+        ],
+        className="info-text",
     )
 
     return fig, info_text
