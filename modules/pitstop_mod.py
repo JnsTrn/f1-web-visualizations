@@ -191,15 +191,15 @@ def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
         [
             html.P(f'Number of Drivers: {len(driver_pitstops_sorted)}'),
             html.P(
-                f'Fast ({category_counts.get('Fast', 0)} Drivers): '
+                f'Fast ({category_counts.get("Fast", 0)} Drivers): '
                 f'{fast_range[0]:.2f}s - {fast_range[1]:.2f}s'
             ),
             html.P(
-                f'Average ({category_counts.get('Average', 0)} Drivers): '
+                f'Average ({category_counts.get("Average", 0)} Drivers): '
                 f'{medium_range[0]:.2f}s - {medium_range[1]:.2f}s'
             ),
             html.P(
-                f'Slow ({category_counts.get('Slow', 0)} Drivers): '
+                f'Slow ({category_counts.get("Slow", 0)} Drivers): '
                 f'{slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
             ),
         ],
@@ -266,15 +266,15 @@ def create_driver_plot(driver_name, df_driver_sorted, total_races):
         [
             html.P(f'Number of Races: {total_races}'),
             html.P(
-                f'Fast ({category_counts.get('Fast', 0)} Races): '
+                f'Fast ({category_counts.get("Fast", 0)} Races): '
                 f'{fast_range[0]:.2f}s - {fast_range[1]:.2f}s'
             ),
             html.P(
-                f'Average ({category_counts.get('Average', 0)} Races): '
+                f'Average ({category_counts.get("Average", 0)} Races): '
                 f'{medium_range[0]:.2f}s - {medium_range[1]:.2f}s'
             ),
             html.P(
-                f'Slow ({category_counts.get('Slow', 0)} Races): '
+                f'Slow ({category_counts.get("Slow", 0)} Races): '
                 f'{slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
             ),
         ],
