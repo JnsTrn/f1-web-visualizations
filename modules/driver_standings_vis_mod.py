@@ -432,7 +432,7 @@ def create_grid_finish_figure_layout():
                     ),
                 ],
                 style={
-                    'width': '80%',
+                    'width': '100%',
                     'margin': '0 auto',
                     'textAlign': 'center'
                 },
@@ -467,6 +467,10 @@ def create_grid_finish_figure_layout():
                 config={'responsive': True},
             ),
         ],
+        style={
+            'position': 'relative',
+            'min-height': '650px'  # Ensure a minimum height to prevent shifting
+        }
     ),
     return layout
 
@@ -557,5 +561,9 @@ def create_avg_all_drivers_figure_layout():
                 config={'responsive': True},
             ),
         ],
+        style={
+            'position': 'relative',
+            'min-height': '500px'  # Ensure a minimum height to prevent shifting
+        }
     ),
     return layout
