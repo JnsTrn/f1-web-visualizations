@@ -81,7 +81,7 @@ def create_fig_start_avg_placements(df, df_race_completed):
             x=df_final['grid_position'],
             y=df_final['avg_placement'],
             mode='lines+markers',
-            name='race completed',
+            name='Race completed',
             marker=dict(color='blue'),
             hovertemplate='Average placement: %{y:.2f}<extra></extra>'
         )
@@ -91,7 +91,7 @@ def create_fig_start_avg_placements(df, df_race_completed):
             x=df_final_all['grid_position'],
             y=df_final_all['avg_placement'],
             mode='lines+markers',
-            name='all races ',
+            name='All races ',
             marker=dict(color='red'),
             hovertemplate='Average placement: %{y:.2f}<extra></extra>'
         )
@@ -217,7 +217,7 @@ def create_circuit_heatmap_layout():
                     dcc.Dropdown(
                         id='circuit-dropdown',
                         options=[],
-                        value='silverstone',
+                        value= 'silverstone',
                         style={'width': '50%',
                             'margin': 'auto',
                             'color': 'black'
@@ -288,7 +288,7 @@ def driver_standings_mw(df):
         template='plotly_dark',
         xaxis_title='Driver',
         yaxis_title='Position',
-        title='Average placements of drivers in mixed/wet conditions',
+        title='Average placements of drivers in mixed/wet conditions since 2005 and atleast 20 races driven',
         xaxis=dict(
             showgrid=False
         ),
@@ -350,7 +350,7 @@ def driver_standings_dry(df):
         template='plotly_dark',
         xaxis_title='Driver',
         yaxis_title='Position',
-        title='Average placements of drivers in dry conditions',
+        title='Average placements of drivers in dry conditions since 2005 and atleast 20 races driven',
         xaxis=dict(
             showgrid=False
         ),
@@ -418,10 +418,10 @@ def create_grid_finish_figure_layout():
                     ),
                     dcc.Slider(
                         id='driver-count-slider',
-                        min=0,
-                        max=400,
-                        step=10,
-                        value=200,
+                        min= 0,
+                        max= 400,
+                        step= 10,
+                        value= 130,
                         marks={
                             i: str(i) for i in range(0, 401, 10)
                         },
@@ -504,7 +504,7 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
     fig.add_trace(go.Scatter(
         x=df_driver_completed['driver_name'],
         y=df_driver_completed['avg_placement'],
-        name='Finished Races',
+        name='Races completed',
         mode='markers',
         hovertemplate='Average placement: %{y:.2f}<extra></extra>'
     ))
@@ -548,7 +548,7 @@ def create_avg_all_drivers_figure_layout():
                 min=0,
                 max=400,
                 step=10,
-                value=200,
+                value=130,
                 marks={
                 i: str(i) for i in range(0, 401, 10)
                 },

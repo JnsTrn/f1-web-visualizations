@@ -96,15 +96,20 @@ and finishing positions
 '''
 
 specific_driver_standings_explanation ='''
-This is a great analysis of what the plot depicts and totally not just some
-filler text for the sole purpose of seeing how more text looks inside the
-boxes.
+Similar to the graph above, you can also select a minimum number of races driven. 
+In this graph, the average placement of each driver is shown and compared to one 
+another. We have also differentiated between completed races and all races. 
+For example, the two-time World Champion Mika Häkkinen was an excellent driver 
+when he was able to finish the race, which wouldn't be evident if we only looked 
+at the data for all races.
 '''
 
 weather_explanation = '''
-This is a great analysis of what the plot depicts and totally not just some
-filler text for the sole purpose of seeing how more text looks inside the
-boxes.
+Reliable weather data has only been available since 2005. Since wet and mixed
+conditions are not very common, we combined the two. To obtain representative
+data, we focused on drivers who have participated in at least 20 wet and/or 
+mixed races. Here you can switch between dry and wet+mixed conditions to see 
+a drivers average placement depending on the condition
 '''
 
 sample_text = '''
@@ -316,6 +321,25 @@ layout = html.Div(
         dbc.Row(
             dbc.Col(
                 html.Div(
+                    [
+                        html.P(
+                            graph_four,
+                        ),
+                    ],
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
+                ),
+            ),
+            className='mt-2 mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
                     all_drivers_avg,
                     style={
                         'width': '89%',
@@ -329,7 +353,7 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            weather_explanation,
+                            specific_driver_standings_explanation,
                         ),
                     ],
                     className='p-3 text-light',
