@@ -76,17 +76,23 @@ driver_grid_start_finish = dsv.create_grid_finish_figure_layout()
 all_drivers_avg = dsv.create_avg_all_drivers_figure_layout()
 
 ########## Set up the layout ##########
+graph_one = '''This heatmap shows the correlation between starting positions 
+and their corresponding finishing positions. While winning a race is much 
+more likely when starting from pole position, we can observe that, in most 
+cases, the finishing position tends to fall within a 3-place range of the 
+starting position'''
 
-all_time_standings_explanation = '''
-This is a great analysis of what the plot depicts and totally not just some
-filler text for the sole purpose of seeing how more text looks inside the
-boxes.
-'''
+all_time_standings_explanation = ''' The average placement was calculated by taking the mean of 
+all finishing positions for each starting position. Retirements or 
+disqualifications result in poor race outcomes, so we have categorized 
+the data into 'races completed' and 'all races,' as retirements or 
+disqualifications can skew the results  '''
 
-circuit_explanation ='''
-This is a great analysis of what the plot depicts and totally not just some
-filler text for the sole purpose of seeing how more text looks inside the
-boxes.
+circuit_explanation ='''In this interactive graph, you can select a number for races
+driven. The list below will then display the different circuits that have 
+been raced on at least the number of times you selected. Similar to the first
+graph, a heatmap is shown to illustrate the correlation between starting 
+and finishing positions
 '''
 
 specific_driver_standings_explanation ='''
@@ -104,6 +110,11 @@ boxes.
 sample_text = '''
 This is a short explanation about what the graph is suppposed to show and what
 we did to create it.
+'''
+
+graph_four = ''' This bar chart shows the all-time starting and finishing 
+positions of a driver. You can select the number of races driven, and a list
+of drivers who have competed in the selected number of races will be displayed.
 '''
 
 
@@ -166,6 +177,26 @@ layout = html.Div(
                 ),
             ),
             className='mb-4',
+        
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            graph_one,
+                        ),
+                    ],
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
+                ),
+            ),
+            className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
@@ -236,55 +267,7 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            weather_explanation,
-                        ),
-                    ],
-                    className='p-3 text-light',
-                    style={
-                        'width': '89%',
-                        'margin': '0 auto',
-                        'backgroundColor': '#212529',
-                        'border-radius': '10px',
-                    }
-                ),
-            ),
-            className='mt-2 mb-5',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(className="chequered-flag"),
-            ),
-            className='mb-4'
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.H1(
-                    [
-                        'Are there specific drivers who excel or struggle '
-                        'more in wet conditions compared to dry conditions?',
-                    ],
-                    className='text-center page-header text-light',
-                ),
-            ),
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div([
-                    html.Div([
-                        html.Button('Dry', id='dry-button', n_clicks=0),
-                        html.Button('Wet', id='wet-button', n_clicks=0),
-                    ], style={'marginBottom': '20px'}),
-                    dcc.Store(id='last-clicked', data='dry-button'),
-                    dcc.Graph(id='graph', figure=figure_driver_dry)
-                ]),
-            ),
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.P(
-                            weather_explanation,
+                            circuit_explanation,
                         ),
                     ],
                     className='p-3 text-light',
@@ -339,6 +322,54 @@ layout = html.Div(
                         'margin': '0 auto',
                     },
                 ),
+            ),
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            weather_explanation,
+                        ),
+                    ],
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
+                ),
+            ),
+            className='mt-2 mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.H1(
+                    [
+                        'Are there specific drivers who excel or struggle '
+                        'more in wet conditions compared to dry conditions?',
+                    ],
+                    className='text-center page-header text-light',
+                ),
+            ),
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div([
+                    html.Div([
+                        html.Button('Dry', id='dry-button', n_clicks=0),
+                        html.Button('Wet', id='wet-button', n_clicks=0),
+                    ], style={'marginBottom': '20px'}),
+                    dcc.Store(id='last-clicked', data='dry-button'),
+                    dcc.Graph(id='graph', figure=figure_driver_dry)
+                ]),
             ),
         ),
         dbc.Row(
