@@ -74,6 +74,7 @@ layout = html.Div(
             ),
             className="pt-5",
         ),
+        # Q1
         dbc.Row(
             dbc.Col(
                 html.A(
@@ -95,19 +96,30 @@ layout = html.Div(
                             question1_txt,
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-5',
+            className='mt-2 mb-5',
         ),
-        html.A(
-            html.H1(
-                'How has the total number of crashes and retirements evolved '
-                'in the seasons from 1994 - 2024?',
-                className='text-center page-header',
+        # Q2
+        dbc.Row(
+            dbc.Col(
+                html.A(
+                    html.H1(
+                        'How has the total number of crashes and retirements evolved '
+                        'in the seasons from 1994 - 2024?',
+                        className='text-center page-header text-light',
+                    ),
+                    href='/retirements',
+                ),
             ),
-            href='/retirements',
+            className='mb-4 mt-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -117,19 +129,30 @@ layout = html.Div(
                             question2_txt,
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-5',
+            className='mt-2 mb-5',
         ),
-        html.A(
-            html.H1(
-                'How does the number and the average duration of pitstops for '
-                'a driver in a race relate to his finishing position?',
-                className='text-center page-header',
+        # Q3
+        dbc.Row(
+            dbc.Col(
+                html.A(
+                    html.H1(
+                        'How does the number and the average duration of pitstops for '
+                        'a driver in a race relate to his finishing position?',
+                        className='text-center page-header text-light',
+                    ),
+                    href='/pitstops',
+                ),
             ),
-            href='/pitstops',
+            className='mb-4 mt-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -139,11 +162,16 @@ layout = html.Div(
                             question3_txt,
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-5',
+            className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
