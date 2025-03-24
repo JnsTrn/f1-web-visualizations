@@ -105,6 +105,12 @@ layout = html.Div(
     [
         dbc.Row(
             dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
+        ),
+        dbc.Row(
+            dbc.Col(
                 html.H1(
                     [
                         'How has the total number of crashes and retirements '
@@ -113,7 +119,7 @@ layout = html.Div(
                     className='text-center page-header text-light',
                 ),
             ),
-            className='mb-4 mt-4',
+            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -123,7 +129,13 @@ layout = html.Div(
                             sample_text
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
             ),
             className='mb-2 mt-4',
@@ -139,13 +151,12 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '92%',
+                                'width': '89%',
                             },
                         ),
                     ]
                 ),
             ),
-            className='mb-2',
         ),
         dbc.Row(
             dbc.Col(
@@ -155,10 +166,16 @@ layout = html.Div(
                             total_incidents_explanation,
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
             ),
-            className='mb-5',
+            className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
@@ -171,32 +188,32 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '92%',
+                                'width': '89%',
                             },
                         ),
                     ]
                 ),
                 width={'size': 12, 'order': 1},
             ),
-            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
                 html.Div(
                     [
-                        html.H4(
-                            'Weather Impact Analysis',
-                            className='text-center',
-                            style={'fontSize': '20px'},
-                        ),
                         html.P(
                             retirement_rate_explanation,
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
             ),
-            className='mb-5',
+            className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
@@ -209,13 +226,12 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '92%',
+                                'width': '89%',
                             },
                         ),
-                    ]
+                    ],
                 ),
             ),
-            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -225,14 +241,22 @@ layout = html.Div(
                             retirements_race_explanation,
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
             ),
+            className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
                 html.Div(className="chequered-flag"),
             ),
+            className='mb-4 mt-4'
         ),
         dbc.Row(
             dbc.Col(
@@ -251,12 +275,11 @@ layout = html.Div(
                 html.Div(
                     incidents_layout,
                     style={
-                        'width': '92%',
+                        'width': '89%',
                         'margin': '0 auto',
                     },
                 ),
             ),
-            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -266,14 +289,22 @@ layout = html.Div(
                             interactive_dashboard_explanation,
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
             ),
+            className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
                 html.Div(className="chequered-flag"),
             ),
+            className='mb-4 mt-4'
         ),
         dbc.Row(
             dbc.Col(
@@ -300,14 +331,13 @@ layout = html.Div(
                             ),
                             style={
                                 'margin': '0 auto',
-                                'width': '92%',
+                                'width': '89%',
                             },
                         ),
                     ]
                 ),
                 width={'size': 12, 'order': 1},
             ),
-            className='mb-4 mt-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -317,29 +347,40 @@ layout = html.Div(
                             crash_weather_explanation,
                         ),
                     ],
-                    className='p-3 bg-dark text-light',
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
                 ),
             ),
-            className='mb-5',
+            className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
                 html.Div(className="chequered-flag"),
             ),
+            className='mb-4 mt-4'
         ),
         dbc.Row(
             dbc.Col(
                 html.Div(
                     html.A(
-                        'Back to Top', href='#top', className='btn btn-danger'
+                        'Back to Top',
+                        href='#top',
+                        className='btn',
+                        style={
+                        'backgroundColor': '#a36664',
+                        'color': 'white',
+                        }
                     ),
                     className='text-center',
                 ),
             ),
-            className='mb-4 mt-4',
         ),
     ],
-    #className='container-fluid px-4 bg-dark text-light',
 )
 
 

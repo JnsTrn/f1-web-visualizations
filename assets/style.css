@@ -18,9 +18,18 @@ body, html {
 }
 
 p {
-    font-size: 18px;
-    line-height: 1.6;
-    width: 93%;
+    font-size: 19px;
+    line-height: 1.5;
+    width: 87%;
     margin: 0 auto;
     text-align: justify;
+}
+
+/* Override global styles for paragraphs inside info-text */
+.info-text p {
+    font-size: 18px;  /* Adjust size as needed */
+    line-height: 1.5;
+    text-align: left;  /* Align text to the left */
+    width: 100%;  /* Remove width restriction */
+    margin: 0 auto;  /* Adjust margin as needed */
 }
