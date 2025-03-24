@@ -47,6 +47,8 @@ df_race_completed = df_race_completed[
 ].drop(columns=['race_completed'])
 name =''
 
+df_weather = pd.read_csv('data/f1_1994_2024_season_results_completed_weather.csv')
+
 
 ############ Create Graphs ############
 
@@ -55,6 +57,19 @@ figure_start_avg_placements = dsv.create_fig_start_avg_placements(
     df, df_race_completed
 )
 spcific_driver_layout = dsv.create_grid_finish_figure(name,df)
+
+figure_driver_mw = dsv.driver_standings_mw(df_weather)
+figure_driver_dry = dsv.driver_standings_dry(df_weather)
+
+graph_dry = dcc.Graph(
+    id='graph-dry',
+    figure=figure_driver_dry
+)
+
+graph_wet = dcc.Graph(
+    id='graph-wet',
+    figure=figure_driver_mw
+)
 
 
 ########## Set up the layout ##########
@@ -259,6 +274,19 @@ layout = html.Div(
 
         dbc.Row(
             dbc.Col(
+                html.Div([
+                    html.Div([
+                        html.Button('Dry', id='dry-button', n_clicks=0),
+                        html.Button('Wet', id='wet-button', n_clicks=0),
+                    ], style={'marginBottom': '20px'}),
+                    dcc.Store(id='last-clicked', data='dry-button'),
+                    dcc.Graph(id='graph', figure=figure_driver_dry)
+                ]),
+            ),
+        ),
+
+        dbc.Row(
+            dbc.Col(
                 html.Div(
                     [
                         html.P(
@@ -370,6 +398,14 @@ layout = html.Div(
 
         dbc.Row(
             dbc.Col(
+                html.Div(                   
+
+                ),
+            ),
+        ),
+
+        dbc.Row(
+            dbc.Col(
                 html.Div(
                     [
                         html.P(
@@ -446,3 +482,27 @@ def update_avg_all_drivers_graph(amount_of_races):
     return dsv.create_avg_all_drivers_figure(
         amount_of_races, df, df_race_completed
     )
+
+@dash.callback(
+    Output('last-clicked', 'data'),
+    [Input('dry-button', 'n_clicks'),
+     Input('wet-button', 'n_clicks')]
+)
+def store_last_clicked(dry_clicks, wet_clicks):
+    ctx = dash.callback_context
+
+    if not ctx.triggered:
+        return dash.no_update
+    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    return button_id
+
+@dash.callback(
+    Output('graph', 'figure'),
+    [Input('last-clicked', 'data')]
+)
+def update_graph(last_clicked):
+    if last_clicked == 'dry-button':
+        return figure_driver_dry
+    elif last_clicked == 'wet-button':
+        return figure_driver_mw
+    return dash.no_update

@@ -169,9 +169,7 @@ def create_figure_all_time_standings(df):
         x=heatmap_data.columns,  
         y=heatmap_data.index,  
         colorscale='Reds_r',
-        #text=heatmap_data.values,  # Werte in den Zellen anzeigen
-        texttemplate='%{text}',  # Text direkt anzeigen
-        #showscale=True  # Farbskala anzeigen (optional)
+        texttemplate='%{text}',  
         hovertemplate='Start: %{x}<br>Finish: %{y}<br> count: %{z}<extra></extra>',
     ))
     fig.update_layout(
@@ -253,4 +251,99 @@ def create_fig_start_avg_placements(df, df_race_completed):
         ),     
     )
 
+    return fig
+
+
+def driver_standings_mw(df):
+    df_weather_filtered_mw = df[df['condition'].isin(['Mixed', 'Wet'])]
+
+    liste_mw = ds.driver_list(20, df_weather_filtered_mw)
+
+    df_avg_placements_start_mw = pd.DataFrame({'driver_name' : [], 'avg_placement' : []})
+
+    for name in liste_mw: 
+        finish_mw = ds.driver_grid_pos(name, df_weather_filtered_mw)
+        finish_mw['Produkt'] = finish_mw.prod(axis=1)
+        if finish_mw['count_grid'].sum() != 0 :
+            mittelwert = finish_mw['Produkt'].sum() / finish_mw['count_grid'].sum() 
+            df_avg_placements_start_mw.loc[len(df_avg_placements_start_mw)] = [name, mittelwert]
+    df_avg_placements_start_mw= df_avg_placements_start_mw.sort_values(by='avg_placement', ascending=True)
+
+
+    df_avg_placements_finish_mw = pd.DataFrame({'driver_name' : [], 'avg_placement' : []})
+    for name in liste_mw: 
+        finish_mw = ds.driver_finish_pos(name, df_weather_filtered_mw)
+        finish_mw['Produkt'] = finish_mw.prod(axis=1)
+        if finish_mw['count_finish'].sum() != 0 :
+            mittelwert = finish_mw['Produkt'].sum() / finish_mw['count_finish'].sum() 
+            df_avg_placements_finish_mw.loc[len(df_avg_placements_finish_mw)] = [name, mittelwert]
+    df_avg_placements_finish_mw= df_avg_placements_finish_mw.sort_values(by='avg_placement', ascending=True)
+
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(x=df_avg_placements_start_mw['driver_name'], y=df_avg_placements_start_mw['avg_placement'],
+                        name='start',hovertemplate='Average placements of start position: %{y}<extra></extra> ' ))
+    fig.add_trace(go.Bar(x=df_avg_placements_finish_mw['driver_name'], y=df_avg_placements_finish_mw['avg_placement'], 
+                        name='finish',hovertemplate='Average placements of finish position: %{y}<extra></extra> '))
+
+
+    fig.update_layout(
+        template='plotly_dark',
+        xaxis_title='Driver', 
+        yaxis_title='Position',  
+        title=f'Average placements of drivers in mixed/wet condition',
+        xaxis=dict(
+            showgrid=False  
+        ),
+        yaxis=dict(
+            showgrid=False  
+        )
+    )
+    return fig
+
+
+def driver_standings_dry(df):
+    df_weather_filtered = df[df['condition'].isin(['Dry'])]
+    df_same_list =df[df['condition'].isin(['Mixed', 'Wet'])]
+
+    liste = ds.driver_list(20, df_same_list)
+
+    df_avg_placements_start = pd.DataFrame({'driver_name' : [], 'avg_placement' : []})
+
+    for name in liste: 
+        finish = ds.driver_grid_pos(name, df_weather_filtered)
+        finish['Produkt'] = finish.prod(axis=1)
+        if finish['count_grid'].sum() != 0 :
+            mittelwert = finish['Produkt'].sum() / finish['count_grid'].sum() 
+            df_avg_placements_start.loc[len(df_avg_placements_start)] = [name, mittelwert]
+    df_avg_placements_start= df_avg_placements_start.sort_values(by='avg_placement', ascending=True)
+
+
+    df_avg_placements_finish = pd.DataFrame({'driver_name' : [], 'avg_placement' : []})
+    for name in liste: 
+        finish = ds.driver_finish_pos(name, df_weather_filtered)
+        finish['Produkt'] = finish.prod(axis=1)
+        if finish['count_finish'].sum() != 0 :
+            mittelwert = finish['Produkt'].sum() / finish['count_finish'].sum() 
+            df_avg_placements_finish.loc[len(df_avg_placements_finish)] = [name, mittelwert]
+    df_avg_placements_finish= df_avg_placements_finish.sort_values(by='avg_placement', ascending=True)
+
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(x=df_avg_placements_start['driver_name'], y=df_avg_placements_start['avg_placement'],
+                        name='start',hovertemplate='Average placements of start position: %{y}<extra></extra> ' ))
+    fig.add_trace(go.Bar(x=df_avg_placements_finish['driver_name'], y=df_avg_placements_finish['avg_placement'], 
+                        name='finish',hovertemplate='Average placements of finish position: %{y}<extra></extra> '))
+    fig.update_layout(
+        template='plotly_dark',
+        xaxis_title='Driver', 
+        yaxis_title='Position',  
+        title=f'Average placements of drivers in dry condition',
+        xaxis=dict(
+            showgrid=False  
+        ),
+        yaxis=dict(
+            showgrid=False  
+        )
+    )
     return fig
