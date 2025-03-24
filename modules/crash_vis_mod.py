@@ -473,10 +473,6 @@ def create_interactive_incidents_dashboard(df):
     # Layout definition (No Dash instance created)
     layout = html.Div(
         [
-            html.H3(
-                'Interactive Incidents by Circuit Dashboard',
-                className='text-center',
-            ),
             dcc.Graph(
                 id='incidents-graph',
                 style={
