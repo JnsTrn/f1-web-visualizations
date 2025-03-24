@@ -13,7 +13,6 @@ import modules.driver_standings_vis_mod as dsv
 
 dash.register_page(__name__, path='/gridPosition')
 
-
 ############## Load Data ##############
 
 df = pd.read_csv('data/f1_1994_2024_season_results.csv')
@@ -61,54 +60,46 @@ spcific_driver_layout = dsv.create_grid_finish_figure(name,df)
 figure_driver_mw = dsv.driver_standings_mw(df_weather)
 figure_driver_dry = dsv.driver_standings_dry(df_weather)
 
-graph_dry = dcc.Graph(
-    id='graph-dry',
-    figure=figure_driver_dry
-)
-
-graph_wet = dcc.Graph(
-    id='graph-wet',
-    figure=figure_driver_mw
-)
 
 circuit_heatmap = dsv.create_circuit_heatmap_layout()
 driver_grid_start_finish = dsv.create_grid_finish_figure_layout()
 all_drivers_avg = dsv.create_avg_all_drivers_figure_layout()
+driver_conditions = dsv.create_driver_conditions_layout()
 
 ########## Set up the layout ##########
-graph_one = '''This heatmap shows the correlation between starting positions 
-and their corresponding finishing positions. While winning a race is much 
-more likely when starting from pole position, we can observe that, in most 
-cases, the finishing position tends to fall within a 3-place range of the 
+graph_one = '''This heatmap shows the correlation between starting positions
+and their corresponding finishing positions. While winning a race is much
+more likely when starting from pole position, we can observe that, in most
+cases, the finishing position tends to fall within a 3-place range of the
 starting position'''
 
-all_time_standings_explanation = ''' The average placement was calculated by taking the mean of 
-all finishing positions for each starting position. Retirements or 
-disqualifications result in poor race outcomes, so we have categorized 
-the data into 'races completed' and 'all races,' as retirements or 
-disqualifications can skew the results  '''
+all_time_standings_explanation = ''' The average placement was calculated by
+taking the mean of all finishing positions for each starting position.
+Retirements or disqualifications result in poor race outcomes, so we have
+categorized the data into 'races completed' and 'all races,' as retirements or
+disqualifications can skew the results.  '''
 
-circuit_explanation ='''In this interactive graph, you can select a number for races
-driven. The list below will then display the different circuits that have 
+circuit_explanation ='''In this interactive graph, you can select a number for
+races driven. The list below will then display the different circuits that have
 been raced on at least the number of times you selected. Similar to the first
-graph, a heatmap is shown to illustrate the correlation between starting 
+graph, a heatmap is shown to illustrate the correlation between starting
 and finishing positions
 '''
 
 specific_driver_standings_explanation ='''
-Similar to the graph above, you can also select a minimum number of races driven. 
-In this graph, the average placement of each driver is shown and compared to one 
-another. We have also differentiated between completed races and all races. 
-For example, the two-time World Champion Mika Häkkinen was an excellent driver 
-when he was able to finish the race, which wouldn't be evident if we only looked 
-at the data for all races.
+Similar to the graph above, you can also select a minimum number of races
+driven. In this graph, the average placement of each driver is shown and
+compared to one another. We have also differentiated between completed races
+and all races. For example, the two-time World Champion Mika Häkkinen was an
+excellent driver when he was able to finish the race, which wouldn't be
+evident if we only looked at the data for all races.
 '''
 
 weather_explanation = '''
 Reliable weather data has only been available since 2005. Since wet and mixed
 conditions are not very common, we combined the two. To obtain representative
-data, we focused on drivers who have participated in at least 20 wet and/or 
-mixed races. Here you can switch between dry and wet+mixed conditions to see 
+data, we focused on drivers who have participated in at least 20 wet and/or
+mixed races. Here you can switch between dry and wet+mixed conditions to see
 a drivers average placement depending on the condition
 '''
 
@@ -117,7 +108,7 @@ This is a short explanation about what the graph is suppposed to show and what
 we did to create it.
 '''
 
-graph_four = ''' This bar chart shows the all-time starting and finishing 
+graph_four = ''' This bar chart shows the all-time starting and finishing
 positions of a driver. You can select the number of races driven, and a list
 of drivers who have competed in the selected number of races will be displayed.
 '''
@@ -181,8 +172,6 @@ layout = html.Div(
                     },
                 ),
             ),
-            className='mb-4',
-        
         ),
         dbc.Row(
             dbc.Col(
@@ -316,7 +305,6 @@ layout = html.Div(
                     },
                 ),
             ),
-            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -365,7 +353,7 @@ layout = html.Div(
                     }
                 ),
             ),
-            className='mt-2 mb-5',
+            className='mb-5',
         ),
         dbc.Row(
             dbc.Col(
@@ -386,15 +374,14 @@ layout = html.Div(
         ),
         dbc.Row(
             dbc.Col(
-                html.Div([
-                    html.Div([
-                        html.Button('Dry', id='dry-button', n_clicks=0),
-                        html.Button('Wet', id='wet-button', n_clicks=0),
-                    ], style={'marginBottom': '20px'}),
-                    dcc.Store(id='last-clicked', data='dry-button'),
-                    dcc.Graph(id='graph', figure=figure_driver_dry)
-                ]),
-            ),
+                html.Div(
+                    driver_conditions,
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                    }
+                )
+            )
         ),
         dbc.Row(
             dbc.Col(
@@ -443,20 +430,16 @@ layout = html.Div(
 
 ############ Callbacks #############
 
-# Callback zum Aktualisieren der Dropdown-Optionen basierend
-# auf dem Slider-Wert
 @dash.callback(
     Output('driver-dropdown', 'options'),
     Input('driver-count-slider', 'value'),
 )
 def update_driver_dropdown(driver_count):
-    # Holen Sie sich die Liste der Fahrer basierend auf dem Wert des Sliders
     drivers = ds.driver_list(driver_count, df)
-    drivers = sorted(drivers)  # Alphabetisch sortieren
+    drivers = sorted(drivers)
     return [{'label': driver, 'value': driver} for driver in drivers]
 
 
-# Callback zum Aktualisieren der Grafik basierend auf der Auswahl des Fahrers
 @dash.callback(
     Output('grid-finish-positions', 'figure'),
     Input('driver-dropdown', 'value'),
@@ -465,7 +448,6 @@ def update_grid_finish_figure(selected_driver):
     return dsv.create_grid_finish_figure(selected_driver, df)
 
 
-# Callback zum Abrufen der Dropdown-Optionen und Aktualisieren der Heatmap
 @dash.callback(
     [
         Output('circuit-dropdown', 'options'),
@@ -476,12 +458,12 @@ def update_grid_finish_figure(selected_driver):
         Input('number-slider', 'value'),
         Input('circuit-dropdown', 'value'),
     ],
+    #prevent_initial_call=False
 )
 def update_dropdown_and_heatmap(slider_value, selected_circuit):
     return dsv.create_circuit_heatmap(slider_value, selected_circuit, df)
 
 
-# Callback zur Aktualisierung der Grafik basierend auf dem Schieberegler-Wert
 @dash.callback(
     Output('driver-placements', 'figure'),
     Input('races-slider', 'value'),
@@ -492,25 +474,21 @@ def update_avg_all_drivers_graph(amount_of_races):
     )
 
 @dash.callback(
-    Output('last-clicked', 'data'),
-    [Input('dry-button', 'n_clicks'),
-     Input('wet-button', 'n_clicks')]
-)
-def store_last_clicked(dry_clicks, wet_clicks):
-    ctx = dash.callback_context
-
-    if not ctx.triggered:
-        return dash.no_update
-    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
-    return button_id
-
-@dash.callback(
     Output('graph', 'figure'),
-    [Input('last-clicked', 'data')]
+    [Input('dry-button', 'n_clicks'),
+     Input('wet-button', 'n_clicks')],
+    prevent_initial_call=False
 )
-def update_graph(last_clicked):
-    if last_clicked == 'dry-button':
+def update_graph(dry_clicks, wet_clicks):
+    # Determine which button was last clicked
+    ctx = dash.callback_context
+    if not ctx.triggered:
+        # If no button has been clicked, return the default (dry) figure
         return figure_driver_dry
-    elif last_clicked == 'wet-button':
+
+    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    if button_id == 'dry-button':
+        return figure_driver_dry
+    elif button_id == 'wet-button':
         return figure_driver_mw
-    return dash.no_update

@@ -120,8 +120,8 @@ def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
         y='finish_position',
         color='duration_category',
         labels={
-            'duration_category': 'Pitstop-Kategorie',
-            'finish_position': 'Endplatzierung',
+            'duration_category': 'Pitstop Speed',
+            'finish_position': 'Finishing Position',
         },
         title=f'Pitstop Analysis: {selected_circuit} ({selected_year})',
         template='plotly_dark',

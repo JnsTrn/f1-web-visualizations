@@ -13,16 +13,21 @@ def create_figure_all_time_standings(df):
     df_heatmap = ds.get_all_standings(df, (number+1))
     df_heatmap = df_heatmap[df_heatmap['finish_position'] <= number]
     heatmap_data = df_heatmap.pivot(index='finish_position', columns='grid_position', values='count')
-    heatmap_data = heatmap_data.fillna(0)
+
+    # Convert zeros to a custom hover text
+    hover_data = heatmap_data.values.copy().astype(object)
+    hover_data[hover_data == 0] = 'N/A'
 
     fig = go.Figure(data=go.Heatmap(
         z=heatmap_data.values,
         x=heatmap_data.columns,
         y=heatmap_data.index,
         colorscale='Reds_r',
-        texttemplate='%{text}',
-        hovertemplate='Start: %{x}<br>Finish: %{y}<br> count: %{z}<extra></extra>',
+        text=heatmap_data.values,
+        hovertext=hover_data,
+        hovertemplate='Start: %{x}<br>Finish: %{y}<br>Count: %{hovertext}<extra></extra>',
     ))
+
     fig.update_layout(
         template='plotly_dark',
         title= 'Relation between Starting and Finishing Position 1994 - 2004',
@@ -123,7 +128,6 @@ def create_fig_start_avg_placements(df, df_race_completed):
     return fig
 
 
-# Callback zum Abrufen der Liste von Strecken aus ds.circuit_list(number, df)
 def get_circuit_options(number, df):
     circuit_list = ds.circuit_list(number=number, df=df)
     circuit_list = sorted(circuit_list)
@@ -131,41 +135,38 @@ def get_circuit_options(number, df):
 
 
 def create_circuit_heatmap(slider_value, selected_circuit, df):
-    # Multipliziere den Wert des Sliders mit 20
     number = slider_value * 20
 
-    # Erhalte die Strecken-Liste basierend auf dem aktuellen Wert von 'number'
     circuit_options = get_circuit_options(number, df)
 
-    # Setze den Standardwert oder den ausgewählten Wert
     if selected_circuit is None or selected_circuit not in [option['value'] for option in circuit_options]:
-        selected_circuit = circuit_options[0]['value'] if circuit_options else 'silverstone'
+        selected_circuit = circuit_options[15]['value'] if circuit_options else 'Silverstone'
 
-    # Filter für den gewählten Circuit
     circuit = df[df['circuit_id'] == selected_circuit]
 
-    # Berechnung der Heatmap-Daten
     a = ds.get_all_standings(circuit,23)
+    a = a[a['finish_position'] <= 22]
 
     heatmap_data = a.pivot(
         index='finish_position',
         columns='grid_position',
         values='count'
     )
-    heatmap_data = heatmap_data.fillna(0)
 
+    # Convert zeros to a custom hover text
+    hover_data = heatmap_data.values.copy().astype(object)
+    hover_data[hover_data == 0] = 'N/A'
 
-    # Erstellen der Heatmap
     fig = go.Figure(data=go.Heatmap(
         z=heatmap_data.values,
         x=heatmap_data.columns,
         y=heatmap_data.index,
         colorscale='Reds_r',
-        texttemplate='%{text}',
-        hovertemplate='Start: %{x}<br>Finish: %{y}<br> count: %{z}<extra></extra>',
+        text=heatmap_data.values,
+        hovertext=hover_data,
+        hovertemplate='Start: %{x}<br>Finish: %{y}<br>Count: %{hovertext}<extra></extra>',
     ))
 
-    # Layout der Heatmap
     fig.update_layout(
         template='plotly_dark',
         title=f'Relation between Starting and Finishing Position for {selected_circuit.capitalize()}',
@@ -187,6 +188,7 @@ def create_circuit_heatmap(slider_value, selected_circuit, df):
     )
 
     return circuit_options, selected_circuit, fig
+
 
 def create_circuit_heatmap_layout():
     layout = html.Div(
@@ -217,7 +219,7 @@ def create_circuit_heatmap_layout():
                     dcc.Dropdown(
                         id='circuit-dropdown',
                         options=[],
-                        value= 'silverstone',
+                        value='Silverstone',
                         style={'width': '50%',
                             'margin': 'auto',
                             'color': 'black'
@@ -286,6 +288,8 @@ def driver_standings_mw(df):
 
     fig.update_layout(
         template='plotly_dark',
+        height=450,
+        autosize=True,
         xaxis_title='Driver',
         yaxis_title='Position',
         title='Average placements of drivers in mixed/wet conditions since 2005 and atleast 20 races driven',
@@ -348,6 +352,8 @@ def driver_standings_dry(df):
 
     fig.update_layout(
         template='plotly_dark',
+        height=450,
+        autosize=True,
         xaxis_title='Driver',
         yaxis_title='Position',
         title='Average placements of drivers in dry conditions since 2005 and atleast 20 races driven',
@@ -359,6 +365,34 @@ def driver_standings_dry(df):
         )
     )
     return fig
+
+
+def create_driver_conditions_layout():
+    layout = html.Div([
+        html.Div([
+            html.Button('Dry', id='dry-button', n_clicks=0),
+            html.Button('Wet', id='wet-button', n_clicks=0),
+        ],
+        style={
+            'marginBottom': '20px',
+            'width': '100%',
+            'textAlign': 'center'
+        }),
+
+        dcc.Store(id='last-clicked', data='dry-button'),
+
+        dcc.Graph(
+            id='graph',
+            style={
+                'width': '100%'
+            },
+            config={'responsive': True}
+        )
+    ], style={
+        'min-height': '505px'
+    })
+
+    return layout
 
 
 def create_grid_finish_figure(name, df):
@@ -393,7 +427,6 @@ def create_grid_finish_figure(name, df):
         template='plotly_dark',
         height=450,
         autosize=True,
-        #hoverlabel=dict(font=dict(color='white')),
         xaxis_title='Position',
         yaxis_title='Count',
         title=f'Amount of Times {name} has started and ended the race in a position from 1994 - 2024',
@@ -468,8 +501,7 @@ def create_grid_finish_figure_layout():
             ),
         ],
         style={
-            'position': 'relative',
-            'min-height': '650px'  # Ensure a minimum height to prevent shifting
+            'min-height': '620px'
         }
     ),
     return layout
@@ -563,7 +595,7 @@ def create_avg_all_drivers_figure_layout():
         ],
         style={
             'position': 'relative',
-            'min-height': '500px'  # Ensure a minimum height to prevent shifting
+            'min-height': '500px'
         }
     ),
     return layout
