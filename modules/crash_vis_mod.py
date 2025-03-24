@@ -199,7 +199,7 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
     if track_incidents.empty:
         fig = go.Figure()
         fig.update_layout(
-            height=1000,
+            height=850,
             annotations=[
                 dict(
                     text='No circuits with enough races in selected period',
@@ -432,7 +432,7 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
         )
 
     fig.update_layout(
-        height=1000,
+        height=850,
         autosize=True,
         # Put the x-axis scale on top
         xaxis=dict(side='top'),

@@ -71,6 +71,9 @@ graph_wet = dcc.Graph(
     figure=figure_driver_mw
 )
 
+circuit_heatmap = dsv.create_circuit_heatmap_layout()
+driver_grid_start_finish = dsv.create_grid_finish_figure_layout()
+all_drivers_avg = dsv.create_avg_all_drivers_figure_layout()
 
 ########## Set up the layout ##########
 
@@ -220,46 +223,38 @@ layout = html.Div(
         dbc.Row(
             dbc.Col(
                 html.Div(
-                    [
-                        html.Div(
-                            [
-                            html.Label(
-                                'Choose mininum races driven on this circuit'
-                            ),
-                            dcc.Slider(
-                                id='number-slider',
-                                min=0,
-                                max=30,
-                                step=1,
-                                value=15,
-                                marks={i: str(i) for i in range(1, 31)},
-                                ),
-                            ],
-                            style={'textAlign': 'center', 'margin': '20px'},
-                        ),
-                        html.Div(
-                            [
-                                html.Label(
-                                    'List of circuits',
-                                    style={'textAlign': 'center'},
-                                ),
-                                dcc.Dropdown(
-                                    id='circuit-dropdown',
-                                    options=[],
-                                    value='silverstone',
-                                    style={'width': '50%',
-                                        'margin': 'auto',
-                                        'color': 'black'
-                                    },
-                                ),
-                            ],
-                            style={'textAlign': 'center', 'margin': '20px'},
-                        ),
-                        dcc.Graph(id='heatmap'),
-                    ],
+                    circuit_heatmap,
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                    },
                 ),
             ),
-        className='mb-4',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            weather_explanation,
+                        ),
+                    ],
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
+                ),
+            ),
+            className='mt-2 mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
         ),
         dbc.Row(
             dbc.Col(
@@ -301,14 +296,23 @@ layout = html.Div(
                     }
                 ),
             ),
-            className='mb-2 mt-4',
+            className='mt-2 mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
         ),
         dbc.Row(
             dbc.Col(
                 html.H1(
                     [
-                        'How does this differ between drivers of different experience'
-                        'levels (as determined by the amount of races they participated in)',
+                        'How does this differ between drivers of different '
+                        'experience levels ',
+                        html.Br(),
+                        '(as determined by the amount of races '
+                        'they participated in)?',
                     ],
                     className='text-center page-header text-light',
                 ),
@@ -316,68 +320,49 @@ layout = html.Div(
         ),
         dbc.Row(
             dbc.Col(
-                html.Div([
-                    html.Div(
-                        children=[
-                            html.Label(
-                                'Choose mininum races driven',
-                                style={'color': 'white'},
-                            ),
-                            dcc.Slider(
-                                id='driver-count-slider',
-                                min=0,
-                                max=400,
-                                step=10,
-                                value=200,
-                                marks={
-                                    i: str(i) for i in range(0, 401, 10)
-                                },
-                                tooltip={'placement': 'bottom', 'always_visible': True},
-                            ),
-                        ],
-                        style={'width': '80%', 'margin': '0 auto', 'textAlign': 'center'},
-                    ),
-                    html.Div(
-                        children=[
-                            html.Label(
-                                'List of Drivers with chosen amount of races:',
-                                style={'color': 'white'},
-                            ),
-                            dcc.Dropdown(
-                                id='driver-dropdown',
-                                value='Michael Schumacher',
-                                style={'width': '50%', 'margin': 'auto', 'color': 'black'},
-                            ),
-                        ],
-                        style={
-                            'width': '80%',
-                            'margin': '20px auto',
-                            'textAlign': 'center',
-                        },
-                    ),
-                    dcc.Graph(id='grid-finish-positions'),
-                ],
+                html.Div(
+                    driver_grid_start_finish,
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                    },
                 ),
             ),
             className='mb-4',
         ),
-
         dbc.Row(
             dbc.Col(
-                html.Div([
-                    dcc.Slider(
-                        id='races-slider',
-                        min=0,
-                        max=400,
-                        step=10,
-                        value=200,
-                        marks={
-                        i: str(i) for i in range(0, 401, 10)
-                        },
-                    ),
-                    dcc.Graph(id='driver-placements'),
-                ],
+                html.Div(
+                    all_drivers_avg,
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                    },
                 ),
+            ),
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            weather_explanation,
+                        ),
+                    ],
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
+                ),
+            ),
+            className='mt-2 mb-5',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(className="chequered-flag"),
             ),
             className='mb-4'
         ),
@@ -385,13 +370,17 @@ layout = html.Div(
             dbc.Col(
                 html.Div(
                     html.A(
-                        'Back to Top', href='#top', className='btn btn-danger'
+                        'Back to Top',
+                        href='#top',
+                        className='btn',
+                        style={
+                        'backgroundColor': '#a36664',
+                        'color': 'white',
+                        }
                     ),
                     className='text-center',
                 ),
-                width={'size': 12, 'order': 1},
             ),
-            className='mb-4',
         ),
     ],
 )
@@ -417,7 +406,7 @@ def update_driver_dropdown(driver_count):
     Output('grid-finish-positions', 'figure'),
     Input('driver-dropdown', 'value'),
 )
-def update__grid_finish_figure(selected_driver):
+def update_grid_finish_figure(selected_driver):
     return dsv.create_grid_finish_figure(selected_driver, df)
 
 
@@ -434,7 +423,7 @@ def update__grid_finish_figure(selected_driver):
     ],
 )
 def update_dropdown_and_heatmap(slider_value, selected_circuit):
-    return dsv.update_dropdown_and_heatmap(slider_value, selected_circuit, df)
+    return dsv.create_circuit_heatmap(slider_value, selected_circuit, df)
 
 
 # Callback zur Aktualisierung der Grafik basierend auf dem Schieberegler-Wert

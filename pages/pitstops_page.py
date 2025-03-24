@@ -189,6 +189,12 @@ layout = html.Div(
         ),
         dbc.Row(
             dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
+        ),
+        dbc.Row(
+            dbc.Col(
                 html.Div(
                      html.A(
                         'Back to Top',
