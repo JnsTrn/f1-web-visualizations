@@ -12,6 +12,12 @@ dash.register_page(__name__, path='/')
 
 ########## Set up the layout ##########
 
+intro_txt = '''
+    We want to show you the world. We want to show you the world.
+    We want to show you the world. We want to show you the world.
+    We want to show you the world. We want to show you the world.
+    We want to show you the world. We want to show you the world.
+'''
 question1_txt = '''
     The starting grid position is an important factor in determining
     the finishing position of drivers in Formula 1 and is likely to
@@ -35,18 +41,51 @@ question3_txt = '''
 
 layout = html.Div(
     [
-        html.H4(
-            'Welcome to our Project! We want to answer these questions:',
-            className='text-center text-light',
+        dbc.Row(
+            [
+                dbc.Col(
+                    html.Img(
+                        src=dash.get_asset_url('racing_f1_car.jpg'),
+                        width='70%',
+                    ),
+                    className="d-flex justify-content-center align-items-center",
+                    width=5,
+                ),
+                dbc.Col(
+                    html.Div(
+                        [
+                            html.H4(
+                                'What to expect from this project?',
+                                className='text-center text-light',
+                            ),
+                            html.P(intro_txt),
+                        ],
+                    ),
+                    className="d-flex align-items-center",
+                    width=7,
+                ),
+            ],
+            align="center",
+            className="pb-5 pt-5",
         ),
-        html.Br(),
-        html.A(
-            html.H1(
-                'How does the starting grid position influence the finishing '
-                'position of drivers in the seasons from 1994 - 2024?',
-                className='text-center page-header',
+        dbc.Row(
+            dbc.Col(
+                html.Div(className="chequered-flag"),
             ),
-            href='/gridPosition',
+            className="pt-5",
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.A(
+                    html.H1(
+                        'How does the starting grid position influence the finishing '
+                        'position of drivers in the seasons from 1994 - 2024?',
+                        className='text-center page-header text-light',
+                    ),
+                    href='/gridPosition',
+                ),
+            ),
+            className='mb-4 mt-4',
         ),
         dbc.Row(
             dbc.Col(
