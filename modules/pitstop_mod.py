@@ -133,10 +133,10 @@ def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
         driver_pitstops_sorted,
         x='driver_name',
         y='duration',
-        text='duration',
         labels={
             'driver_name': 'Driver',
             'duration': 'Total Pitstop Time (s)',
+            'finish_position' : 'Finish Position'
         },
         title=f'Total Pitstop Time per Driver({selected_circuit}, {selected_year})',
         template='plotly_dark',
@@ -150,7 +150,6 @@ def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
             [1, 'rgb(255, 255, 255)'],
         ],
     )
-    fig_bar.update_traces(texttemplate='%{text:.2f}s', textposition='outside')
 
     # Anzahl der Fahrer pro Kategorie berechnen
     category_counts = (
