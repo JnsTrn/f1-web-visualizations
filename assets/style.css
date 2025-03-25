@@ -6,15 +6,23 @@ body, html {
 }
 
 .chequered-flag {
-    width: 99vw;
+    width: 97vw;
     height: 50px;
     background-image: url('/assets/chequered_flag_cut.jpg');
     background-size: contain;
     background-repeat: repeat-x;
-    margin: 0;
+    display: block;
+    margin: 0 auto;
     padding: 0;
     position: relative;
     left: 0;
+    
+}
+
+h1 {
+    width: 80vw;
+    margin: 0 auto;
+    text-align: center;
 }
 
 p {
