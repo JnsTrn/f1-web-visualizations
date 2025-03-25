@@ -16,6 +16,7 @@ dash.register_page(__name__, path='/retirements')
 
 ############## Load Data ##############
 
+
 DATA_PATH = 'data/'
 
 df = pd.read_csv(
@@ -25,7 +26,8 @@ df = pd.read_csv(
 df_CraWeath = pd.read_csv(DATA_PATH + 'crashes_and_weather.csv')
 
 
-# ############ Define Graphs ############
+############# Define Graphs ############
+
 
 wcvm.init_figs()
 fig_CraWeath = wcvm.create_fig_CraWeath(df_CraWeath)
@@ -47,7 +49,7 @@ for fig in [
     )
 
 
-########## Set up the layout ##########
+########### Set up the layout ###########
 
 total_incidents_explanation = '''
 This is an explanation about what the plot depicts and what it means.
@@ -193,7 +195,6 @@ layout = html.Div(
                         ),
                     ]
                 ),
-                width={'size': 12, 'order': 1},
             ),
         ),
         dbc.Row(
@@ -310,8 +311,7 @@ layout = html.Div(
             dbc.Col(
                 html.H1(
                     [
-                        'How does weather affect race completion rates and ',
-                        html.Br(),
+                        'How does weather affect race completion rates and '
                         'the likelihood of crashes or retirements in the '
                         'seasons from 2005 - 2024?',
                     ],
@@ -336,7 +336,6 @@ layout = html.Div(
                         ),
                     ]
                 ),
-                width={'size': 12, 'order': 1},
             ),
         ),
         dbc.Row(

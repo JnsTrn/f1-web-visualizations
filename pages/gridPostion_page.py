@@ -127,9 +127,8 @@ layout = html.Div(
                 html.H1(
                     [
                         'How does the starting grid position influence the '
-                        'finishing position',
-                        html.Br(),
-                        ' of drivers in the seasons from 1994 - 2024?',
+                        'finishing position of drivers in the seasons '
+                        'from 1994 - 2024?',
                     ],
                     className='text-center page-header text-light',
                 ),
@@ -286,10 +285,8 @@ layout = html.Div(
                 html.H1(
                     [
                         'How does this differ between drivers of different '
-                        'experience levels ',
-                        html.Br(),
-                        '(as determined by the amount of races '
-                        'they participated in)?',
+                        'experience levels (as determined by the amount of '
+                        'races they participated in)?',
                     ],
                     className='text-center page-header text-light',
                 ),
@@ -458,7 +455,6 @@ def update_grid_finish_figure(selected_driver):
         Input('number-slider', 'value'),
         Input('circuit-dropdown', 'value'),
     ],
-    #prevent_initial_call=False
 )
 def update_dropdown_and_heatmap(slider_value, selected_circuit):
     return dsv.create_circuit_heatmap(slider_value, selected_circuit, df)

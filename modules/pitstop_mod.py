@@ -5,79 +5,6 @@ import plotly.express as px
 from dash import dcc, html
 
 
-def create_pitstop_layout(unique_circuits):
-    layout = html.Div(
-        style={
-            'backgroundColor': 'black',
-            'color': 'white',
-            'padding': '20px',
-        },
-        children=[
-            # html.H1('F1 Pitstop Analyse', style={'textAlign': 'center'}),
-            # Dropdown für Rennstrecke
-            html.Label('Choose a circuit:', style={'fontSize': '20px'}),
-            dcc.Dropdown(
-                id='circuit-pitstops-dropdown',
-                options=[
-                    {'label': circuit, 'value': circuit}
-                    for circuit in sorted(unique_circuits)
-                ],
-                value='German Grand Prix',
-                clearable=False,
-                style={'backgroundColor': 'white', 'color': 'black'},
-            ),
-            # Dropdown für Jahr (abhängig von Rennstrecke)
-            html.Label(
-                'Choose a year:',
-                style={'fontSize': '20px', 'marginTop': '10px'},
-            ),
-            dcc.Dropdown(
-                id='year-dropdown',
-                clearable=False,
-                style={'backgroundColor': 'white', 'color': 'black'},
-            ),
-            # Boxplot für Pitstop-Zeiten und Endplatzierung
-            dcc.Graph(id='pitstop-boxplot', style={'marginTop': '20px'}),
-            # Balkendiagramm für die Gesamt-Pitstop-Zeit pro Fahrer
-            dcc.Graph(id='pitstop-barplot', style={'marginTop': '20px'}),
-            # Info-Text zur Anzahl der Rennen und Zeitbereiche
-            html.Div(
-                id='race-info', style={'fontSize': '18px', 'marginTop': '20px'}
-            ),
-        ],
-    )
-    return layout
-
-
-# Layout der App mit Dark Mode Styling
-def create_pitstop_layout_boxplot(eligible_drivers):
-    layout = html.Div(
-        style={
-            'backgroundColor': 'black',
-            'color': 'white',
-            'padding': '20px',
-        },
-        children=[
-            # html.H1('F1 Pitstop Analyse', style={'textAlign': 'center'}),
-            html.Label('Choose a driver:', style={'fontSize': '20px'}),
-            dcc.Dropdown(
-                id='driver-pitstop-dropdown',
-                options=[
-                    {'label': driver, 'value': driver}
-                    for driver in eligible_drivers
-                ],
-                value='Max Verstappen',
-                style={'backgroundColor': 'white', 'color': 'black'},
-            ),
-            dcc.Graph(id='boxplot', style={'backgroundColor': 'black'}),
-            html.Div(
-                id='race-boxplot-info',
-                style={'fontSize': '18px', 'marginTop': '20px'},
-            ),
-        ],
-    )
-    return layout
-
 
 def convert_duration_to_seconds(duration):
     if pd.isna(duration):
@@ -100,6 +27,80 @@ def convert_duration_to_seconds(duration):
         return minutes * 60 + seconds
     except (ValueError, IndexError):
         return np.nan
+
+
+def create_pitstop_layout(unique_circuits):
+    layout = html.Div(
+        style={
+            'backgroundColor': 'black',
+            'color': 'white',
+            'padding': '20px',
+        },
+        children=[
+            html.Label('Choose a circuit:', style={'fontSize': '20px'}),
+            dcc.Dropdown(
+                id='circuit-pitstops-dropdown',
+                options=[
+                    {'label': circuit, 'value': circuit}
+                    for circuit in sorted(unique_circuits)
+                ],
+                value='German Grand Prix',
+                clearable=False,
+                style={'backgroundColor': 'white', 'color': 'black'},
+            ),
+            html.Label(
+                'Choose a year:',
+                style={'fontSize': '20px', 'marginTop': '10px'},
+            ),
+            dcc.Dropdown(
+                id='year-dropdown',
+                clearable=False,
+                style={'backgroundColor': 'white', 'color': 'black'},
+            ),
+            dcc.Graph(
+                id='pitstop-boxplot',
+                style={'marginTop': '20px'}),
+            dcc.Graph(
+                id='pitstop-barplot',
+                style={'marginTop': '20px'}),
+            html.Div(
+                id='race-info',
+                style={'fontSize': '18px', 'marginTop': '20px'}
+            ),
+        ],
+    )
+    return layout
+
+
+def create_pitstop_layout_boxplot(eligible_drivers):
+    layout = html.Div(
+        style={
+            'backgroundColor': 'black',
+            'color': 'white',
+            'padding': '20px',
+        },
+        children=[
+            html.Label('Choose a driver:', style={'fontSize': '20px'}),
+            dcc.Dropdown(
+                id='driver-pitstop-dropdown',
+                options=[
+                    {'label': driver, 'value': driver}
+                    for driver in eligible_drivers
+                ],
+                value='Max Verstappen',
+                style={'backgroundColor': 'white', 'color': 'black'},
+            ),
+            dcc.Graph(
+                id='boxplot',
+                style={'backgroundColor': 'black'}),
+            html.Div(
+                id='race-boxplot-info',
+                style={'fontSize': '18px', 'marginTop': '20px'},
+            ),
+        ],
+    )
+    return layout
+
 
 def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted):
 
@@ -229,6 +230,7 @@ def create_driver_plot(driver_name, df_driver_sorted, total_races):
         title=f'Pitstop Analysis: {driver_name}',
         template='plotly_dark',
     )
+
 
     # Anzahl der Rennen pro Kategorie und Zeitbereiche berechnen
     category_counts = (

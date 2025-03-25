@@ -11,6 +11,7 @@ import modules.pitstop_mod as ptm
 
 ####### Initialize the Dash app #######
 
+
 dash.register_page(__name__, path='/pitstops')
 
 
@@ -49,6 +50,7 @@ eligible_drivers = driver_years[driver_years >= 2].index
 
 ############## Create Graphs ##############
 
+
 pitstops_layout = ptm.create_pitstop_layout(unique_circuits)
 pitstops_boxplot = ptm.create_pitstop_layout_boxplot(eligible_drivers)
 
@@ -79,9 +81,7 @@ layout = html.Div(
                 html.H1(
                     [
                         'How does the number and the average duration of '
-                        'pitstops ',
-                        html.Br(),
-                        'for a driver in a race relate to his '
+                        'pitstops for a driver in a race relate to his '
                         'finishing position? ',
                     ],
                     className='text-center page-header text-light',
