@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 
 ####### Initialize the Dash app #######
 
-dash.register_page(__name__, path='/')
+dash.register_page(__name__, path='/', title='Research Questions')
 
 
 ########## Set up the layout ##########

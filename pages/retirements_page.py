@@ -11,7 +11,7 @@ import modules.weather_crash_vis_mod as wcvm
 
 ####### Initialize the Dash app #######
 
-dash.register_page(__name__, path='/retirements')
+dash.register_page(__name__, path='/retirements', title='Retirement Analysis')
 
 
 ############## Load Data ##############

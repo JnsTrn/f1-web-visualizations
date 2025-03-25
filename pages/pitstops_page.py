@@ -12,7 +12,7 @@ import modules.pitstop_mod as ptm
 ####### Initialize the Dash app #######
 
 
-dash.register_page(__name__, path='/pitstops')
+dash.register_page(__name__, path='/pitstops', title='Pitstop Analysis')
 
 
 ############## Load Data ##############
