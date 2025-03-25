@@ -57,7 +57,7 @@ def total_incidents_by_year(df):
             itemdoubleclick='toggleothers',
             font=dict(size=16),
             x=0.9,
-            y=1.4,
+            y=1.43,
         ),
     )
 

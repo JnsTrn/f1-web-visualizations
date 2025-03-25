@@ -140,7 +140,7 @@ def create_circuit_heatmap(slider_value, selected_circuit, df):
     circuit_options = get_circuit_options(number, df)
 
     if selected_circuit is None or selected_circuit not in [option['value'] for option in circuit_options]:
-        selected_circuit = circuit_options[15]['value'] if circuit_options else 'Silverstone'
+        selected_circuit = 'silverstone'
 
     circuit = df[df['circuit_id'] == selected_circuit]
 
