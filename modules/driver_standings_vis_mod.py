@@ -36,14 +36,14 @@ def create_figure_all_time_standings(df):
             tickmode='array',
             tickvals=df_heatmap['grid_position'].unique(),
             showgrid=False,
-            title= 'Start position',
+            title= 'Starting position',
             linecolor= 'white'
         ),
         yaxis=dict(
             tickmode='array',
             tickvals=df_heatmap['finish_position'].unique(),
             showgrid=False,
-            title= 'Finish position',
+            title= 'Finishing position',
             linecolor='white'
         )
     )
@@ -112,7 +112,7 @@ def create_fig_start_avg_placements(df, df_race_completed):
             showgrid=False,
             linecolor= 'white',
             zeroline= False,
-            title= 'Start position'
+            title= 'Starting position'
         ),
         yaxis=dict(
             tick0=0,
@@ -140,7 +140,7 @@ def create_circuit_heatmap(slider_value, selected_circuit, df):
     circuit_options = get_circuit_options(number, df)
 
     if selected_circuit is None or selected_circuit not in [option['value'] for option in circuit_options]:
-        selected_circuit = 'silverstone'
+        selected_circuit = 'nurburgring'
 
     circuit = df[df['circuit_id'] == selected_circuit]
 
@@ -564,7 +564,7 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
             range=[0, 20],
             showgrid=False,
             linecolor='white',
-            title='Avg Placement'
+            title='Average Placement'
         ),
         margin=dict(t=50, b=50, l=50, r=50),
     )
