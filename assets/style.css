@@ -40,3 +40,21 @@ p {
     width: 100%;
     margin: 0 auto;
 }
+
+.custom-hover-link,
+.custom-hover-link:hover {
+    text-decoration: none;
+}
+
+.hover-box {
+    background-color: #212529;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    width: 89%;
+    margin: 0 auto;
+}
+  
+.custom-hover-link:hover .hover-box {
+background-color: #495057;
+}
+  

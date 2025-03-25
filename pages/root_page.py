@@ -39,6 +39,7 @@ question3_txt = '''
     over the years and how it relates to his finishing position.
 '''
 
+
 layout = html.Div(
     [
         dbc.Row(
@@ -72,103 +73,73 @@ layout = html.Div(
             dbc.Col(
                 html.Div(className="chequered-flag"),
             ),
-            className="pt-5",
+            className="pt-5 pb-5",
         ),
-        # Q1
         dbc.Row(
             dbc.Col(
                 html.A(
-                    html.H1(
-                        'How does the starting grid position influence the finishing '
-                        'position of drivers in the seasons from 1994 - 2024?',
-                        className='text-center page-header text-light',
+                    html.Div(
+                        [
+                            html.H1(
+                                'How does the starting grid position influence the finishing '
+                                'position of drivers in the seasons from 1994 - 2024?',
+                                className='text-center page-header text-light',
+                                style={'marginBottom': '20px'},
+                            ),
+                            html.P(
+                                question1_txt,
+                            ),
+                        ],
+                        className='p-3 text-light hover-box',
                     ),
                     href='/gridPosition',
-                ),
-            ),
-            className='mb-4 mt-4',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.P(
-                            question1_txt,
-                        ),
-                    ],
-                    className='p-3 text-light',
-                    style={
-                        'width': '89%',
-                        'margin': '0 auto',
-                        'backgroundColor': '#212529',
-                        'border-radius': '10px',
-                    }
+                    className='custom-hover-link',
                 ),
             ),
             className='mt-2 mb-5',
         ),
-        # Q2
         dbc.Row(
             dbc.Col(
                 html.A(
-                    html.H1(
-                        'How has the total number of crashes and retirements evolved '
-                        'in the seasons from 1994 - 2024?',
-                        className='text-center page-header text-light',
+                    html.Div(
+                        [
+                            html.H1(
+                                'How has the total number of crashes and retirements evolved '
+                                'in the seasons from 1994 - 2024?',
+                                className='text-center page-header text-light',
+                                style={'marginBottom': '20px'},
+                            ),
+                            html.P(
+                                question2_txt,
+                            ),
+                        ],
+                        className='p-3 text-light hover-box',
                     ),
                     href='/retirements',
-                ),
-            ),
-            className='mb-4 mt-4',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.P(
-                            question2_txt,
-                        ),
-                    ],
-                    className='p-3 text-light',
-                    style={
-                        'width': '89%',
-                        'margin': '0 auto',
-                        'backgroundColor': '#212529',
-                        'border-radius': '10px',
-                    }
+                    className='custom-hover-link',
                 ),
             ),
             className='mt-2 mb-5',
         ),
-        # Q3
         dbc.Row(
             dbc.Col(
                 html.A(
-                    html.H1(
-                        'How does the number and the average duration of pitstops for '
-                        'a driver in a race relate to his finishing position?',
-                        className='text-center page-header text-light',
+                    html.Div(
+                        [
+                            html.H1(
+                                'How does the number and the average duration of pitstops for '
+                                'a driver in a race relate to his finishing position?',
+                                className='text-center page-header text-light',
+                                style={'marginBottom': '20px'},
+                            ),
+                            html.P(
+                                question3_txt,
+                            ),
+                        ],
+                        className='p-3 text-light hover-box',
                     ),
                     href='/pitstops',
-                ),
-            ),
-            className='mb-4 mt-4',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.P(
-                            question3_txt,
-                        ),
-                    ],
-                    className='p-3 text-light',
-                    style={
-                        'width': '89%',
-                        'margin': '0 auto',
-                        'backgroundColor': '#212529',
-                        'border-radius': '10px',
-                    }
+                    className='custom-hover-link',
                 ),
             ),
             className='mt-2 mb-5',
