@@ -32,26 +32,29 @@ intro_txt = [
 ]
 
 question1_txt = '''
-    The starting grid position is an important factor in determining
-    the finishing position of drivers in Formula 1 and is likely to
-    be a key factor in the outcome of a race. We will analyze
-    the data from the seasons 1994 - 2024 to determine the
-    relationship between the starting grid position and the finishing
-    position of drivers.
-'''
-question2_txt = '''
-    Crashes and retirements are a common occurence in Formula 1. We
-    will analyze the data from the seasons 1994 - 2024 to determine
-    how the total number of crashes and retirements has evolved
-    over the years.
-'''
-question3_txt = '''
-    Pitstops are an important part of Formula 1. We will analyze the
-    data from the seasons 2011 - 2024 to determine how the number
-    and the average duration of pitstops for a driver has evolved
-    over the years and how it relates to his finishing position.
+    A driver's starting grid position is determined by qualification races. 
+    It is likely that the starting grid position influences the finishing position 
+    in the final race. We will analyze data from the 1994–2024 seasons to uncover 
+    the relationship between these two factors. Additionally, we will explore 
+    how this relationship differs between drivers based on their experience 
+    levels.
 '''
 
+question2_txt = '''
+    Drivers are classified as retired if they are unable or not allowed to complete 
+    a race. Retirements caused by crashes or technical failures are a common occurrence 
+    in Formula 1. We will analyze data from the 1994–2024 seasons to examine how 
+    retirements have evolved over the years. Additionally, we will explore the 
+    relationship between weather conditions and retirements, limited to data 
+    from 2005–2024.
+'''
+
+question3_txt = '''
+    In Formula 1, pitstops are necessary for tasks like changing tires and making 
+    minor technical repairs. We will analyze data from the 2011–2024 seasons to 
+    investigate how the number and average duration of pitstops for a driver have 
+    changed over the years, and how these factors relate to their finishing position.
+'''
 
 layout = html.Div(
     [
@@ -141,7 +144,7 @@ layout = html.Div(
                         [
                             html.H1(
                                 'How does the number and the average duration of pitstops for '
-                                'a driver in a race relate to his finishing position?',
+                                'a driver in a race relate to his finishing position from 2011 - 2024?',
                                 className='text-center page-header text-light',
                                 style={'marginBottom': '20px'},
                             ),
