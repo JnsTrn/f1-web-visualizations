@@ -62,9 +62,10 @@ The graph provides an overview of all races across all tracks and all seasons fo
 
 To analyze the impact of pitstop duration on the driver's finishing position, the pitstop duration is divided into three categories: Fast, Average, and Slow.
 
-The final race positions within these three categories are then evaluated using box plots. These box plots illustrate the distribution of finishing positions, highlighting key statistical metrics such as the median, quartiles, and potential outliers.
 
-This visualization helps identify how the driver’s race results vary depending on their pitstop times.
+This visualization helps to identify how the driver’s race results vary depending on their pitstop times.
+
+The Total pit stop time is used in this graph to account for the average pit stop duration and the number of pit stops made by the driver.
 """
 
 text2 = """
@@ -96,7 +97,7 @@ layout = html.Div(
                     [
                         'How does the number and the average duration of '
                         'pitstops for a driver in a race relate to his '
-                        'finishing position? ',
+                        'finishing position? from 2011-2024',
                     ],
                     className='text-center page-header text-light',
                 ),
@@ -138,7 +139,7 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            text2,
+                            explanation_text1,
                         ),
                     ],
                     className='p-3 text-light',
@@ -154,10 +155,16 @@ layout = html.Div(
         ),
         dbc.Row(
             dbc.Col(
+                html.Div(className="chequered-flag"),
+            ),
+            className='mb-4'
+        ),
+        dbc.Row(
+            dbc.Col(
                 html.Div(
                     [
                         html.P(
-                            explanation_text1,
+                            text2,
                         ),
                     ],
                     className='p-3 text-light',
