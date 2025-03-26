@@ -92,13 +92,22 @@ Formula 1.
 '''
 
 crash_weather_explanation = '''
-This analysis examines the relationship between weather conditions and crash
-frequency. Wet or changing conditions have historically been associated with
-higher crash rates in motorsport. The data reveals that races with rain or
-changing weather conditions do indeed show a higher proportion of crash-related
-retirements compared to races held in consistently dry conditions. This
-information is valuable for understanding risk factors in race strategy and
-safety planning.
+Observations reveal that wet weather is associated with a significantly higher 
+incident rate compared to dry and mixed weather conditions. Interestingly, the 
+technical failure rate is lower during mixed and wet weather compared to dry 
+conditions. This may be because lower driving speeds in wet weather reduce 
+stress on the car. Additionally, races in wet conditions are more likely to 
+end prematurely (race abandonment), leaving less opportunity for technical 
+failures to occur. 
+
+It is worth noting that the data for wet weather, and especially mixed weather 
+conditions, is relatively sparse, meaning single events could have a larger 
+impact on the results.
+
+To determine whether there is a significant relationship between weather 
+conditions and race completion status in generel, a Chi-Square test was conducted. The 
+test produced a Chi-Square value of 59.38 and a P-value of 6e-11, indicating a 
+statistically significant relationship at a significance level of 6e-11.
 '''
 
 interactive_dashboard_explanation = '''
