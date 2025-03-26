@@ -371,7 +371,7 @@ def create_driver_conditions_layout():
     layout = html.Div([
         html.Div([
             html.Button('Dry', id='dry-button', n_clicks=0),
-            html.Button('Wet', id='wet-button', n_clicks=0),
+            html.Button('Wet/Mixed', id='wet-button', n_clicks=0),
         ],
         style={
             'marginBottom': '20px',

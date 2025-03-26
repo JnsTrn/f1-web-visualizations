@@ -67,40 +67,41 @@ all_drivers_avg = dsv.create_avg_all_drivers_figure_layout()
 driver_conditions = dsv.create_driver_conditions_layout()
 
 ########## Set up the layout ##########
-graph_one = '''This heatmap shows the correlation between starting positions
-and their corresponding finishing positions. While winning a race is much
-more likely when starting from pole position, we can observe that, in most
-cases, the finishing position tends to fall within a 3-place range of the
-starting position'''
+graph_one = '''This heatmap shows the relationship between starting positions 
+and their corresponding finishing positions. While starting from pole position 
+significantly increases the likelihood of winning, in most
+cases, the finishing position tends to fall within a 2-place range of the 
+starting position.'''
 
-all_time_standings_explanation = ''' The average placement was calculated by
-taking the mean of all finishing positions for each starting position.
-Retirements or disqualifications result in poor race outcomes, so we have
-categorized the data into 'races completed' and 'all races,' as retirements or
-disqualifications can skew the results.  '''
+all_time_standings_explanation = ''' The average placement was calculating by 
+taking the mean of all finishing positions for each starting position. To 
+account for the impact of retirements or disqualifications, which can skew 
+the race results, the data has been categorized into 'races completed' 
+and 'all races.  '''
 
 circuit_explanation ='''In this interactive graph, you can select a number for
 races driven. The list below will then display the different circuits that have
 been raced on at least the number of times you selected. Similar to the first
-graph, a heatmap is shown to illustrate the correlation between starting
+graph, a heatmap is shown to illustrate the relationship between starting
 and finishing positions
 '''
 
 specific_driver_standings_explanation ='''
-Similar to the graph above, you can also select a minimum number of races
-driven. In this graph, the average placement of each driver is shown and
-compared to one another. We have also differentiated between completed races
-and all races. For example, the two-time World Champion Mika Häkkinen was an
-excellent driver when he was able to finish the race, which wouldn't be
-evident if we only looked at the data for all races.
+Similar to the graph above, you can also filter by a minimum number of races 
+driven. This graph displays and compares the average placement of each driver.
+Additionally, the graph was also categorized in completed races and all 
+races. For example, two-time World Champion Mika Häkkinen was an excellent
+driver when he finished races, which might not be apparent looking at only
+the data for 'all races'.
 '''
 
 weather_explanation = '''
-Reliable weather data has only been available since 2005. Since wet and mixed
-conditions are not very common, we combined the two. To obtain representative
-data, we focused on drivers who have participated in at least 20 wet and/or
-mixed races. Here you can switch between dry and wet+mixed conditions to see
-a drivers average placement depending on the condition
+Reliable weather data has been available only since 2005. Since wet and mixed 
+conditions are relatively rare, these two categories have been combined. To 
+ensure representative data, the focus is on drivers who have participated in 
+at least 20 wet and/or mixed races. The option to switch between dry and 
+wet+mixed conditions allows for viewing a driver's average placement based on 
+the specific weather condition.
 '''
 
 sample_text = '''
