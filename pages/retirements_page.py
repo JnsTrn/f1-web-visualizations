@@ -92,23 +92,53 @@ Formula 1.
 '''
 
 crash_weather_explanation = '''
-This analysis examines the relationship between weather conditions and crash
-frequency. Wet or changing conditions have historically been associated with
-higher crash rates in motorsport. The data reveals that races with rain or
-changing weather conditions do indeed show a higher proportion of crash-related
-retirements compared to races held in consistently dry conditions. This
-information is valuable for understanding risk factors in race strategy and
-safety planning.
+Observations reveal that wet weather is associated with a significantly higher
+incident rate compared to dry and mixed weather conditions. Interestingly, the
+technical failure rate is lower during mixed and wet weather compared to dry
+conditions. This may be because lower driving speeds in wet weather reduce
+stress on the car. Additionally, races in wet conditions are more likely to
+end prematurely (race abandonment), leaving less opportunity for technical
+failures to occur.
 '''
 
-interactive_dashboard_explanation = '''
-The interactive dashboard above allows you to explore incident data in more
-detail. You can filter by year, team, driver, and incident type to identify
-patterns and trends. This tool is particularly useful for investigating
-specific periods or comparing performance across different teams and drivers.
+crash_weather_chi2 = '''
+It is worth noting that the data for wet weather, and especially mixed weather
+conditions, is relatively sparse, meaning single events could have a larger
+impact on the results.
+
+To determine whether there is a significant relationship between weather
+conditions and race completion status in generel, a Chi-Square test was
+conducted. The test produced a Chi-Square value of 59.38 and a P-value of 6e-11,
+indicating a statistically significant relationship at a significance level of
+6e-11.
 '''
 
-sample_text = '''
+interactive_dashboard_explanation_monaco = '''
+Among circuits raced on 5 or more times from 1994-2024, Monaco stands out with
+the highest average number of crashes per race. This isn't surprising given
+its reputation as one of the most challenging tracks. With a narrow layout
+surrounded by walls and barriers and almost no runoff areas, it offers drivers
+little margin for error, making crashes more likely.
+'''
+
+interactive_dashboard_explanation_australia = '''
+Albert Park, home to the Australian Grand Prix, has one of the highest
+retirement rates across nearly all time periods. It often serves as the first
+race of the season, which may explain this trend. As the first real-world test
+for many cars, previously unknown technical issues may arise, leading to a
+higher rate of retirements.
+'''
+
+interactive_dashboard_explanation_imola = '''
+Imola stands out for its high technical failure rates, especially from 1994 to
+2006, a period marked by frequent mechanical issues across many circuits.
+However, since its return to the F1 calendar in 2019, its technical failure
+rate has been below average in the four times it has been raced, suggesting
+that past failures at the track were likely more related to the era's overall
+technical challenges than the circuit itself.
+'''
+
+retirements_text = '''
 In Formula 1, a driver may be forced to retire from a race due to either
 technical failures or crashes. Technical Failures include mechanical and
 reliability issues such as engine failures, hydraulic problems, brake
@@ -118,6 +148,7 @@ into a barrier) or contact with other cars. Total Retirements is the sum of
 these two categories, representing all cases where a driver was unable to
 finish the race.
 '''
+
 
 layout = html.Div(
     [
@@ -144,7 +175,7 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            sample_text
+                            retirements_text,
                         ),
                     ],
                     className='p-3 text-light',
@@ -267,7 +298,13 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            interactive_dashboard_explanation,
+                            [
+                                interactive_dashboard_explanation_monaco,
+                                html.Br(),
+                                interactive_dashboard_explanation_australia,
+                                html.Br(),
+                                interactive_dashboard_explanation_imola,
+                            ],
                         ),
                     ],
                     className='p-3 text-light',
@@ -323,7 +360,11 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            crash_weather_explanation,
+                            [
+                                crash_weather_explanation,
+                                html.Br(),
+                                crash_weather_chi2,
+                            ],
                         ),
                     ],
                     className='p-3 text-light',

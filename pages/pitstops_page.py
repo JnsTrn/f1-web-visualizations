@@ -57,16 +57,30 @@ pitstops_boxplot = ptm.create_pitstop_layout_boxplot(eligible_drivers)
 
 ############ Set up the layout ############
 
-sample_text = '''
-This is a short explanation about what the graph is suppposed to show and what
-we did to create it.
-'''
+text1 = """
+The graph provides an overview of all races across all tracks and all seasons for a selected driver.
 
-explanation_text = '''
-This is a great analysis of what the plot depicts and totally not just some
-filler text for the sole purpose of seeing how more text looks inside the
-boxes.
-'''
+To analyze the impact of pitstop duration on the driver's finishing position, the pitstop duration is divided into three categories: Fast, Average, and Slow.
+
+The final race positions within these three categories are then evaluated using box plots. These box plots illustrate the distribution of finishing positions, highlighting key statistical metrics such as the median, quartiles, and potential outliers.
+
+This visualization helps identify how the driver’s race results vary depending on their pitstop times.
+"""
+
+text2 = """
+The graph provides an overview of all drivers, their pitstop time and their finishing position for a selected Grand Prix and year. To analayze the impact of pitstop duration on the driver's finishing position, the pitstop duration is divided into three categories: Fast, Average, and Slow.
+These are then evaluated using a box plot. This visualization helps identify how different pit stop times affect the driver's finishing position. 
+    """
+
+explanation_text1 = """
+When analyzing all races for a selected driver, no clear correlation is found between pit stop duration and final race position. This is primarily due to variations in entry and exit times for pit stops across different races. These variations are often influenced by external race conditions rather than the performance of the driver’s pit crew, as all competitors are subject to the same factors.
+"""
+
+explanation_text2 = """
+The following analysis provides a detailed examination of individual races, evaluating the relationship between pit stop times and drivers' final positions.
+
+In some races, such as the Abu Dhabi Grand Prix 2024, a correlation between pit stop duration and finishing position was observed, while in others, like the German Grand Prix 2011, no clear pattern emerged. These findings suggest that pit stop times have a limited impact on final race results, as numerous other factors play a more decisive role in determining a driver's finishing position.
+"""
 
 layout = html.Div(
     [
@@ -94,7 +108,7 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            sample_text,
+                            text1,
                         ),
                     ],
                     className='p-3 text-light',
@@ -124,7 +138,7 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            explanation_text,
+                            text2,
                         ),
                     ],
                     className='p-3 text-light',
@@ -143,7 +157,7 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            sample_text,
+                            explanation_text1,
                         ),
                     ],
                     className='p-3 text-light',
@@ -173,7 +187,7 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            explanation_text,
+                            explanation_text2,
                         ),
                     ],
                     className='p-3 text-light',

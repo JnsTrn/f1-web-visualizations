@@ -6,7 +6,6 @@ from plotly.subplots import make_subplots
 
 
 def total_incidents_by_year(df):
-    # Group by year and sum total retirements, crashes, and failures
     yearly_totals = (
         df.groupby('year')[
             ['Total_Retirements', 'Race Incident/Crash', 'Technical Failure']
@@ -15,25 +14,24 @@ def total_incidents_by_year(df):
         .reset_index()
     )
 
-    # Rename columns for clarity in the legend
     column_mapping = {
         'Total_Retirements': 'Total Retirements',
         'Race Incident/Crash': 'Incidents/Crashes',
         'Technical Failure': 'Technical Failures',
     }
+
     yearly_totals = yearly_totals.rename(columns=column_mapping)
 
     fig = px.line(
         yearly_totals,
         x='year',
-        y=list(column_mapping.values()),  # Use renamed columns
+        y=list(column_mapping.values()),
         title='Total Incidents by Year (1994 - 2024)',
         markers=True,
         labels={'value': 'Total Count', 'year': 'Year'},
         template='plotly_dark',
     )
 
-    # Update traces for hover customization
     hover_templates = {
         'Total Retirements': '<b>Total Retirements:</b> %{y}<extra></extra>',
         'Incidents/Crashes': '<b>Incidents/Crashes:</b> %{y}<extra></extra>',
@@ -41,14 +39,12 @@ def total_incidents_by_year(df):
     }
 
     for trace in fig.data:
-        trace_name = trace.name  # Get the trace name
+        trace_name = trace.name
         if trace_name in hover_templates:
             trace.hovertemplate = hover_templates[trace_name]
 
-    # Update traces for better visibility
     fig.update_traces(line=dict(width=3), marker=dict(size=8))
 
-    # Enable interactive legend
     fig.update_layout(
         yaxis=dict(rangemode='tozero'),
         legend=dict(
@@ -65,7 +61,6 @@ def total_incidents_by_year(df):
 
 
 def yearly_retirements_rate(df):
-    # Sum up race incidents and technical failures per year
     yearly_breakdown = (
         df.groupby('year')[['Total_Retirements', 'Total']].sum().reset_index()
     )
@@ -102,7 +97,6 @@ def yearly_retirements_rate(df):
 
 
 def average_yearly_retirements(df):
-    # Sum up race incidents and technical failures per year
     yearly_breakdown = (
         df.groupby('year')[['Total_Retirements', 'Total']].sum().reset_index()
     )
@@ -180,7 +174,7 @@ def calculate_incidents(df, min_race_count):
         track_incidents['Total_Retirements'] / track_incidents['Total']
     ) * 100
 
-    # Filter circuits with at least X races
+    # Filter circuits with at least x races
     track_incidents = track_incidents[
         track_incidents['race_count'] >= min_race_count
     ]
@@ -189,10 +183,9 @@ def calculate_incidents(df, min_race_count):
 
 
 def create_incidents_figure(df, start_year, end_year, min_race_count, type):
-    # Filter the dataframe for the selected year range
+    # Filter for the selected year range
     df_filtered = df[(df['year'] >= start_year) & (df['year'] <= end_year)]
 
-    # Calculate incidents for the filtered dataframe
     track_incidents = calculate_incidents(df_filtered, min_race_count)
 
     # Return an empty figure if no data matches criteria
@@ -214,7 +207,6 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
         )
         return fig
 
-    # Set subplot titles based on the selected type
     if type == 'per_race':
         subplot_titles = [
             'Average Amount of Crashes per Race',
@@ -375,7 +367,7 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
                 orientation='h',
                 marker=dict(
                     color=track_incidents_sorted['failures_per_race_driver'],
-                   colorscale=[
+                    colorscale=[
                         [0, 'deepskyblue'],
                         [0.5, 'mediumblue'],
                         [1, 'darkblue'],
@@ -444,7 +436,6 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
         template='plotly_dark',
         showlegend=False,
         annotations=[
-            # Adjust the positions of the subplot titles
             dict(
                 x=0.135,
                 y=1.02,

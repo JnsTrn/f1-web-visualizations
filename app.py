@@ -27,7 +27,7 @@ navbar = dbc.NavbarSimple(
         ),
         dbc.NavItem(dbc.NavLink('Retirement Analysis', href='/retirements')),
         dbc.NavItem(dbc.NavLink('Pitstop Analysis', href='/pitstops')),
-
+        dbc.NavItem(dbc.NavLink('About the Data', href='/dataCollection')),
         dbc.NavItem(html.Img(
             src=dash.get_asset_url('red_f1_car_clipped_small.png'),
             style={'height': '40px'},
