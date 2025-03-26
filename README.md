@@ -13,13 +13,13 @@ This project was conducted as part of the "Data Science Project"-course at CAU U
 ## Research Questions
 
 - How does the starting grid position influence the finishing position of drivers in the seasons from 1994 - 2024?
--   How does this differ between circuits that have been driven on at least X times?
--   How does this differ between drivers of different experience levels (as determined by the amount of races they participated in)?
--   Are there specific drivers who excel or struggle more in wet conditions compared to dry conditions?
+    - How does this differ between circuits that have been driven on at least X times?
+    - How does this differ between drivers of different experience levels (as determined by the amount of races they participated in)?
+    - Are there specific drivers who excel or struggle more in wet conditions compared to dry conditions?
 
 - How has the total number of crashes and retirements evolved in the seasons from 1994 - 2024?
--   Which tracks have the highest frequency of crashes or retirements compared to others?
--   How does weather affect race completion rates and the likelihood of crashes or retirements in the seasons from 2005 - 2024?
+    - Which tracks have the highest frequency of crashes or retirements compared to others?
+    - How does weather affect race completion rates and the likelihood of crashes or retirements in the seasons from 2005 - 2024?
 
 - How does the number and the average duration of pitstops for a driver in a race relate to his finishing position?
 
