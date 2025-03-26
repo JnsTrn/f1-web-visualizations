@@ -7,17 +7,29 @@ import dash_bootstrap_components as dbc
 
 ####### Initialize the Dash app #######
 
-dash.register_page(__name__, path='/')
+dash.register_page(__name__, path='/', title='Research Questions')
 
 
 ########## Set up the layout ##########
 
-intro_txt = '''
-    We want to show you the world. We want to show you the world.
-    We want to show you the world. We want to show you the world.
-    We want to show you the world. We want to show you the world.
-    We want to show you the world. We want to show you the world.
-'''
+intro_txt = [
+    'This project explores various research questions related to Formula 1, '
+    'aiming to uncover how race results are influenced by different factors. '
+    'Our approach combines detailed visualizations with insightful analysis to '
+    'present our findings. Data collection was accomplished using the ',
+    html.A('Jolpica F1 API', href='https://jolpica.com/api',
+           target='_blank', className='text-light'),
+    ' for comprehensive Formula 1 data and the ',
+    html.A('Open Meteo API', href='https://open-meteo.com/',
+           target='_blank', className='text-light'),
+    ' for precise weather data tailored to each race\'s location and time. '
+    'Further details on the data gathering process can be found ',
+    html.A('HERE', href='/data-gathering',
+           target='_blank', className='text-light'),
+    '. This project was conducted as part of the "Data Science Project"',
+    'course at CAU University.'
+]
+
 question1_txt = '''
     The starting grid position is an important factor in determining
     the finishing position of drivers in Formula 1 and is likely to
