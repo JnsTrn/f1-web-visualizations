@@ -67,6 +67,28 @@ all_drivers_avg = dsv.create_avg_all_drivers_figure_layout()
 driver_conditions = dsv.create_driver_conditions_layout()
 
 ########## Set up the layout ##########
+question_1_exp= '''Qualifying takes place a day before the race and determines
+the starting grid positions. How much impact does the starting position have
+on the outcome? Is the race essentially decided before it even begins?
+'''
+
+question_2_exp = '''Formula 1 has many different tracks that 
+not only vary in their geographical location but also in their layout. Do 
+different circuits lead to different race results? Do certain circuits 
+provide better opportunities for winning a race?
+'''
+
+question_3_exp = '''
+Some Formula 1 drivers have long careers, with numerous seasons and races 
+under their belts. Are these long career justified by looking at the race results ? '''
+
+question_4_exp = ''' Wet races are not common in Formula 1. Not only 
+are they rare, but driving in wet conditions is also usually more 
+challenging for a driver, as the tracks are slipperier and visibility 
+is significantly reduced. Which driver handles these difficult conditions 
+the best?
+'''
+
 graph_one = '''This heatmap shows the relationship between starting positions 
 and their corresponding finishing positions. While starting from pole position 
 significantly increases the likelihood of winning, in most
@@ -141,7 +163,7 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            sample_text,
+                            question_1_exp,
                         ),
                     ],
                     className='p-3 text-light',
@@ -248,6 +270,25 @@ layout = html.Div(
         dbc.Row(
             dbc.Col(
                 html.Div(
+                    [
+                        html.P(
+                            question_2_exp,
+                        ),
+                    ],
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
+                ),
+            ),
+            className='mb-2 mt-4',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
                     circuit_heatmap,
                     style={
                         'width': '89%',
@@ -292,6 +333,25 @@ layout = html.Div(
                     className='text-center page-header text-light',
                 ),
             ),
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            question_3_exp,
+                        ),
+                    ],
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
+                ),
+            ),
+            className='mb-2 mt-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -369,6 +429,25 @@ layout = html.Div(
                     className='text-center page-header text-light',
                 ),
             ),
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.P(
+                            question_4_exp,
+                        ),
+                    ],
+                    className='p-3 text-light',
+                    style={
+                        'width': '89%',
+                        'margin': '0 auto',
+                        'backgroundColor': '#212529',
+                        'border-radius': '10px',
+                    }
+                ),
+            ),
+            className='mb-2 mt-4',
         ),
         dbc.Row(
             dbc.Col(
