@@ -52,13 +52,23 @@ for fig in [
 ########### Set up the layout ###########
 
 total_incidents_explanation = '''
-This is an explanation about what the plot depicts and what it means.
-This graph shows the total number of incidents per year in Formula 1 from 1994
-to 2024. Incidents include accidents, mechanical failures, and other reasons
-for non-finishes. We can observe that the total number of incidents has
-decreased over time, likely due to improved safety standards and car
-reliability. The peaks in certain years may correspond to regulation changes
-or particularly challenging seasons.
+In the early years of the dataset, technical failures were the primary cause of
+retirements, consistently outnumbering crash-related retirements. It wasn't
+until 2005 that they declined to comparable levels. The spikes observed in 2006
+and 2010 can largely be attributed to an increased number of technical failures.
+
+These increases correlate with major regulation changes: In 2006, Formula 1
+transitioned from V10 to V8 engines, requiring teams to adapt to new cooling,
+fuel efficiency, and durability demands, while the grid expanded from 20 to 22
+drivers. Similarly, in 2010, the grid size increased to 24 drivers (up from 20),
+and new rules such as the ban on in-race refueling and the 8-engine season
+limit introduced in 2009 along with a higher number of races, likely
+contributed to this rise in technical failures.
+
+Crash-related retirements have also declined but followed a different pattern
+than technical failures. After dropping from 90 in 1994 to 29 in 2003, they
+rebounded to around 50 per season from 2003 to 2013 before stabilizing at 30
+per season from 2013 onward.
 '''
 
 retirement_rate_explanation = '''
@@ -99,8 +109,14 @@ specific periods or comparing performance across different teams and drivers.
 '''
 
 sample_text = '''
-This is a short explanation about what the graph is suppposed to show and what
-we did to create it.
+In Formula 1, a driver may be forced to retire from a race due to either
+technical failures or crashes. Technical Failures include mechanical and
+reliability issues such as engine failures, hydraulic problems, brake
+malfunctions, and other mechanical defects. Incidents/Crashes refer to
+race-ending collisions, whether caused by driver errors (such as oversteering
+into a barrier) or contact with other cars. Total Retirements is the sum of
+these two categories, representing all cases where a driver was unable to
+finish the race.
 '''
 
 layout = html.Div(
@@ -140,7 +156,45 @@ layout = html.Div(
                     }
                 ),
             ),
-            className='mb-2 mt-4',
+            className='mb-4 mt-4',
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.Div(
+                            dcc.Graph(
+                                figure=fig_retirements_rate,
+                                config={'responsive': True},
+                            ),
+                            style={
+                                'margin': '0 auto',
+                                'width': '89%',
+                            },
+                        ),
+                    ]
+                ),
+            ),
+            className='mb-2'
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        html.Div(
+                            dcc.Graph(
+                                figure=fig_retirements_race,
+                                config={'responsive': True},
+                            ),
+                            style={
+                                'margin': '0 auto',
+                                'width': '89%',
+                            },
+                        ),
+                    ],
+                ),
+            ),
+            className='mb-2'
         ),
         dbc.Row(
             dbc.Col(
@@ -166,80 +220,6 @@ layout = html.Div(
                     [
                         html.P(
                             total_incidents_explanation,
-                        ),
-                    ],
-                    className='p-3 text-light',
-                    style={
-                        'width': '89%',
-                        'margin': '0 auto',
-                        'backgroundColor': '#212529',
-                        'border-radius': '10px',
-                    }
-                ),
-            ),
-            className='mt-2 mb-5',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.Div(
-                            dcc.Graph(
-                                figure=fig_retirements_rate,
-                                config={'responsive': True},
-                            ),
-                            style={
-                                'margin': '0 auto',
-                                'width': '89%',
-                            },
-                        ),
-                    ]
-                ),
-            ),
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.P(
-                            retirement_rate_explanation,
-                        ),
-                    ],
-                    className='p-3 text-light',
-                    style={
-                        'width': '89%',
-                        'margin': '0 auto',
-                        'backgroundColor': '#212529',
-                        'border-radius': '10px',
-                    }
-                ),
-            ),
-            className='mt-2 mb-5',
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.Div(
-                            dcc.Graph(
-                                figure=fig_retirements_race,
-                                config={'responsive': True},
-                            ),
-                            style={
-                                'margin': '0 auto',
-                                'width': '89%',
-                            },
-                        ),
-                    ],
-                ),
-            ),
-        ),
-        dbc.Row(
-            dbc.Col(
-                html.Div(
-                    [
-                        html.P(
-                            retirements_race_explanation,
                         ),
                     ],
                     className='p-3 text-light',
