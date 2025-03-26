@@ -99,7 +99,9 @@ conditions. This may be because lower driving speeds in wet weather reduce
 stress on the car. Additionally, races in wet conditions are more likely to 
 end prematurely (race abandonment), leaving less opportunity for technical 
 failures to occur. 
+'''
 
+crash_weather_chi2 = '''
 It is worth noting that the data for wet weather, and especially mixed weather 
 conditions, is relatively sparse, meaning single events could have a larger 
 impact on the results.
@@ -332,7 +334,11 @@ layout = html.Div(
                 html.Div(
                     [
                         html.P(
-                            crash_weather_explanation,
+                            [
+                                crash_weather_explanation,
+                                html.Br(),
+                                crash_weather_chi2,
+                            ],
                         ),
                     ],
                     className='p-3 text-light',
