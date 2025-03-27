@@ -75,12 +75,14 @@ on the outcome? Is the race essentially decided before it even begins?
 question_2_exp = '''Formula 1 has many different tracks that 
 not only vary in their geographical location but also in their layout. Do 
 different circuits lead to different race results? Do certain circuits 
-provide better opportunities for winning a race?
+provide better chances for winning a race?
 '''
 
 question_3_exp = '''
 Some Formula 1 drivers have long careers, with numerous seasons and races 
-under their belts. Are these long career justified by looking at the race results ? '''
+under their belts. Can these long careers be justified by looking at the 
+race results ?
+'''
 
 question_4_exp = ''' Wet races are not common in Formula 1. Not only 
 are they rare, but driving in wet conditions is also usually more 
@@ -95,14 +97,12 @@ significantly increases the likelihood of winning, in most
 cases, the finishing position tends to fall within a 2-place range of the 
 starting position.'''
 
-all_time_standings_explanation = ''' The average placement was calculating by 
-taking the mean of all finishing positions for each starting position. To 
-account for the impact of retirements or disqualifications, which can skew 
-the race results, the data has been categorized into 'races completed' 
-and 'all races.  '''
+all_time_standings_explanation = '''To account for the impact of retirements 
+or disqualifications, which can skew the race results, the data has been 
+categorized into 'races completed' and 'all races'.  '''
 
 circuit_explanation ='''In this interactive graph, you can select a number for
-races driven. The list below will then display the different circuits that have
+races driven. The dropdown menu will then display the different circuits that have
 been raced on at least the number of times you selected. Similar to the first
 graph, a heatmap is shown to illustrate the relationship between starting
 and finishing positions
@@ -113,7 +113,7 @@ Similar to the graph above, you can also filter by a minimum number of races
 driven. This graph displays and compares the average placement of each driver.
 Additionally, the graph was also categorized in completed races and all 
 races. For example, two-time World Champion Mika Häkkinen was an excellent
-driver when he finished races, which might not be apparent looking at only
+driver when he finished races which might not be apparent looking at only
 the data for 'all races'.
 '''
 
@@ -122,18 +122,14 @@ Reliable weather data has been available only since 2005. Since wet and mixed
 conditions are relatively rare, these two categories have been combined. To 
 ensure representative data, the focus is on drivers who have participated in 
 at least 20 wet and/or mixed races. The option to switch between dry and 
-wet+mixed conditions allows for viewing a driver's average placement based on 
+wet/mixed conditions allows for viewing a driver's average placement based on 
 the specific weather condition.
 '''
 
-sample_text = '''
-This is a short explanation about what the graph is suppposed to show and what
-we did to create it.
-'''
 
 graph_four = ''' This bar chart shows the all-time starting and finishing
-positions of a driver. You can select the number of races driven, and a list
-of drivers who have competed in the selected number of races will be displayed.
+positions of a driver. You can select the number of races driven, and a dropdown
+menu of drivers who have competed in the selected number of races will be displayed.
 '''
 
 
