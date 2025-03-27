@@ -1,9 +1,6 @@
 # f1-web-visualizations
 
 ## Introduction
-
-• Introduction to the topic of the project, the RQ and data
-
 This project explores various [research questions](#ResearchQuestions)
 related to Formula 1.
 On this website the results are presented with visualizations and analysis.
@@ -11,6 +8,7 @@ On this website the results are presented with visualizations and analysis.
 This project was conducted as part of the "Data Science Project"-course at CAU University.
 
 ## Research Questions
+The research questions that we are exploring:
 
 - How does the starting grid position influence the finishing position of drivers in the seasons from 1994 - 2024?
     - How does this differ between circuits that have been driven on at least X times?
@@ -33,12 +31,16 @@ for weather data tailored to each race's location and time.
 The data collection process was done in the **private**
 [F1-Data-Collection](https://github.com/JnsTrn/F1-Data-Collection) repository.
 
-Description of the data pipeline must be in F1-Data-Collection!!!!!!!!!!!!!!
-
 # Build and Deploy
-• Short description on how the website was built and deployed. (e.g. How is the data
-connected?)
-
+To build the website the following components are needed:
+ - All stylistic assets are located in the [assets directory](assets)
+ - The data is stored as CSVs in the [data directory](data)
+ - Most code for the visualizations is located in the [modules directory](modules)
+ - The content of different pages is located in the [pages directory](pages)
+ - The initilization of the application together with page independent content is located in [app.py](app.py).
+To host the webiste all libraries listet in [requirements](requirements.txt)
+must be installed (can be done by using pipenv). Python version 3.12.0 was used.
+To start the website [app.py](app.py) must be executed.
 
 # Website Walkthrough
 • Showcase how to use your web application and the highlights
