@@ -11,7 +11,7 @@ import modules.driver_standings_vis_mod as dsv
 
 ####### Initialize the Dash app #######
 
-dash.register_page(__name__, path='/gridPosition', title='Grid Position Analysis')
+dash.register_page(__name__, path='/grid-position', title='Grid Position Analysis')
 
 ############## Load Data ##############
 

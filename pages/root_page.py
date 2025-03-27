@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 
 ####### Initialize the Dash app #######
 
-dash.register_page(__name__, path='/', title='Research Questions')
+dash.register_page(__name__, path='/', title='Home')
 
 
 ########## Set up the layout ##########
@@ -25,7 +25,7 @@ intro_txt = [
            target='_blank', className='text-light'),
     ' for precise weather data tailored to each race\'s location and time. '
     'Further details on the data gathering process can be found ',
-    html.A('here', href='/dataCollection',
+    html.A('here', href='/about-data',
            className='text-light'),
     '. This project was conducted as part of the "Data Science Project"',
     'course at CAU University.'
@@ -50,9 +50,9 @@ question2_txt = '''
 '''
 
 question3_txt = '''
-    In Formula 1, pitstops are necessary for tasks like changing tires and making 
+    In Formula 1, pit stops are necessary for tasks like changing tires and making 
     minor technical repairs. We will analyze data from the 2011–2024 seasons to 
-    investigate how the number and average duration of pitstops for a driver have 
+    investigate how the number and average duration of pit stops for a driver have 
     changed over the years, and how these factors relate to their finishing position.
 '''
 
@@ -108,7 +108,7 @@ layout = html.Div(
                         ],
                         className='p-3 text-light hover-box',
                     ),
-                    href='/gridPosition',
+                    href='/grid-position',
                     className='custom-hover-link',
                 ),
             ),
@@ -143,7 +143,7 @@ layout = html.Div(
                     html.Div(
                         [
                             html.H1(
-                                'How does the number and the average duration of pitstops for '
+                                'How does the number and the average duration of pit stops for '
                                 'a driver in a race relate to his finishing position from 2011 - 2024?',
                                 className='text-center page-header text-light',
                                 style={'marginBottom': '20px'},
@@ -154,7 +154,7 @@ layout = html.Div(
                         ],
                         className='p-3 text-light hover-box',
                     ),
-                    href='/pitstops',
+                    href='/pit-stops',
                     className='custom-hover-link',
                 ),
             ),

@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 
 ####### Initialize the Dash app #######
 
-dash.register_page(__name__, path='/dataCollection', title='About The Data')
+dash.register_page(__name__, path='/about-data', title='About The Data')
 
 
 ########## Set up the layout ##########

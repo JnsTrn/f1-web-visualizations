@@ -4,10 +4,10 @@
 
 • Introduction to the topic of the project, the RQ and data
 
-This project explores various [research questions](#Research Questions)
+This project explores various [research questions](#ResearchQuestions)
 related to Formula 1.
 On this website the results are presented with visualizations and analysis.
-[Data collection](#Data Collection) was happening in a different private repository.
+[Data collection](#Data) was happening in a different private repository.
 This project was conducted as part of the "Data Science Project"-course at CAU University.
 
 ## Research Questions
@@ -24,7 +24,7 @@ This project was conducted as part of the "Data Science Project"-course at CAU U
 - How does the number and the average duration of pitstops for a driver in a race relate to his finishing position?
 
 ## Data
-All data needed to run the website visualizations is stored as CSVs in the [data folder](data).
+All data needed to run the website visualizations is stored as CSVs in the [data directory](data).
 The data was gathered using the
 [Jolpica F1 API](https://github.com/jolpica/jolpica-f1/blob/main/README.md)
 for Formula 1 data and the

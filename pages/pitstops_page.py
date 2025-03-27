@@ -12,7 +12,7 @@ import modules.pitstop_mod as ptm
 ####### Initialize the Dash app #######
 
 
-dash.register_page(__name__, path='/pitstops', title='Pitstop Analysis')
+dash.register_page(__name__, path='/pit-stops', title='Pit Stop Analysis')
 
 
 ############## Load Data ##############
@@ -60,16 +60,16 @@ pitstops_boxplot = ptm.create_pitstop_layout_boxplot(eligible_drivers)
 text1 = """
 The graph provides an overview of all races across all tracks and all seasons for a selected driver.
 
-To analyze the impact of pitstop duration on the driver's finishing position, the pitstop duration is divided into three categories: Fast, Average, and Slow.
+To analyze the impact of pit stop duration on the driver's finishing position, the pit stop duration is divided into three categories: Fast, Average, and Slow.
 
 
-This visualization helps to identify how the driver’s race results vary depending on their pitstop times.
+This visualization helps to identify how the driver’s race results vary depending on their pit stop times.
 
 The Total pit stop time is used in this graph to account for the average pit stop duration and the number of pit stops made by the driver.
 """
 
 text2 = """
-The graph provides an overview of all drivers, their pitstop time and their finishing position for a selected Grand Prix and year. To analayze the impact of pitstop duration on the driver's finishing position, the pitstop duration is divided into three categories: Fast, Average, and Slow.
+The graph provides an overview of all drivers, their pit stop time and their finishing position for a selected Grand Prix and year. To analayze the impact of pit stop duration on the driver's finishing position, the pit stop duration is divided into three categories: Fast, Average, and Slow.
 These are then evaluated using a box plot. This visualization helps identify how different pit stop times affect the driver's finishing position. 
     """
 
@@ -96,7 +96,7 @@ layout = html.Div(
                 html.H1(
                     [
                         'How does the number and the average duration of '
-                        'pitstops for a driver in a race relate to his '
+                        'pit stops for a driver in a race relate to his '
                         'finishing position? from 2011-2024',
                     ],
                     className='text-center page-header text-light',

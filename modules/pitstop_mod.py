@@ -121,10 +121,10 @@ def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
         y='finish_position',
         color='duration_category',
         labels={
-            'duration_category': 'Pitstop Speed',
+            'duration_category': 'Pit Stop Speed',
             'finish_position': 'Finishing Position',
         },
-        title=f'Pitstop Analysis: {selected_circuit} ({selected_year})',
+        title=f'Pit Stop Analysis: {selected_circuit} ({selected_year})',
         template='plotly_dark',
     )
 
@@ -136,10 +136,10 @@ def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
         y='duration',
         labels={
             'driver_name': 'Driver',
-            'duration': 'Total Pitstop Time (s)',
+            'duration': 'Total Pit Stop Time (s)',
             'finish_position' : 'Finish Position'
         },
-        title=f'Total Pitstop Time per Driver({selected_circuit}, {selected_year})',
+        title=f'Total Pit Stop Time per Driver({selected_circuit}, {selected_year})',
         template='plotly_dark',
         color='finish_position',
         color_continuous_scale=[
@@ -224,10 +224,10 @@ def create_driver_plot(driver_name, df_driver_sorted, total_races):
         y='finish_position',
         color='duration_category',
         labels={
-            'duration_category': 'Pitstop-Speed',
+            'duration_category': 'Pit Stop Speed',
             'finish_position': 'Finishing Position',
         },
-        title=f'Pitstop Analysis: {driver_name}',
+        title=f'Pit Stop Analysis: {driver_name}',
         template='plotly_dark',
     )
 

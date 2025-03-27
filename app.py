@@ -21,13 +21,13 @@ server = app.server
 
 navbar = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink('Research Questions', href='/')),
+        dbc.NavItem(dbc.NavLink('Home', href='/')),
         dbc.NavItem(
-            dbc.NavLink('Grid Position Analysis', href='/gridPosition')
+            dbc.NavLink('Grid Position Analysis', href='/grid-position')
         ),
         dbc.NavItem(dbc.NavLink('Retirement Analysis', href='/retirements')),
-        dbc.NavItem(dbc.NavLink('Pitstop Analysis', href='/pitstops')),
-        dbc.NavItem(dbc.NavLink('About the Data', href='/dataCollection')),
+        dbc.NavItem(dbc.NavLink('Pit Stop Analysis', href='/pit-stops')),
+        dbc.NavItem(dbc.NavLink('About the Data', href='/about-data')),
         dbc.NavItem(html.Img(
             src=dash.get_asset_url('red_f1_car_clipped_small.png'),
             style={'height': '40px'},
