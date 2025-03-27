@@ -107,8 +107,8 @@ def create_fig_start_avg_placements(df, df_race_completed):
         title= 'Average placement depending on starting position',
         xaxis=dict(
             tick0=0,
-            dtick=2,
-            range=[0, 23],
+            dtick=1,
+            range=[0, 22.5],
             showgrid=False,
             linecolor= 'white',
             zeroline= False,
@@ -554,7 +554,7 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
         autosize=True,
         title=f'Average placement of drivers with at least {amount_of_races} races',
         xaxis=dict(
-            showgrid=False,
+            #showgrid=False,
             linecolor='white',
             title='Driver'
         ),
