@@ -36,7 +36,7 @@ fig_retirements_rate = cvm.yearly_retirements_rate(df)
 fig_retirements_race = cvm.average_yearly_retirements(df)
 incidents_layout = cvm.create_interactive_incidents_dashboard(df)
 
-# Update all figures to be responsive with consistent margins
+
 for fig in [
     fig_total_incidents,
     fig_retirements_rate,
@@ -65,10 +65,8 @@ and new rules such as the ban on in-race refueling and the 8-engine season
 limit introduced in 2009 along with a higher number of races, likely
 contributed to this rise in technical failures.
 
-Crash-related retirements have also declined but followed a different pattern
-than technical failures. After dropping from 90 in 1994 to 29 in 2003, they
-rebounded to around 50 per season from 2003 to 2013 before stabilizing at 30
-per season from 2013 onward.
+Crash-related retirements have also declined notably, especially in the
+timeframe from 1994 to 2003.
 '''
 
 retirement_rate_explanation = '''
@@ -113,6 +111,10 @@ indicating a statistically significant relationship at a significance level of
 6e-11.
 '''
 
+helper_text ='''
+Some potentially interesting observations:
+'''
+
 interactive_dashboard_explanation_monaco = '''
 Among circuits raced on 5 or more times from 1994-2024, Monaco stands out with
 the highest average number of crashes per race. This isn't surprising given
@@ -140,11 +142,11 @@ technical challenges than the circuit itself.
 
 retirements_text = '''
 In Formula 1, a driver may be forced to retire from a race due to either
-technical failures or crashes. Technical Failures include mechanical and
+technical failures or crashes. Technical failures include mechanical and
 reliability issues such as engine failures, hydraulic problems, brake
 malfunctions, and other mechanical defects. Incidents/Crashes refer to
 race-ending collisions, whether caused by driver errors (such as oversteering
-into a barrier) or contact with other cars. Total Retirements is the sum of
+into a barrier) or contact with other cars. Total retirements is the sum of
 these two categories, representing all cases where a driver was unable to
 finish the race.
 '''
@@ -299,6 +301,8 @@ layout = html.Div(
                     [
                         html.P(
                             [
+                                helper_text,
+                                html.Br(),
                                 interactive_dashboard_explanation_monaco,
                                 html.Br(),
                                 interactive_dashboard_explanation_australia,
