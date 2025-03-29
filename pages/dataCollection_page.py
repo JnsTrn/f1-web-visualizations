@@ -12,6 +12,7 @@ dash.register_page(__name__, path='/about-data', title='About The Data')
 
 ########## Set up the layout ##########
 
+# Text formatting by AI
 race_txt = [
     'The ',
     html.A(
@@ -43,6 +44,7 @@ race_txt = [
     '(not very common)',
 ]
 
+# Text formatting by AI
 weather_txt = [
     'Weather data from 2005 to 2024 was collected using the ',
     html.A(
@@ -69,6 +71,7 @@ weather_txt = [
     '3. Wet: Consistent precipitation throughout the race.',
 ]
 
+# Text formatting by AI
 final_txt = [
     'All analyses were based on data sourced from the ',
     html.A(

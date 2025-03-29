@@ -3,10 +3,21 @@ import plotly.io as pio
 
 
 def init_figs():
+    """
+    Sets the theme
+    """
     pio.templates.default = 'plotly_dark'
 
 
+# The body of this function is mostly AI generated
 def create_fig_CraWeath(df_CraWeath):
+    """
+    Takes a dataframe 
+
+    Creates a bar chart from dataframe data
+
+    Returns the bar chart as a plotly figure object
+    """
     fig_CraWeath = go.Figure()
     fig_CraWeath.add_trace(
         go.Bar(

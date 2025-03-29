@@ -28,12 +28,10 @@ navbar = dbc.NavbarSimple(
         dbc.NavItem(dbc.NavLink('Retirement Analysis', href='/retirements')),
         dbc.NavItem(dbc.NavLink('Pit Stop Analysis', href='/pit-stops')),
         dbc.NavItem(dbc.NavLink('About the Data', href='/about-data')),
-        dbc.NavItem(
-            html.Img(
-                src=dash.get_asset_url('red_f1_car_clipped_small.png'),
-                style={'height': '40px'},
-            )
-        ),
+        dbc.NavItem(html.Img(
+            src=dash.get_asset_url('red_f1_car_clipped_small.png'),
+            style={'height': '40px'},
+        )),
     ],
     brand='DSP 2025 - Team 897',
     brand_href='/',
@@ -41,6 +39,7 @@ navbar = dbc.NavbarSimple(
     fluid=True,
 )
 
+# Structure AI generated
 imprint_section = html.Footer(
     [
         dbc.Container(
@@ -108,11 +107,11 @@ imprint_section = html.Footer(
 
 ########## Set up the layout ##########
 
+#Structure AI generated
 app.layout = dbc.Container(
     [navbar, html.Br(), dash.page_container, html.Br(), imprint_section],
     fluid=True,
-    className='bg-dark text-light',
-    style={'backgroundColor': 'black'},
+    className='bg-dark text-light', style={'backgroundColor': 'black'}
 )
 
 
