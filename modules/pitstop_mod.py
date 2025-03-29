@@ -5,7 +5,6 @@ import plotly.express as px
 from dash import dcc, html
 
 
-
 def convert_duration_to_seconds(duration):
     if pd.isna(duration):
         return np.nan
@@ -57,15 +56,10 @@ def create_pitstop_layout(unique_circuits):
                 clearable=False,
                 style={'backgroundColor': 'white', 'color': 'black'},
             ),
-            dcc.Graph(
-                id='pitstop-boxplot',
-                style={'marginTop': '20px'}),
-            dcc.Graph(
-                id='pitstop-barplot',
-                style={'marginTop': '20px'}),
+            dcc.Graph(id='pitstop-boxplot', style={'marginTop': '20px'}),
+            dcc.Graph(id='pitstop-barplot', style={'marginTop': '20px'}),
             html.Div(
-                id='race-info',
-                style={'fontSize': '18px', 'marginTop': '20px'}
+                id='race-info', style={'fontSize': '18px', 'marginTop': '20px'}
             ),
         ],
     )
@@ -90,9 +84,7 @@ def create_pitstop_layout_boxplot(eligible_drivers):
                 value='Max Verstappen',
                 style={'backgroundColor': 'white', 'color': 'black'},
             ),
-            dcc.Graph(
-                id='boxplot',
-                style={'backgroundColor': 'black'}),
+            dcc.Graph(id='boxplot', style={'backgroundColor': 'black'}),
             html.Div(
                 id='race-boxplot-info',
                 style={'fontSize': '18px', 'marginTop': '20px'},
@@ -102,8 +94,9 @@ def create_pitstop_layout_boxplot(eligible_drivers):
     return layout
 
 
-def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted):
-
+def create_circuit_plot(
+    selected_circuit, selected_year, driver_pitstops_sorted
+):
     driver_pitstops_sorted['duration_category'] = pd.cut(
         driver_pitstops_sorted['duration'],
         bins=[driver_pitstops_sorted['duration'].min()]
@@ -137,9 +130,10 @@ def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
         labels={
             'driver_name': 'Driver',
             'duration': 'Total Pit Stop Time (s)',
-            'finish_position' : 'Finish Position'
+            'finish_position': 'Finish Position',
         },
-        title=f'Total Pit Stop Time per Driver({selected_circuit}, {selected_year})',
+        title=f'Total Pit Stop Time per Driver({selected_circuit}, '
+        f'{selected_year})',
         template='plotly_dark',
         color='finish_position',
         color_continuous_scale=[
@@ -203,13 +197,14 @@ def create_circuit_plot(selected_circuit, selected_year, driver_pitstops_sorted)
                 f'{slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
             ),
         ],
-        className="info-text",
+        className='info-text',
     )
 
     return fig_box, fig_bar, info_text
 
+
 def create_driver_plot(driver_name, df_driver_sorted, total_races):
-     # Pitstop-Dauer in 3 Kategorien aufteilen
+    # Pitstop-Dauer in 3 Kategorien aufteilen
     df_driver_sorted['duration_category'] = pd.cut(
         df_driver_sorted['duration'],
         bins=[df_driver_sorted['duration'].min()]
@@ -230,7 +225,6 @@ def create_driver_plot(driver_name, df_driver_sorted, total_races):
         title=f'Pit Stop Analysis: {driver_name}',
         template='plotly_dark',
     )
-
 
     # Anzahl der Rennen pro Kategorie und Zeitbereiche berechnen
     category_counts = (
@@ -279,7 +273,7 @@ def create_driver_plot(driver_name, df_driver_sorted, total_races):
                 f'{slow_range[0]:.2f}s - {slow_range[1]:.2f}s'
             ),
         ],
-        className="info-text",
+        className='info-text',
     )
 
     return fig, info_text

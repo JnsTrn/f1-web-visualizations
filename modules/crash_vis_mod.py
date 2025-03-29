@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 
+# Modified by Claude
 def total_incidents_by_year(df):
     yearly_totals = (
         df.groupby('year')[
@@ -182,6 +183,7 @@ def calculate_incidents(df, min_race_count):
     return track_incidents
 
 
+# Modified by Claude
 def create_incidents_figure(df, start_year, end_year, min_race_count, type):
     # Filter for the selected year range
     df_filtered = df[(df['year'] >= start_year) & (df['year'] <= end_year)]
@@ -469,6 +471,7 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
     return fig
 
 
+# Modified by Claude
 def create_interactive_incidents_dashboard(df):
     all_years = sorted(df['year'].unique())
     min_year, max_year = all_years[0], all_years[-1]

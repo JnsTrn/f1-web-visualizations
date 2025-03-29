@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     background-color: black !important;
     height: 100%;
     margin: 0;
@@ -16,7 +17,7 @@ body, html {
     padding: 0;
     position: relative;
     left: 0;
-    
+
 }
 
 h1 {
@@ -53,8 +54,8 @@ p {
     width: 89%;
     margin: 0 auto;
 }
-  
+
 .custom-hover-link:hover .hover-box {
-background-color: #495057;
+    background-color: #495057;
 }
   

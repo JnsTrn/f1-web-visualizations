@@ -51,25 +51,26 @@ for fig in [
 
 ########### Set up the layout ###########
 
-total_incidents_explanation = '''
+total_incidents_explanation = """
 In the early years of the dataset, technical failures were the primary cause of
 retirements, consistently outnumbering crash-related retirements. It wasn't
 until 2005 that they declined to comparable levels. The spikes observed in 2006
-and 2010 can largely be attributed to an increased number of technical failures.
+and 2010 can largely be attributed to an increased number of technical
+failures.
 
 These increases correlate with major regulation changes: In 2006, Formula 1
 transitioned from V10 to V8 engines, requiring teams to adapt to new cooling,
 fuel efficiency, and durability demands, while the grid expanded from 20 to 22
-drivers. Similarly, in 2010, the grid size increased to 24 drivers (up from 20),
-and new rules such as the ban on in-race refueling and the 8-engine season
-limit introduced in 2009 along with a higher number of races, likely
-contributed to this rise in technical failures.
+drivers. Similarly, in 2010, the grid size increased to 24 drivers
+(up from 20), and new rules such as the ban on in-race refueling and the
+8-engine season limit introduced in 2009 along with a higher number of races,
+likely contributed to this rise in technical failures.
 
 Crash-related retirements have also declined notably, especially in the
 timeframe from 1994 to 2003.
-'''
+"""
 
-retirement_rate_explanation = '''
+retirement_rate_explanation = """
 The retirement rate represents the percentage of cars that did not finish the
 race compared to the total number of starters. This metric helps us understand
 the reliability and safety evolution in F1 over three decades. The downward
@@ -77,9 +78,9 @@ trend suggests that modern F1 cars are significantly more reliable than their
 predecessors. Notably, the introduction of hybrid power units in 2014 initially
 caused a spike in retirements as teams adapted to the new technology, but
 reliability quickly improved in subsequent seasons.
-'''
+"""
 
-retirements_race_explanation = '''
+retirements_race_explanation = """
 This visualization shows the average number of retirements per race for each
 season. It provides insight into how race attrition has changed over time.
 Early seasons in our dataset show significantly higher average retirements per
@@ -87,9 +88,9 @@ race, sometimes exceeding 13 cars per race, while recent seasons typically see
 fewer than 4 retirements per race. This improvement reflects advancements in
 engineering, manufacturing processes, and overall design philosophy in modern
 Formula 1.
-'''
+"""
 
-crash_weather_explanation = '''
+crash_weather_explanation = """
 Observations reveal that wet weather is associated with a significantly higher
 incident rate compared to dry and mixed weather conditions. Interestingly, the
 technical failure rate is lower during mixed and wet weather compared to dry
@@ -97,50 +98,50 @@ conditions. This may be because lower driving speeds in wet weather reduce
 stress on the car. Additionally, races in wet conditions are more likely to
 end prematurely (race abandonment), leaving less opportunity for technical
 failures to occur.
-'''
+"""
 
-crash_weather_chi2 = '''
+crash_weather_chi2 = """
 It is worth noting that the data for wet weather, and especially mixed weather
 conditions, is relatively sparse, meaning single events could have a larger
 impact on the results.
 
 To determine whether there is a significant relationship between weather
 conditions and race completion status in generel, a Chi-Square test was
-conducted. The test produced a Chi-Square value of 59.38 and a P-value of 6e-11,
-indicating a statistically significant relationship at a significance level of
-6e-11.
-'''
+conducted. The test produced a Chi-Square value of 59.38 and a P-value of
+6e-11, indicating a statistically significant relationship at a significance
+level of 6e-11.
+"""
 
-helper_text ='''
+helper_text = """
 Some potentially interesting observations:
-'''
+"""
 
-interactive_dashboard_explanation_monaco = '''
+interactive_dashboard_explanation_monaco = """
 Among circuits raced on 5 or more times from 1994-2024, Monaco stands out with
 the highest average number of crashes per race. This isn't surprising given
 its reputation as one of the most challenging tracks. With a narrow layout
 surrounded by walls and barriers and almost no runoff areas, it offers drivers
 little margin for error, making crashes more likely.
-'''
+"""
 
-interactive_dashboard_explanation_australia = '''
+interactive_dashboard_explanation_australia = """
 Albert Park, home to the Australian Grand Prix, has one of the highest
 retirement rates across nearly all time periods. It often serves as the first
 race of the season, which may explain this trend. As the first real-world test
 for many cars, previously unknown technical issues may arise, leading to a
 higher rate of retirements.
-'''
+"""
 
-interactive_dashboard_explanation_imola = '''
+interactive_dashboard_explanation_imola = """
 Imola stands out for its high technical failure rates, especially from 1994 to
 2006, a period marked by frequent mechanical issues across many circuits.
 However, since its return to the F1 calendar in 2019, its technical failure
 rate has been below average in the four times it has been raced, suggesting
 that past failures at the track were likely more related to the era's overall
 technical challenges than the circuit itself.
-'''
+"""
 
-retirements_text = '''
+retirements_text = """
 In Formula 1, a driver may be forced to retire from a race due to either
 technical failures or crashes. Technical failures include mechanical and
 reliability issues such as engine failures, hydraulic problems, brake
@@ -149,16 +150,16 @@ race-ending collisions, whether caused by driver errors (such as oversteering
 into a barrier) or contact with other cars. Total retirements is the sum of
 these two categories, representing all cases where a driver was unable to
 finish the race.
-'''
+"""
 
 
 layout = html.Div(
     [
         dbc.Row(
             dbc.Col(
-                html.Div(className="chequered-flag"),
+                html.Div(className='chequered-flag'),
             ),
-            className='mb-4'
+            className='mb-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -186,7 +187,7 @@ layout = html.Div(
                         'margin': '0 auto',
                         'backgroundColor': '#212529',
                         'border-radius': '10px',
-                    }
+                    },
                 ),
             ),
             className='mb-4 mt-4',
@@ -208,7 +209,7 @@ layout = html.Div(
                     ]
                 ),
             ),
-            className='mb-2'
+            className='mb-2',
         ),
         dbc.Row(
             dbc.Col(
@@ -227,7 +228,7 @@ layout = html.Div(
                     ],
                 ),
             ),
-            className='mb-2'
+            className='mb-2',
         ),
         dbc.Row(
             dbc.Col(
@@ -261,16 +262,16 @@ layout = html.Div(
                         'margin': '0 auto',
                         'backgroundColor': '#212529',
                         'border-radius': '10px',
-                    }
+                    },
                 ),
             ),
             className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
-                html.Div(className="chequered-flag"),
+                html.Div(className='chequered-flag'),
             ),
-            className='mb-4 mt-4'
+            className='mb-4 mt-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -317,16 +318,16 @@ layout = html.Div(
                         'margin': '0 auto',
                         'backgroundColor': '#212529',
                         'border-radius': '10px',
-                    }
+                    },
                 ),
             ),
             className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
-                html.Div(className="chequered-flag"),
+                html.Div(className='chequered-flag'),
             ),
-            className='mb-4 mt-4'
+            className='mb-4 mt-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -377,16 +378,16 @@ layout = html.Div(
                         'margin': '0 auto',
                         'backgroundColor': '#212529',
                         'border-radius': '10px',
-                    }
+                    },
                 ),
             ),
             className='mt-2 mb-5',
         ),
         dbc.Row(
             dbc.Col(
-                html.Div(className="chequered-flag"),
+                html.Div(className='chequered-flag'),
             ),
-            className='mb-4 mt-4'
+            className='mb-4 mt-4',
         ),
         dbc.Row(
             dbc.Col(
@@ -396,9 +397,9 @@ layout = html.Div(
                         href='#top',
                         className='btn',
                         style={
-                        'backgroundColor': '#a36664',
-                        'color': 'white',
-                        }
+                            'backgroundColor': '#a36664',
+                            'color': 'white',
+                        },
                     ),
                     className='text-center',
                 ),
@@ -416,6 +417,7 @@ layout = html.Div(
         Input('type-slider', 'value'),
     ],
 )
+# Modified by Claude
 def update_figure(selected_years, min_race_count, type_value):
     start_year, end_year = selected_years
     type_mapping = {0: 'per_race', 1: 'per_race_driver'}
