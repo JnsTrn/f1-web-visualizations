@@ -43,6 +43,59 @@ must be installed (can be done by using pipenv). Python version 3.12.0 was used.
 To start the website [app.py](app.py) must be executed.
 
 # Website Walkthrough
-• Showcase how to use your web application and the highlights
+The way to access all pages on the website is the navigation bar.
+The a navigation bar is always available at the top as well as the imprint at the bottom.
+The different pages will be explained in the following sections.
 
+## Home Page
+The web application starts initially at the home page.
+On the home page an intruduction is given and the research questions are shown.
+By clicking on one of the research questions the user is redirected to the respective page for that research question.
 
+## Research Question Pages
+These page display the respective results with visualizations.
+Where it is nessecary a short description and analysis is also provided in the application.
+How to use all important features is also provided here.
+First some general information about all graphs:
+ - All graphs have a menu on the top right
+ - The graphs can be downloaded in its current state as png
+ - The graph state can be altered by zooming and panning
+ - To restore the original state click on 'Reset Axis' or reload the page
+ - All graphs provide tooltips on hover
+
+### Grid Position Analysis
+Average placement depending on starting position:
+ - The plots for 'race completed' and 'All races' can be toggled by clicking on the legend on the right
+Relation between Starting and Finishing Position for the X:
+ - The specific circuit can be selected with the drop down menu above (can be filtered with text input)
+ - The circuits displayed in the drop down menu can be filtered by the slider above 
+Amount of Times X has started and ended the race in a position from 1994 - 2024:
+ - The bars for 'Start' and 'Finish' can be toggled by clicking on the legend on the right
+ - The specific driver can be selected with the drop down menu above (can be filtered with text input)
+ - The drivers displayed in the drop down menu can be filtered by the slider above 
+Average placement of drivers with at least X races:
+ - The plots for 'Races completed' and 'All races' can be toggled by clicking on the legend on the right. 
+ The drivers also always sorted in ascending order by the top enabled category in the legend.
+ - The number of races driven can be toggled with the slider above
+Average placements of drivers in X conditions since 2005 and at least 20 races driven:
+ - The bars for 'start' and 'finish' can be toggled by clicking on the legend on the right
+ - The weather condition during the races can be toggled by the buttons above
+
+### Retirement Analysis
+Total Incidents by Year (1994 - 2024)
+ - The plots for 'Total Retirements', 'Incidents/Crashes' and 'Technical Failures' can be toggled by clicking on the legend on the right
+Incidents by Circuit (X - X) (Minimum X races):
+ - The timeframe of the data can be toggled with the slider below
+ - The minimum number of races driven on that circuit can be toggled with the slider below
+ - The representation type of the data can be toggled between count per race and rate
+
+### Pitstop Analysis
+Pit Stop Analysis: X:
+ - The plots for 'Fast', 'Average' and 'Slow' can be toggled by clicking on the legend on the right
+ - The specific driver can be selected with the drop down menu above (can be filtered with text input)
+Pit Stop Analysis: X (X) and Total Pit Stop Time per Driver(X):
+ - The plots for 'Fast', 'Average' and 'Slow' can be toggled by clicking on the legend on the right
+ - The specific circuit and year can be selected with the drop down menu above (can be filtered with text input)
+
+## About the Data
+This page provides information about where the data comes from and how it was processed.
