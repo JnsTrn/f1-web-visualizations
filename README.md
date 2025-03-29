@@ -66,17 +66,21 @@ First some general information about all graphs:
 ### Grid Position Analysis
 Average placement depending on starting position:
  - The plots for 'race completed' and 'All races' can be toggled by clicking on the legend on the right
+
 Relation between Starting and Finishing Position for the X:
  - The specific circuit can be selected with the drop down menu above (can be filtered with text input)
  - The circuits displayed in the drop down menu can be filtered by the slider above 
+
 Amount of Times X has started and ended the race in a position from 1994 - 2024:
  - The bars for 'Start' and 'Finish' can be toggled by clicking on the legend on the right
  - The specific driver can be selected with the drop down menu above (can be filtered with text input)
  - The drivers displayed in the drop down menu can be filtered by the slider above 
+
 Average placement of drivers with at least X races:
  - The plots for 'Races completed' and 'All races' can be toggled by clicking on the legend on the right. 
  The drivers also always sorted in ascending order by the top enabled category in the legend.
  - The number of races driven can be toggled with the slider above
+
 Average placements of drivers in X conditions since 2005 and at least 20 races driven:
  - The bars for 'start' and 'finish' can be toggled by clicking on the legend on the right
  - The weather condition during the races can be toggled by the buttons above
@@ -84,6 +88,7 @@ Average placements of drivers in X conditions since 2005 and at least 20 races d
 ### Retirement Analysis
 Total Incidents by Year (1994 - 2024)
  - The plots for 'Total Retirements', 'Incidents/Crashes' and 'Technical Failures' can be toggled by clicking on the legend on the right
+
 Incidents by Circuit (X - X) (Minimum X races):
  - The timeframe of the data can be toggled with the slider below
  - The minimum number of races driven on that circuit can be toggled with the slider below
@@ -93,6 +98,7 @@ Incidents by Circuit (X - X) (Minimum X races):
 Pit Stop Analysis: X:
  - The plots for 'Fast', 'Average' and 'Slow' can be toggled by clicking on the legend on the right
  - The specific driver can be selected with the drop down menu above (can be filtered with text input)
+
 Pit Stop Analysis: X (X) and Total Pit Stop Time per Driver(X):
  - The plots for 'Fast', 'Average' and 'Slow' can be toggled by clicking on the legend on the right
  - The specific circuit and year can be selected with the drop down menu above (can be filtered with text input)
