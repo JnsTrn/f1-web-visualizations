@@ -7,6 +7,20 @@ from plotly.subplots import make_subplots
 
 # Modified by Claude
 def total_incidents_by_year(df):
+    """
+    Generates a line plot showing the total number of race incidents, technical
+    failures, and retirements per year.
+
+    Input:
+        A DataFrame containing race data with the columns:
+        'year'
+        'Total_Retirements'
+        'Race Incident/Crash'
+        'Technical Failure'
+
+    Returns:
+        A Plotly figure representing the trends of incidents over time.
+    """
     yearly_totals = (
         df.groupby('year')[
             ['Total_Retirements', 'Race Incident/Crash', 'Technical Failure']
@@ -62,6 +76,18 @@ def total_incidents_by_year(df):
 
 
 def yearly_retirements_rate(df):
+    """
+    Generates a line plot showing the percentage of retired cars per year.
+
+    Input:
+        A DataFrame containing race data with the columns:
+        'year'
+        'Total_Retirements'
+        'Total'
+
+    Returns:
+        A Plotly figure displaying the yearly retirement rate as a percentage.
+    """
     yearly_breakdown = (
         df.groupby('year')[['Total_Retirements', 'Total']].sum().reset_index()
     )
@@ -98,6 +124,19 @@ def yearly_retirements_rate(df):
 
 
 def average_yearly_retirements(df):
+    """
+    Generates a line plot showing the average number of retirements
+    per race each year.
+
+    Input:
+        A DataFrame containing race data with the columns:
+            'year'
+            'Total_Retirements'
+            'race_count'
+
+    Returns:
+        A Plotly figure displaying the yearly average retirements per race.
+    """
     yearly_breakdown = (
         df.groupby('year')[['Total_Retirements', 'Total']].sum().reset_index()
     )
@@ -134,6 +173,25 @@ def average_yearly_retirements(df):
 
 
 def calculate_incidents(df, min_race_count):
+    """
+    Calculates the incident statistics per race and as a percentage of the
+    maximum that could have possibly happened for each circuit.
+
+    Input:
+        A DataFrame containing:
+            circuit_id
+            race incidents
+            technical failures
+            retirements,
+
+        min_race_count (int):
+            Minimum number of races required for a circuit to be included
+            in the returned Dataframe.
+
+    Returns:
+        A DataFrame with calculated incidents per race and per driver,
+        filtered by the minimum race count.
+    """
     races_per_circuit = (
         df.groupby('circuit_id').size().reset_index(name='race_count')
     )
@@ -185,6 +243,23 @@ def calculate_incidents(df, min_race_count):
 
 # Modified by Claude
 def create_incidents_figure(df, start_year, end_year, min_race_count, type):
+    """
+    Creates a Plotly figure visualizing race incident statistics by circuit.
+
+    Input:
+        A DataFrame containing:
+            year
+            incidents
+            failures
+            retirements
+        start_year (int): The starting year for the analysis.
+        end_year (int): The ending year for the analysis.
+        min_race_count (int): Minimum number of races required for inclusion.
+        type (str): Determines the visualization type.
+
+    Returns:
+        Bar charts displaying incidents by circuit.
+    """
     # Filter for the selected year range
     df_filtered = df[(df['year'] >= start_year) & (df['year'] <= end_year)]
 
@@ -473,6 +548,20 @@ def create_incidents_figure(df, start_year, end_year, min_race_count, type):
 
 # Modified by Claude
 def create_interactive_incidents_dashboard(df):
+    """
+    Creates an interactive Dash layout with adjustable Sliders for
+    race incidents by circuit.
+
+    Input:
+        A DataFrame containing:
+            year
+            incidents
+            failures
+            retirements
+
+    Returns:
+        A Dash HTML layout containing interactive sliders and a graph.
+    """
     all_years = sorted(df['year'].unique())
     min_year, max_year = all_years[0], all_years[-1]
 
