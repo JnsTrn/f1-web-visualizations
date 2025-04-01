@@ -34,7 +34,11 @@ intro_txt = [
     'Further details on the data gathering process can be found ',
     html.A('here', href='/about-data', className='text-light'),
     '. This project was conducted as part of the "Data Science Project" ',
-    'course at CAU University.',
+    'course at ',
+    html.A('CAU',
+           href='/https://www.uni-kiel.de/en/imprint',
+           target='_blank', className='text-light'),
+    '.'
 ]
 
 question1_txt = '''
