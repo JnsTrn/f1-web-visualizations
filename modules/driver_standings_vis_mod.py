@@ -6,6 +6,7 @@ from dash import dcc, html
 import modules.driver_standings_mod as ds
 
 
+# Modified by ChatGPT
 def create_figure_all_time_standings(df):
     # Creates a heatmap of all time Start and finish position
     number = 22
@@ -55,6 +56,7 @@ def create_figure_all_time_standings(df):
     return fig
 
 
+# Modified by ChatGPT
 def create_fig_start_avg_placements(df, df_race_completed):
     # Calculation of mean for races that were completed
     standings = ds.get_all_standings(df_race_completed, 23)
@@ -132,6 +134,7 @@ def create_fig_start_avg_placements(df, df_race_completed):
     return fig
 
 
+# Modified by ChatGPT
 def get_circuit_options(number, df):
     circuit_list = ds.circuit_list(number=number, df=df)
     circuit_list = sorted(circuit_list)
@@ -141,6 +144,7 @@ def get_circuit_options(number, df):
     ]
 
 
+# Modified by ChatGPT
 def create_circuit_heatmap(slider_value, selected_circuit, df):
     number = slider_value * 20
 
@@ -201,6 +205,7 @@ def create_circuit_heatmap(slider_value, selected_circuit, df):
     return circuit_options, selected_circuit, fig
 
 
+# Modified by ChatGPT
 def create_circuit_heatmap_layout():
     layout = (
         html.Div(
@@ -254,6 +259,7 @@ def create_circuit_heatmap_layout():
     return layout
 
 
+# Modified by ChatGPT
 def driver_standings_mw(df):
     df_weather_filtered_mw = df[df['condition'].isin(['Mixed', 'Wet'])]
 
@@ -331,6 +337,7 @@ def driver_standings_mw(df):
     return fig
 
 
+# Modified by ChatGPT
 def driver_standings_dry(df):
     df_weather_filtered = df[df['condition'].isin(['Dry'])]
     df_same_list = df[df['condition'].isin(['Mixed', 'Wet'])]
@@ -406,6 +413,7 @@ def driver_standings_dry(df):
     return fig
 
 
+# Modified by ChatGPT
 def create_driver_conditions_layout():
     layout = html.Div(
         [
@@ -433,6 +441,7 @@ def create_driver_conditions_layout():
     return layout
 
 
+# Modified by ChatGPT
 def create_grid_finish_figure(name, df):
     grid_counts = ds.driver_grid_pos(name, df)
     grid_counts = grid_counts[grid_counts['grid_position'] != 0]
@@ -479,6 +488,7 @@ def create_grid_finish_figure(name, df):
     return fig
 
 
+# Modified by ChatGPT
 def create_grid_finish_figure_layout():
     layout = (
         html.Div(
@@ -544,6 +554,7 @@ def create_grid_finish_figure_layout():
     return layout
 
 
+# Modified by ChatGPT
 def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
     # Creates a figure for the average placements of drivers
     liste = ds.driver_list(amount_of_races, df)
@@ -621,6 +632,7 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
     return fig
 
 
+# Modified by ChatGPT
 def create_avg_all_drivers_figure_layout():
     layout = (
         html.Div(
