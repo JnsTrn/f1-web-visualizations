@@ -8,7 +8,13 @@ import modules.driver_standings_mod as ds
 
 # Modified by ChatGPT
 def create_figure_all_time_standings(df):
-    # Creates a heatmap of all time Start and finish position
+    """
+    Takes a dataframe
+
+    Creates a heatmap for all time driver standings
+
+    Returns the the heatmap as a plotly figure object
+    """
     number = 22
 
     df_heatmap = ds.get_all_standings(df, (number + 1))
@@ -58,6 +64,15 @@ def create_figure_all_time_standings(df):
 
 # Modified by ChatGPT
 def create_fig_start_avg_placements(df, df_race_completed):
+    """
+    Takes the completed dataframe and the dataframe where only the
+    completed races are in
+
+    Creates a scatterplot for the avg placement for each starting position
+    and considered all races and race that were driven from start to finish
+
+    Returns the scatterplot as a plotly figure object
+    """
     # Calculation of mean for races that were completed
     standings = ds.get_all_standings(df_race_completed, 23)
     standings['Produkt'] = standings.prod(axis=1)
@@ -136,6 +151,15 @@ def create_fig_start_avg_placements(df, df_race_completed):
 
 # Modified by ChatGPT
 def get_circuit_options(number, df):
+    """
+    Takes a dataframe and number which was choosen in the slider
+
+    Filters all circuits that have been driven with choosen amount
+    of races
+
+    Returns the list of circuits which was droven at least
+    choosen amount of times
+    """
     circuit_list = ds.circuit_list(number=number, df=df)
     circuit_list = sorted(circuit_list)
     return [
@@ -146,6 +170,15 @@ def get_circuit_options(number, df):
 
 # Modified by ChatGPT
 def create_circuit_heatmap(slider_value, selected_circuit, df):
+    """
+    Takes a dataframe, the list of circuits created in
+    'get_circuit_options' and the circuit name from the slider
+
+    Creates a heatmap from the circuit with each starting and
+    finish position
+
+    Returns the the heatmap as a plotly figure object
+    """
     number = slider_value * 20
 
     circuit_options = get_circuit_options(number, df)
@@ -207,6 +240,11 @@ def create_circuit_heatmap(slider_value, selected_circuit, df):
 
 # Modified by ChatGPT
 def create_circuit_heatmap_layout():
+    """
+    Creates the interactive layout for the circuit heatmap
+
+    Returns HTML layout for slider and dropdown menu
+    """
     layout = (
         html.Div(
             [
@@ -261,6 +299,14 @@ def create_circuit_heatmap_layout():
 
 # Modified by ChatGPT
 def driver_standings_mw(df):
+    """
+    Takes a dataframe
+
+    Creates a bar chart for the avg placement of drivers
+    during wet and mixed condition.
+
+    Returns the bar chart as a plotly figure object
+    """
     df_weather_filtered_mw = df[df['condition'].isin(['Mixed', 'Wet'])]
 
     liste_mw = ds.driver_list(20, df_weather_filtered_mw)
@@ -339,6 +385,14 @@ def driver_standings_mw(df):
 
 # Modified by ChatGPT
 def driver_standings_dry(df):
+    """
+    Takes a dataframe
+
+    Creates a bar chart for the avg placement of drivers
+    during dry condition.
+
+    Returns the bar chart as a plotly figure object
+    """
     df_weather_filtered = df[df['condition'].isin(['Dry'])]
     df_same_list = df[df['condition'].isin(['Mixed', 'Wet'])]
 
@@ -415,6 +469,11 @@ def driver_standings_dry(df):
 
 # Modified by ChatGPT
 def create_driver_conditions_layout():
+    """
+    Creates the interactive layout for the dry and mixed/wet conditions graph
+
+    Returns HTML layout for dry and Wet/Mixed button
+    """
     layout = html.Div(
         [
             html.Div(
@@ -443,6 +502,14 @@ def create_driver_conditions_layout():
 
 # Modified by ChatGPT
 def create_grid_finish_figure(name, df):
+    """
+    Takes a dataframe
+
+    Creates a bar chart of all the starting and finish position of
+    the choosen driver.
+
+    Returns the bar chart as a plotly figure object
+    """
     grid_counts = ds.driver_grid_pos(name, df)
     grid_counts = grid_counts[grid_counts['grid_position'] != 0]
     grid_counts.columns = ['grid_position', 'count_grid']
@@ -490,6 +557,12 @@ def create_grid_finish_figure(name, df):
 
 # Modified by ChatGPT
 def create_grid_finish_figure_layout():
+    """
+    Creates the interactive layout for a specific drivers start
+    and finish position
+
+    Returns HTML layout for slider and dropdown menu
+    """
     layout = (
         html.Div(
             [
@@ -556,7 +629,16 @@ def create_grid_finish_figure_layout():
 
 # Modified by ChatGPT
 def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
-    # Creates a figure for the average placements of drivers
+    """
+    Takes the completed dataframe, the dataframe where only the
+    completed races are in and a number with at least this amount of races
+    driven
+
+    Creates a scatterplot for the avg placement for each driver that has
+    participated in 'amount_of_races' races
+
+    Returns the scatterplot as a plotly figure object
+    """
     liste = ds.driver_list(amount_of_races, df)
     df_driver = pd.DataFrame({'driver_name': [], 'avg_placement': []})
 
@@ -634,6 +716,12 @@ def create_avg_all_drivers_figure(amount_of_races, df, df_race_completed):
 
 # Modified by ChatGPT
 def create_avg_all_drivers_figure_layout():
+    """
+    Creates the interactive layout for the avg placement
+    of all drivers that has driven with a choosen amount of races
+
+    Returns HTML layout for slider for the amount races driven
+    """
     layout = (
         html.Div(
             [
