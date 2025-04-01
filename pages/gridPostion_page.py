@@ -19,33 +19,7 @@ dash.register_page(
 
 df = pd.read_csv('data/f1_1994_2024_season_results.csv')
 
-race_status = set(
-    [
-        'Finished',
-        '+1 Lap',
-        '+2 Laps',
-        '+3 Laps',
-        '+4 Laps',
-        '+5 Laps',
-        '+7 Laps',
-        '+6 Laps',
-        '+8 Laps',
-        '+12 Laps',
-        '+11 Laps',
-        '+26 Laps',
-        '+17 Laps',
-        '+10 Laps',
-        '+9 Laps',
-        '+42 Laps',
-        '+14 Laps',
-    ]
-)
 
-df_race_completed = df
-df_race_completed['race_completed'] = df['status'].isin(race_status)
-df_race_completed = df_race_completed[
-    df_race_completed['race_completed']
-].drop(columns=['race_completed'])
 name = ''
 
 df_weather = pd.read_csv(
@@ -57,7 +31,7 @@ df_weather = pd.read_csv(
 
 figure_all_time_standings = dsv.create_figure_all_time_standings(df)
 figure_start_avg_placements = dsv.create_fig_start_avg_placements(
-    df, df_race_completed
+    df, df_weather
 )
 spcific_driver_layout = dsv.create_grid_finish_figure(name, df)
 
@@ -547,7 +521,7 @@ def update_dropdown_and_heatmap(slider_value, selected_circuit):
 )
 def update_avg_all_drivers_graph(amount_of_races):
     return dsv.create_avg_all_drivers_figure(
-        amount_of_races, df, df_race_completed
+        amount_of_races, df, df_weather
     )
 
 
