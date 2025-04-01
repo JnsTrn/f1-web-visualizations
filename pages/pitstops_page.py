@@ -23,7 +23,7 @@ df = pd.read_csv(
     DATA_PATH + 'merged_pitstops.csv',
 )
 
-
+# This code has been modified by ChatGPT 
 # Create Dataframe for circuit Plot
 
 df_unique = df
@@ -101,7 +101,7 @@ hat pit stop times have a limited impact on final race results, as numerous
 other factors play a more decisive role in determining a driver's finishing
 position.
 '''
-
+# This code has been modified by ChatGPT
 layout = html.Div(
     [
         dbc.Row(
@@ -255,20 +255,33 @@ layout = html.Div(
 
 ########### Initialize Callbacks ############
 
-
+# This code has been modified by ChatGPT
 # Callback for the Year Dropdown
 @dash.callback(
     [Output('year-dropdown', 'options'), Output('year-dropdown', 'value')],
     Input('circuit-pitstops-dropdown', 'value'),
 )
 def update_year_dropdown(selected_circuit):
+    """
+    Updates the year dropdown based on the selected circuit.
+
+    Parameters:
+        selected_circuit (str): The name of the selected circuit.
+
+    Returns:
+        tuple:
+            - A list of dictionaries containing available years as dropdown
+            options.
+            - The default selected year (earliest available year) or None if
+            no data exists.
+    """
     filtered_years = df[df['race_name'] == selected_circuit]['year'].unique()
     year_options = [
         {'label': str(year), 'value': year} for year in sorted(filtered_years)
     ]
     return year_options, filtered_years[0] if len(filtered_years) > 0 else None
 
-
+# This code has been modified by ChatGPT
 # Callback for the circuit pitstop Plot
 @dash.callback(
     [
@@ -281,7 +294,21 @@ def update_year_dropdown(selected_circuit):
         Input('year-dropdown', 'value'),
     ],
 )
+# This code has been modified by ChatGPT
 def update_pitstop_plot(selected_circuit, selected_year):
+
+    """
+    Updates the pit stop analysis plots based on the selected circuit and year.
+
+    Parameters:
+        selected_circuit (str): The name of the selected race circuit.
+        selected_year (int): The year of the selected race.
+
+    Returns:
+        tuple: A box plot (Figure) showing pit stop duration categories, 
+               a bar plot (Figure) displaying pit stop times per driver, 
+               and a text component (html.P) summarizing the race information.
+    """
     if not selected_circuit or not selected_year:
         return (
             px.box(title='No Data Available'),
@@ -318,7 +345,19 @@ def update_pitstop_plot(selected_circuit, selected_year):
     [Output('boxplot', 'figure'), Output('race-boxplot-info', 'children')],
     [Input('driver-pitstop-dropdown', 'value')],
 )
+# This code has been modified by ChatGPT
 def update_plot(driver_name):
+    """
+    Updates the driver-specific pit stop analysis plot.
+
+    Parameters:
+        driver_name (str): The name of the selected driver.
+
+    Returns:
+        tuple: 
+            - A box plot (Figure) showing the distribution of pit stop times.
+            - A text component (html.P) summarizing the analysis.
+    """
     df_driver = df_filtered[df_filtered['driver_name'] == driver_name].copy()
     total_races = len(df_driver)
 
