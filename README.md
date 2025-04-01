@@ -4,8 +4,8 @@
 This project explores various [research questions](#ResearchQuestions)
 related to Formula 1.
 On this website the results are presented with visualizations and analysis.
-[Data collection](#Data) was happening in a different private repository.
-This project was conducted as part of the "Data Science Project"-course at CAU University.
+[Data collection](#Data) was conducted in a separate private repository.
+This project was conducted as part of the "Data Science Project"-course at Christian-Albrechts-Universität-zu-Kiel.
 
 ## Research Questions
 The research questions that we are exploring:
@@ -28,7 +28,7 @@ The data was gathered using the
 for Formula 1 data and the
 [Open Meteo API](https://open-meteo.com/en/docs/historical-weather-api)
 for weather data tailored to each race's location and time.
-The data collection process was done in the **private**
+The data collection process was conducted in the **private**
 [F1-Data-Collection](https://github.com/JnsTrn/F1-Data-Collection) repository.
 
 # Build and Deploy
@@ -37,23 +37,23 @@ To build the website the following components are needed:
  - The data is stored as CSVs in the [data directory](data)
  - Most code for the visualizations is located in the [modules directory](modules)
  - The content of different pages is located in the [pages directory](pages)
- - The initilization of the application together with page independent content is located in [app.py](app.py).
-To host the webiste all libraries listet in [requirements](requirements.txt)
-must be installed (can be done by using pipenv). Python version 3.12.0 was used.
+ - The initialization of the application together with page independent content is located in [app.py](app.py).
+To host the website all libraries listed in [requirements](requirements.txt)
+must be installed (can be done by using pipenv). Python version 3.12.0 was used as the development environment for this project. To ensure compatibility, it is recommended to use this version or a later release when deploying the website.
 To start the website [app.py](app.py) must be executed.
 
 # Website Walkthrough
 The way to access all pages on the website is the navigation bar.
-The a navigation bar is always available at the top as well as the imprint at the bottom.
+The navigation bar is always available at the top as well as the imprint at the bottom.
 The different pages will be explained in the following sections.
 
 ## Home Page
 The web application starts initially at the home page.
-On the home page an intruduction is given and the research questions are shown.
+On the home page an introduction is given and the research questions are shown.
 By clicking on one of the research questions the user is redirected to the respective page for that research question.
 
 ## Research Question Pages
-These page display the respective results with visualizations.
+These pages display the respective results with visualizations.
 Where it is nessecary a short description and analysis is also provided in the application.
 How to use all important features is also provided here.
 First some general information about all graphs:
